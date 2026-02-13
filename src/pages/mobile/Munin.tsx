@@ -42,7 +42,7 @@ const MobileMunin = () => {
         ...d,
         category: getCategory(d.id)
     })).filter((d: any) =>
-        d.label.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        d.name?.toLowerCase().includes(searchQuery.toLowerCase()) &&
         (activeCategory === 'All' || d.category === activeCategory)
     );
 
@@ -159,10 +159,10 @@ const MobileMunin = () => {
                                 </div>
                                 <div className="mobile-list-item-content">
                                     <div className="mobile-list-item-title">
-                                        {d.label}
+                                        {d.name}
                                     </div>
                                     <div className="mobile-list-item-subtitle">
-                                        {categories.find(c => c.name === d.category)?.label}
+                                        {d.description}
                                     </div>
                                 </div>
                                 <span className="mobile-badge mobile-badge-primary">

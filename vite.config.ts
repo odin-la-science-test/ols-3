@@ -15,7 +15,7 @@ export default defineConfig({
   build: {
     // Optimisations de build
     target: 'es2015',
-    minify: false, // Désactiver la minification pour accélérer le build
+    minify: 'esbuild', // Utiliser esbuild (plus rapide que terser)
     rollupOptions: {
       output: {
         // Code splitting pour réduire la taille des bundles

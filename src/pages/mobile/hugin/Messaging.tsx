@@ -8,7 +8,8 @@ import '../../../styles/mobile-app.css';
 
 const MobileMessaging = () => {
     const navigate = useNavigate();
-    const { showToast } = useToast();
+    const toast = useToast();
+    const showToast = toast?.showToast || (() => {});
     const [messages, setMessages] = useState<any[]>([]);
     const [selectedMessage, setSelectedMessage] = useState<any>(null);
     const [view, setView] = useState<'list' | 'read' | 'compose'>('list');
@@ -22,9 +23,10 @@ const MobileMessaging = () => {
     const loadMessages = async () => {
         try {
             const data = await fetchModuleData('messaging');
-            setMessages(data || []);
+            setMessages(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error('Error loading messages:', error);
+            setMessages([]);
         }
     };
 
@@ -53,8 +55,8 @@ const MobileMessaging = () => {
     };
 
     const filteredMessages = messages.filter(m => 
-        m.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        m.from.toLowerCase().includes(searchQuery.toLowerCase())
+        m?.subject?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        m?.from?.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     return (
@@ -122,7 +124,7 @@ const MobileMessaging = () => {
                                         }}
                                     >
                                         <div className="mobile-avatar mobile-avatar-sm">
-                                            {msg.from[0].toUpperCase()}
+                                            {msg?.from?.[0]?.toUpperCase() || '?'}
                                         </div>
                                         <div className="mobile-list-item-content">
                                             <div className="mobile-list-item-title">
@@ -148,7 +150,7 @@ const MobileMessaging = () => {
                             <div className="mobile-card-title">{selectedMessage.subject}</div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.75rem' }}>
                                 <div className="mobile-avatar mobile-avatar-sm">
-                                    {selectedMessage.from[0].toUpperCase()}
+                                    {selectedMessage?.from?.[0]?.toUpperCase() || '?'}
                                 </div>
                                 <div>
                                     <div style={{ fontSize: '0.9rem', fontWeight: 600 }}>{selectedMessage.from}</div>
