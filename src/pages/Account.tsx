@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useToast } from '../components/ToastContext';
 import Navbar from '../components/Navbar';
 import { useDeviceDetection } from '../hooks/useDeviceDetection';
+import Avatar from '../components/Avatar';
 
 const Account = () => {
     const { showToast } = useToast();
     const { isMobile } = useDeviceDetection();
+    const [refreshAvatar, setRefreshAvatar] = useState(0);
 
     // Fetch profile from localStorage
     const currentUser = localStorage.getItem('currentUser') || 'User';
@@ -83,15 +85,14 @@ const Account = () => {
 
                 {/* Header */}
                 <div style={{ textAlign: 'center', marginBottom: isMobile ? '30px' : '50px' }}>
-                    <div style={{
-                        width: isMobile ? '80px' : '120px', height: isMobile ? '80px' : '120px', margin: '0 auto 15px',
-                        borderRadius: '50%',
-                        background: 'linear-gradient(135deg, var(--cosmic-accent), var(--cosmic-accent-2))',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        fontSize: isMobile ? '2rem' : '3em', color: 'white', fontWeight: 'bold',
-                        boxShadow: '0 10px 30px rgba(102, 126, 234, 0.4)'
-                    }}>
-                        {user.username.charAt(0).toUpperCase()}
+                    <div style={{ marginBottom: '15px' }}>
+                        <Avatar 
+                            email={user.email}
+                            name={user.username}
+                            size={isMobile ? 80 : 120}
+                            editable={true}
+                            onImageChange={() => setRefreshAvatar(prev => prev + 1)}
+                        />
                     </div>
                     <h1 style={{
                         fontSize: isMobile ? '1.8rem' : '2.5em',

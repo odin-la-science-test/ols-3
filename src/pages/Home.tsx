@@ -6,6 +6,12 @@ import Navbar from '../components/Navbar';
 import OnboardingMissions from '../components/OnboardingMissions';
 import { useTheme } from '../components/ThemeContext';
 import { useDeviceDetection } from '../hooks/useDeviceDetection';
+import GlobalSearch from '../components/GlobalSearch';
+import QuickNotes from '../components/QuickNotes';
+import UsageStats from '../components/UsageStats';
+import FavoritesPanel from '../components/FavoritesPanel';
+import ProgressTracker from '../components/ProgressTracker';
+import { getFavorites, type Favorite } from '../utils/favorites';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -20,6 +26,20 @@ const Home = () => {
         if (isFirstTime) {
             setShowOnboarding(true);
         }
+        
+        // Charger les favoris
+        setFavorites(getFavorites());
+        
+        // Écouter Ctrl+K pour ouvrir la recherche
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                setIsSearchOpen(true);
+            }
+        };
+        
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
 
     const handleCompleteOnboarding = () => {
@@ -32,6 +52,8 @@ const Home = () => {
     const [currentTime, setCurrentTime] = useState(new Date());
     const [unreadCount, setUnreadCount] = useState(0);
     const [todayEvents, setTodayEvents] = useState<any[]>([]);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [favorites, setFavorites] = useState<Favorite[]>([]);
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -159,7 +181,7 @@ const Home = () => {
             {isMobile && (
                 <div style={{ marginBottom: '2rem', width: '100%' }}>
                     <p style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.5)', fontWeight: 500, marginBottom: '0.25rem' }}>Bienvenue,</p>
-                    <h2 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>{username} 👋</h2>
+                    <h2 style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.03em' }}>{username}</h2>
                 </div>
             )}
 
@@ -183,7 +205,7 @@ const Home = () => {
                                 letterSpacing: '-0.03em',
                                 marginBottom: '0.5rem'
                             }}>
-                                {username} 👋
+                                {username}
                             </h1>
                             <p style={{
                                 color: c.textSecondary,
@@ -214,7 +236,7 @@ const Home = () => {
                                         padding: '1.25rem',
                                         minWidth: '140px',
                                         textAlign: 'center',
-                                        cursor: stat.label === 'Messages non lus' ? 'pointer' : 'default',
+                                        cursor: 'pointer',
                                         transition: 'all 0.3s'
                                     }}
                                     onMouseEnter={(e) => {
@@ -260,6 +282,19 @@ const Home = () => {
                             ))}
                         </div>
                     </div>
+
+                    {/* Usage Stats */}
+                    <div style={{ width: '100%', maxWidth: '1200px', marginBottom: '2rem' }}>
+                        <UsageStats />
+                    </div>
+
+                    {/* Favorites Panel */}
+                    <div style={{ width: '100%', maxWidth: '1200px', marginBottom: '2rem' }}>
+                        <FavoritesPanel />
+                    </div>
+
+                    {/* Progress Tracker */}
+                    <ProgressTracker />
                 </>
             )}
 
@@ -531,6 +566,9 @@ const Home = () => {
     return (
         <div style={{ minHeight: '100vh', position: 'relative' }}>
             <Navbar />
+            <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+            <QuickNotes />
+            {/* <ThemeSelector /> */}
             <div style={{ padding: '2rem', position: 'relative' }}>
                 {content}
                 {showOnboarding && <OnboardingMissions onComplete={handleCompleteOnboarding} />}

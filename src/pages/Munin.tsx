@@ -107,8 +107,8 @@ const Munin = () => {
                         fontSize: '1.2rem', 
                         marginBottom: '2rem'
                     }}>
-                        {language === 'FR' ? 'Référentiel de connaissances et de données scientifiques classé par domaines d\'expertise.' :
-                            'Comprehensive repository of scientific knowledge and data categorized by fields of expertise.'}
+                        {language === 'FR' ? '250+ domaines scientifiques disponibles' :
+                            '250+ scientific domains available'}
                     </p>
 
                     <div style={{ position: 'relative', width: '100%', maxWidth: '600px', margin: '0 auto 2rem auto' }}>

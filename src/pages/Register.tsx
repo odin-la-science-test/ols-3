@@ -10,6 +10,8 @@ import {
     SessionManager,
     RateLimiter
 } from '../utils/encryption';
+import { InputValidator, AnomalyDetector } from '../utils/securityEnhancements';
+import { SecurityLogger } from '../utils/securityConfig';
 import {
     Users, Building2, ChevronRight, CheckCircle,
     LayoutDashboard, Beaker, BookOpen, Activity, ShieldCheck,
@@ -140,7 +142,12 @@ const Register = () => {
     // Validation en temps réel de l'email
     const handleEmailChange = (email: string) => {
         setFormData({ ...formData, email });
-        if (email && !isValidEmail(email)) {
+        
+        // Validation de sécurité
+        const validation = InputValidator.validateInput(email, 'email');
+        if (email && !validation.valid) {
+            setEmailError(validation.errors.join(', '));
+        } else if (email && !isValidEmail(email)) {
             setEmailError('Format d\'email invalide');
         } else {
             setEmailError('');
@@ -153,6 +160,21 @@ const Register = () => {
         // Vérifier le rate limiting
         if (!registrationLimiter.checkLimit(formData.email)) {
             showToast('Trop de tentatives. Veuillez réessayer plus tard.', 'error');
+            SecurityLogger.log('registration_rate_limit', formData.email);
+            return;
+        }
+
+        // Validation de sécurité des entrées
+        const emailValidation = InputValidator.validateInput(formData.email, 'email');
+        if (!emailValidation.valid) {
+            showToast('Email invalide: ' + emailValidation.errors.join(', '), 'error');
+            return;
+        }
+
+        const passwordValidation = InputValidator.validateInput(formData.password, 'text');
+        if (!passwordValidation.valid) {
+            showToast('Mot de passe invalide: ' + passwordValidation.errors.join(', '), 'error');
+            SecurityLogger.log('registration_injection_attempt', formData.email, { errors: passwordValidation.errors });
             return;
         }
 
@@ -168,13 +190,21 @@ const Register = () => {
             // Hasher le mot de passe
             const hashedPassword = await hashPassword(formData.password);
 
+            // Sanitize user inputs
+            const sanitizedData = InputValidator.sanitizeObject({
+                adminName: formData.adminName,
+                companyName: formData.companyName,
+                phone: formData.phone
+            });
+
             // Save Mock Profile
             const userProfile = {
-                email: formData.email,
+                email: emailValidation.sanitized,
                 password: hashedPassword,
-                username: formData.email.split('@')[0],
+                username: emailValidation.sanitized.split('@')[0],
                 role: isEnterprise ? 'admin' : 'user',
                 isEnterprise,
+                ...sanitizedData,
                 subscription: {
                     status: 'active',
                     type: formData.planType,
@@ -191,6 +221,10 @@ const Register = () => {
             // Créer une session sécurisée
             SessionManager.createSession(formData.email);
 
+            // Enregistrer le comportement
+            AnomalyDetector.recordBehavior(formData.email, 'registration');
+            SecurityLogger.log('registration_success', formData.email);
+
             showToast('🚀 Inscription réussie ! Bienvenue sur Odin la Science.', 'success');
             loadThemeForUser(formData.email);
             
@@ -199,6 +233,7 @@ const Register = () => {
             }, 1500);
         } catch (error) {
             console.error('Registration error:', error);
+            SecurityLogger.log('registration_error', formData.email, { error: String(error) });
             showToast('Erreur lors de l\'inscription', 'error');
         } finally {
             setIsSubmitting(false);

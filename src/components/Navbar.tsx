@@ -5,6 +5,7 @@ import { useLanguage, type Language } from './LanguageContext';
 import { useToast } from './ToastContext';
 import { useDeviceDetection } from '../hooks/useDeviceDetection';
 import NotificationCenter from './NotificationCenter';
+import Avatar from './Avatar';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const { isMobile } = useDeviceDetection();
+    const [refreshAvatar, setRefreshAvatar] = useState(0);
 
     const languages: { code: Language; label: string; flag: string }[] = [
         { code: 'FR', label: 'Français', flag: '🇫🇷' },
@@ -175,23 +177,16 @@ const Navbar = () => {
                                         transition: 'all 0.2s'
                                     }}
                                 >
-                                    <div style={{
-                                        width: '24px',
-                                        height: '24px',
-                                        background: 'linear-gradient(135deg, var(--accent-munin), var(--accent-hugin))',
-                                        borderRadius: '50%',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        fontSize: '0.7rem',
-                                        fontWeight: 700,
-                                        color: 'white'
-                                    }}>
-                                        {username.charAt(0).toUpperCase()}
-                                </div>
-                                <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>{username.split('@')[0]}</span>
-                                <ChevronDown size={14} style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-                            </button>
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <Avatar 
+                                            email={currentUserEmail || ''}
+                                            name={username}
+                                            size={28}
+                                        />
+                                    </div>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>{username.split('@')[0]}</span>
+                                    <ChevronDown size={14} style={{ transform: isDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                                </button>
 
                             {isDropdownOpen && (
                                 <div style={{
@@ -357,14 +352,20 @@ const Navbar = () => {
                         width: '32px',
                         height: '32px',
                         borderRadius: '50%',
-                        background: 'rgba(255,255,255,0.1)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: 'white'
+                        background: 'transparent',
+                        border: 'none',
+                        padding: 0,
+                        cursor: 'pointer'
                     }}
                 >
-                    <User size={18} />
+                    <Avatar 
+                        email={currentUserEmail || ''}
+                        name={username}
+                        size={32}
+                    />
                 </button>
             </header>
 

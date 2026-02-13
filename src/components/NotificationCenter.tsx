@@ -76,10 +76,10 @@ const NotificationCenter = () => {
                 style={{
                     position: 'relative',
                     padding: '0.5rem',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    background: '#1e293b',
+                    border: '1px solid #334155',
                     borderRadius: '0.5rem',
-                    color: 'var(--text-primary)',
+                    color: '#f1f5f9',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -127,22 +127,23 @@ const NotificationCenter = () => {
                         right: 0,
                         width: '400px',
                         maxHeight: '500px',
-                        background: 'var(--bg-secondary)',
-                        border: '1px solid var(--border-color)',
+                        background: '#1e293b',
+                        border: '1px solid #334155',
                         borderRadius: '0.75rem',
-                        boxShadow: '0 10px 40px rgba(0,0,0,0.3)',
+                        boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
                         zIndex: 1000,
                         display: 'flex',
                         flexDirection: 'column'
                     }}>
                         <div style={{
                             padding: '1rem 1.5rem',
-                            borderBottom: '1px solid var(--border-color)',
+                            borderBottom: '1px solid #334155',
                             display: 'flex',
                             justifyContent: 'space-between',
-                            alignItems: 'center'
+                            alignItems: 'center',
+                            background: '#0f172a'
                         }}>
-                            <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: 0 }}>
+                            <h3 style={{ fontSize: '1rem', fontWeight: 700, margin: 0, color: '#f1f5f9' }}>
                                 Notifications {unreadCount > 0 && `(${unreadCount})`}
                             </h3>
                             <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -153,9 +154,9 @@ const NotificationCenter = () => {
                                             style={{
                                                 padding: '0.25rem 0.75rem',
                                                 background: 'transparent',
-                                                border: '1px solid var(--border-color)',
+                                                border: '1px solid #334155',
                                                 borderRadius: '0.375rem',
-                                                color: 'var(--text-secondary)',
+                                                color: '#94a3b8',
                                                 fontSize: '0.8rem',
                                                 cursor: 'pointer'
                                             }}
@@ -167,9 +168,9 @@ const NotificationCenter = () => {
                                             style={{
                                                 padding: '0.25rem 0.75rem',
                                                 background: 'transparent',
-                                                border: '1px solid var(--border-color)',
+                                                border: '1px solid #334155',
                                                 borderRadius: '0.375rem',
-                                                color: 'var(--text-secondary)',
+                                                color: '#94a3b8',
                                                 fontSize: '0.8rem',
                                                 cursor: 'pointer'
                                             }}
@@ -181,12 +182,12 @@ const NotificationCenter = () => {
                             </div>
                         </div>
 
-                        <div style={{ flex: 1, overflowY: 'auto' }}>
+                        <div style={{ flex: 1, overflowY: 'auto', background: '#1e293b' }}>
                             {notifications.length === 0 ? (
                                 <div style={{
                                     padding: '3rem',
                                     textAlign: 'center',
-                                    color: 'var(--text-secondary)'
+                                    color: '#94a3b8'
                                 }}>
                                     <Bell size={48} style={{ opacity: 0.3, marginBottom: '1rem' }} />
                                     <p>Aucune notification</p>
@@ -198,16 +199,16 @@ const NotificationCenter = () => {
                                         onClick={() => markAsRead(notif.id)}
                                         style={{
                                             padding: '1rem 1.5rem',
-                                            borderBottom: '1px solid var(--border-color)',
+                                            borderBottom: '1px solid #334155',
                                             cursor: 'pointer',
-                                            background: notif.read ? 'transparent' : 'rgba(99, 102, 241, 0.05)',
+                                            background: notif.read ? '#1e293b' : 'rgba(99, 102, 241, 0.1)',
                                             transition: 'background 0.2s'
                                         }}
                                         onMouseEnter={(e) => {
-                                            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                                            e.currentTarget.style.background = 'rgba(99, 102, 241, 0.15)';
                                         }}
                                         onMouseLeave={(e) => {
-                                            e.currentTarget.style.background = notif.read ? 'transparent' : 'rgba(99, 102, 241, 0.05)';
+                                            e.currentTarget.style.background = notif.read ? '#1e293b' : 'rgba(99, 102, 241, 0.1)';
                                         }}
                                     >
                                         <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
@@ -224,7 +225,8 @@ const NotificationCenter = () => {
                                                     <h4 style={{
                                                         fontSize: '0.9rem',
                                                         fontWeight: 600,
-                                                        margin: 0
+                                                        margin: 0,
+                                                        color: '#f1f5f9'
                                                     }}>
                                                         {notif.title}
                                                     </h4>
@@ -240,7 +242,7 @@ const NotificationCenter = () => {
                                                 </div>
                                                 <p style={{
                                                     fontSize: '0.85rem',
-                                                    color: 'var(--text-secondary)',
+                                                    color: '#94a3b8',
                                                     margin: '0 0 0.5rem 0',
                                                     lineHeight: 1.4
                                                 }}>
@@ -251,7 +253,7 @@ const NotificationCenter = () => {
                                                     alignItems: 'center',
                                                     gap: '0.25rem',
                                                     fontSize: '0.75rem',
-                                                    color: 'var(--text-secondary)',
+                                                    color: '#64748b',
                                                     opacity: 0.7
                                                 }}>
                                                     <Clock size={12} />

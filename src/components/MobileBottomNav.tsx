@@ -1,36 +1,61 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Home, Beaker, BookOpen, User } from 'lucide-react';
+import { Home, BookOpen, FlaskConical, Settings } from 'lucide-react';
 import '../styles/mobile-app.css';
 
 const MobileBottomNav = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const navItems = [
-        { path: '/home', icon: Home, label: 'Accueil' },
-        { path: '/hugin', icon: Beaker, label: 'Hugin' },
-        { path: '/munin', icon: BookOpen, label: 'Munin' },
-        { path: '/account', icon: User, label: 'Profil' }
-    ];
+  const navItems = [
+    { icon: Home, label: 'Accueil', path: '/home' },
+    { icon: BookOpen, label: 'Munin', path: '/munin' },
+    { icon: null, label: 'Logo', path: null }, // Logo au centre
+    { icon: FlaskConical, label: 'Hugin', path: '/hugin' },
+    { icon: Settings, label: 'Compte', path: '/settings' }
+  ];
 
-    const isActive = (path: string) => {
-        return location.pathname === path || location.pathname.startsWith(path + '/');
-    };
+  return (
+    <nav className="mobile-bottom-nav">
+      {navItems.map((item, index) => {
+        if (item.label === 'Logo') {
+          return (
+            <div
+              key="logo"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0.5rem'
+              }}
+            >
+              <img 
+                src="/logo1.png" 
+                alt="Odin Logo" 
+                style={{ 
+                  height: '40px',
+                  filter: 'drop-shadow(0 0 8px rgba(99, 102, 241, 0.3))'
+                }} 
+              />
+            </div>
+          );
+        }
 
-    return (
-        <nav className="mobile-bottom-nav">
-            {navItems.map((item) => (
-                <button
-                    key={item.path}
-                    onClick={() => navigate(item.path)}
-                    className={`mobile-nav-item ${isActive(item.path) ? 'active' : ''}`}
-                >
-                    <item.icon size={24} />
-                    <span className="mobile-nav-item-label">{item.label}</span>
-                </button>
-            ))}
-        </nav>
-    );
+        const Icon = item.icon!;
+        const isActive = location.pathname === item.path;
+        
+        return (
+          <div
+            key={item.path}
+            className={`mobile-nav-item ${isActive ? 'active' : ''}`}
+            onClick={() => navigate(item.path!)}
+          >
+            <Icon size={24} />
+            <span>{item.label}</span>
+          </div>
+        );
+      })}
+    </nav>
+  );
 };
 
 export default MobileBottomNav;

@@ -4,12 +4,9 @@ import './App.css';
 
 // Composants critiques chargés immédiatement
 import LandingPage from './pages/LandingPage';
-import MobileLandingPage from './pages/mobile/LandingPage';
 import Home from './pages/Home';
-import MobileHome from './pages/mobile/HomeNew';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import ResponsiveRoute from './components/ResponsiveRoute';
 import ShortcutManager from './components/ShortcutManager';
 import KeyboardShortcuts from './components/KeyboardShortcuts';
 import { ToastProvider } from './components/ToastContext';
@@ -22,22 +19,14 @@ import VersionBadge from './components/VersionBadge';
 
 // Lazy loading pour les composants moins critiques
 const Munin = lazy(() => import('./pages/Munin'));
-const MobileMunin = lazy(() => import('./pages/mobile/Munin'));
 const Discipline = lazy(() => import('./pages/Discipline'));
-const MobileDiscipline = lazy(() => import('./pages/mobile/Discipline'));
 const EntityDetail = lazy(() => import('./pages/EntityDetail'));
-const MobileEntityDetail = lazy(() => import('./pages/mobile/EntityDetail'));
 const PropertyDetail = lazy(() => import('./pages/PropertyDetail'));
-const MobilePropertyDetail = lazy(() => import('./pages/mobile/PropertyDetail'));
 const CompareEntities = lazy(() => import('./pages/CompareEntities'));
-const MobileCompareEntities = lazy(() => import('./pages/mobile/CompareEntities'));
 const Hugin = lazy(() => import('./pages/Hugin'));
-const MobileHugin = lazy(() => import('./pages/mobile/Hugin'));
 const Messaging = lazy(() => import('./pages/hugin/Messaging'));
-const MobileMessaging = lazy(() => import('./pages/mobile/hugin/Messaging'));
 const Inventory = lazy(() => import('./pages/hugin/Inventory'));
 const Planning = lazy(() => import('./pages/hugin/Planning'));
-const MobilePlanning = lazy(() => import('./pages/mobile/hugin/Planning'));
 const Documents = lazy(() => import('./pages/hugin/Documents'));
 const CultureTracking = lazy(() => import('./pages/hugin/CultureTracking'));
 const ITArchive = lazy(() => import('./pages/hugin/ITArchive'));
@@ -75,7 +64,6 @@ const Qiime2 = lazy(() => import('./pages/hugin/Qiime2'));
 const Whonet = lazy(() => import('./pages/hugin/Whonet'));
 const ExcelTest = lazy(() => import('./pages/hugin/ExcelTest'));
 const BioAnalyzer = lazy(() => import('./pages/hugin/BioAnalyzer'));
-const MobileBioAnalyzer = lazy(() => import('./pages/mobile/hugin/BioAnalyzer'));
 const ImageAnalyzer = lazy(() => import('./pages/hugin/ImageAnalyzer'));
 const StatisticsLab = lazy(() => import('./pages/hugin/StatisticsLab'));
 const WhyOdin = lazy(() => import('./pages/WhyOdin'));
@@ -97,6 +85,18 @@ const Terms = lazy(() => import('./pages/Terms'));
 const Cookies = lazy(() => import('./pages/Cookies'));
 const OpenSourceTools = lazy(() => import('./pages/OpenSourceTools'));
 const Tutorial = lazy(() => import('./pages/Tutorial'));
+
+// Mobile pages
+const MobileHome = lazy(() => import('./pages/mobile/Home'));
+const MobileMunin = lazy(() => import('./pages/mobile/Munin'));
+const MobileHugin = lazy(() => import('./pages/mobile/Hugin'));
+const MobileSettings = lazy(() => import('./pages/mobile/Settings'));
+const MobileDiscipline = lazy(() => import('./pages/mobile/Discipline'));
+const MobilePlanning = lazy(() => import('./pages/mobile/hugin/Planning'));
+const MobileMessaging = lazy(() => import('./pages/mobile/hugin/Messaging'));
+
+// ResponsiveRoute component
+import ResponsiveRoute from './components/ResponsiveRoute';
 
 import type { ReactNode } from 'react';
 import { checkHasAccess, getAccessData } from './utils/ShieldUtils';
@@ -236,12 +236,7 @@ function App() {
           )}
           <Suspense fallback={<LoadingFallback />}>
             <Routes>
-            <Route path="/" element={
-              <ResponsiveRoute 
-                desktopComponent={LandingPage} 
-                mobileComponent={MobileLandingPage} 
-              />
-            } />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/why-odin" element={<WhyOdin />} />
@@ -263,88 +258,70 @@ function App() {
             <Route path="/home" element={
               <ProtectedRoute>
                 <ResponsiveRoute 
-                  desktopComponent={Home} 
-                  mobileComponent={MobileHome} 
+                  desktop={<Home />}
+                  mobile={<MobileHome />}
                 />
               </ProtectedRoute>
             } />
             <Route path="/munin" element={
               <ProtectedRoute module="munin">
                 <ResponsiveRoute 
-                  desktopComponent={Munin} 
-                  mobileComponent={MobileMunin} 
+                  desktop={<Munin />}
+                  mobile={<MobileMunin />}
                 />
               </ProtectedRoute>
             } />
             <Route path="/munin/:id" element={
               <ProtectedRoute module="munin">
                 <ResponsiveRoute 
-                  desktopComponent={Discipline} 
-                  mobileComponent={MobileDiscipline} 
+                  desktop={<Discipline />}
+                  mobile={<MobileDiscipline />}
                 />
               </ProtectedRoute>
             } />
             <Route path="/munin/:disciplineId/:entityId" element={
               <ProtectedRoute module="munin">
-                <ResponsiveRoute 
-                  desktopComponent={EntityDetail} 
-                  mobileComponent={MobileEntityDetail} 
-                />
+                <EntityDetail />
               </ProtectedRoute>
             } />
             <Route path="/munin/:id/compare" element={
               <ProtectedRoute module="munin">
-                <ResponsiveRoute 
-                  desktopComponent={CompareEntities} 
-                  mobileComponent={MobileCompareEntities} 
-                />
+                <CompareEntities />
               </ProtectedRoute>
             } />
             <Route path="/discipline/:id" element={
               <ProtectedRoute module="munin">
-                <ResponsiveRoute 
-                  desktopComponent={Discipline} 
-                  mobileComponent={MobileDiscipline} 
-                />
+                <Discipline />
               </ProtectedRoute>
             } />
             <Route path="/entity/:id" element={
               <ProtectedRoute module="munin">
-                <ResponsiveRoute 
-                  desktopComponent={EntityDetail} 
-                  mobileComponent={MobileEntityDetail} 
-                />
+                <EntityDetail />
               </ProtectedRoute>
             } />
             <Route path="/property/:id" element={
               <ProtectedRoute module="munin">
-                <ResponsiveRoute 
-                  desktopComponent={PropertyDetail} 
-                  mobileComponent={MobilePropertyDetail} 
-                />
+                <PropertyDetail />
               </ProtectedRoute>
             } />
             <Route path="/compare" element={
               <ProtectedRoute module="munin">
-                <ResponsiveRoute 
-                  desktopComponent={CompareEntities} 
-                  mobileComponent={MobileCompareEntities} 
-                />
+                <CompareEntities />
               </ProtectedRoute>
             } />
             <Route path="/hugin" element={
               <ProtectedRoute>
                 <ResponsiveRoute 
-                  desktopComponent={Hugin} 
-                  mobileComponent={MobileHugin} 
+                  desktop={<Hugin />}
+                  mobile={<MobileHugin />}
                 />
               </ProtectedRoute>
             } />
             <Route path="/hugin/messaging" element={
               <ProtectedRoute module="hugin_core">
                 <ResponsiveRoute 
-                  desktopComponent={Messaging} 
-                  mobileComponent={MobileMessaging} 
+                  desktop={<Messaging />}
+                  mobile={<MobileMessaging />}
                 />
               </ProtectedRoute>
             } />
@@ -356,8 +333,8 @@ function App() {
             <Route path="/hugin/planning" element={
               <ProtectedRoute module="hugin_core">
                 <ResponsiveRoute 
-                  desktopComponent={Planning} 
-                  mobileComponent={MobilePlanning} 
+                  desktop={<Planning />}
+                  mobile={<MobilePlanning />}
                 />
               </ProtectedRoute>
             } />
@@ -538,10 +515,7 @@ function App() {
             } />
             <Route path="/hugin/bioanalyzer" element={
               <ProtectedRoute module="bioanalyzer">
-                <ResponsiveRoute 
-                  desktopComponent={BioAnalyzer} 
-                  mobileComponent={MobileBioAnalyzer} 
-                />
+                <BioAnalyzer />
               </ProtectedRoute>
             } />
             <Route path="/hugin/imageanalyzer" element={
@@ -561,7 +535,10 @@ function App() {
             } />
             <Route path="/settings" element={
               <ProtectedRoute>
-                <Settings />
+                <ResponsiveRoute 
+                  desktop={<Settings />}
+                  mobile={<MobileSettings />}
+                />
               </ProtectedRoute>
             } />
             <Route path="/admin" element={
