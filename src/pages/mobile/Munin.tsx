@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Search, BookOpen, Grid, Activity, Dna, FlaskConical, Calculator, Users, Settings } from 'lucide-react';
-import disciplinesData from '../../data/disciplines.json';
+import disciplinesArray from '../../data/disciplines.json';
 
 const MobileMunin = () => {
     const navigate = useNavigate();
@@ -36,10 +36,10 @@ const MobileMunin = () => {
         { name: 'Engineering & Tech', icon: <Settings size={18} />, color: '#06b6d4', label: 'Tech' }
     ];
 
-    const categorizedDisciplines = disciplinesData.map(d => ({
+    const categorizedDisciplines = disciplinesArray.map((d: any) => ({
         ...d,
         category: getCategory(d.id)
-    })).filter(d =>
+    })).filter((d: any) =>
         d.label.toLowerCase().includes(searchQuery.toLowerCase()) &&
         (activeCategory === 'All' || d.category === activeCategory)
     );
