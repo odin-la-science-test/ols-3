@@ -1,6 +1,33 @@
 import { SessionManager, CSRFProtection } from './encryption';
 import { supabase, isSupabaseConfigured, getTableName, getCurrentUserEmail } from './supabaseClient';
 
+// Cache en mémoire pour réduire les appels Supabase
+const dataCache: Map<string, { data: any[], timestamp: number }> = new Map();
+const CACHE_DURATION = 30000; // 30 secondes
+
+// Vérifier si le cache est valide
+const isCacheValid = (moduleName: string): boolean => {
+    const cached = dataCache.get(moduleName);
+    if (!cached) return false;
+    return Date.now() - cached.timestamp < CACHE_DURATION;
+};
+
+// Obtenir les données du cache
+const getCachedData = (moduleName: string): any[] | null => {
+    if (!isCacheValid(moduleName)) return null;
+    return dataCache.get(moduleName)?.data || null;
+};
+
+// Mettre à jour le cache
+const updateCache = (moduleName: string, data: any[]): void => {
+    dataCache.set(moduleName, { data, timestamp: Date.now() });
+};
+
+// Invalider le cache pour un module
+const invalidateCache = (moduleName: string): void => {
+    dataCache.delete(moduleName);
+};
+
 // Fallback localStorage functions
 const getLocalStorageData = (moduleName: string): any[] => {
     try {
@@ -199,26 +226,41 @@ export const fetchModuleData = async (moduleName: string) => {
     try {
         console.log('fetchModuleData called for:', moduleName);
         
+        // Vérifier le cache d'abord
+        const cachedData = getCachedData(moduleName);
+        if (cachedData !== null) {
+            console.log('Using cached data for:', moduleName);
+            return cachedData;
+        }
+        
         // Priorité 1: Supabase si configuré
         if (isSupabaseConfigured()) {
             console.log('Using Supabase for:', moduleName);
             const data = await fetchFromSupabase(moduleName);
+            updateCache(moduleName, data); // Mettre en cache
             return data;
         }
         
         // Priorité 2: localStorage fallback
         console.log('Using localStorage fallback for:', moduleName);
-        return getLocalStorageData(moduleName);
+        const data = getLocalStorageData(moduleName);
+        updateCache(moduleName, data); // Mettre en cache
+        return data;
     } catch (error) {
         console.error(`Error fetching ${moduleName}:`, error);
         console.log('Falling back to localStorage');
-        return getLocalStorageData(moduleName);
+        const data = getLocalStorageData(moduleName);
+        updateCache(moduleName, data);
+        return data;
     }
 };
 
 export const saveModuleItem = async (moduleName: string, item: any) => {
     try {
         console.log('saveModuleItem called with:', moduleName, item);
+        
+        // Invalider le cache lors de la sauvegarde
+        invalidateCache(moduleName);
         
         // Priorité 1: Supabase si configuré
         if (isSupabaseConfigured()) {
@@ -266,6 +308,9 @@ export const saveModuleItem = async (moduleName: string, item: any) => {
 export const deleteModuleItem = async (moduleName: string, id: string | number) => {
     try {
         console.log('deleteModuleItem called:', moduleName, id);
+        
+        // Invalider le cache lors de la suppression
+        invalidateCache(moduleName);
         
         // Priorité 1: Supabase si configuré
         if (isSupabaseConfigured()) {

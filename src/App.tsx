@@ -1,88 +1,17 @@
 import { useNavigate, Routes, Route, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import './App.css';
+
+// Composants critiques chargés immédiatement
 import LandingPage from './pages/LandingPage';
 import MobileLandingPage from './pages/mobile/LandingPage';
 import Home from './pages/Home';
 import MobileHome from './pages/mobile/Home';
 import Login from './pages/Login';
-import Munin from './pages/Munin';
-import MobileMunin from './pages/mobile/Munin';
-import Discipline from './pages/Discipline';
-import EntityDetail from './pages/EntityDetail';
-import PropertyDetail from './pages/PropertyDetail';
-import CompareEntities from './pages/CompareEntities';
-import Hugin from './pages/Hugin';
-import MobileHugin from './pages/mobile/Hugin';
-import Messaging from './pages/hugin/Messaging';
-import MobileMessaging from './pages/mobile/hugin/Messaging';
-import Inventory from './pages/hugin/Inventory';
-import Planning from './pages/hugin/Planning';
-import MobilePlanning from './pages/mobile/hugin/Planning';
-import Documents from './pages/hugin/Documents';
-import CultureTracking from './pages/hugin/CultureTracking';
-import ITArchive from './pages/hugin/ITArchive';
-import Meetings from './pages/hugin/Meetings';
-import ScientificResearch from './pages/hugin/ScientificResearch';
-import TableurLab from './pages/hugin/TableurLab';
-import Mimir from './pages/hugin/Mimir';
-import Bibliography from './pages/hugin/Bibliography';
-import LabNotebook from './pages/hugin/LabNotebook';
-import StockManager from './pages/hugin/StockManager';
-import CryoKeeper from './pages/hugin/CryoKeeper';
-import EquipFlow from './pages/hugin/EquipFlow';
-import GrantBudget from './pages/hugin/GrantBudget';
-import SOPLibrary from './pages/hugin/SOPLibrary';
-import BioToolBox from './pages/hugin/BioToolBox';
-import SequenceLens from './pages/hugin/SequenceLens';
-import ColonyVision from './pages/hugin/ColonyVision';
-import ProjectMind from './pages/hugin/ProjectMind';
-import SafetyHub from './pages/hugin/SafetyHub';
-import FlowAnalyzer from './pages/hugin/FlowAnalyzer';
-import SpectrumViewer from './pages/hugin/SpectrumViewer';
-import GelPro from './pages/hugin/GelPro';
-import PhyloGen from './pages/hugin/PhyloGen';
-import MoleculeBox from './pages/hugin/MoleculeBox';
-import KineticsLab from './pages/hugin/KineticsLab';
-import PlateMapper from './pages/hugin/PlateMapper';
-import SolutionMixer from './pages/hugin/SolutionMixer';
-import PrimerStep from './pages/hugin/PrimerStep';
-import CellTracker from './pages/hugin/CellTracker';
-import BlastNCBI from './pages/hugin/BlastNCBI';
-import PhyloMega from './pages/hugin/PhyloMega';
-import BioNumerics from './pages/hugin/BioNumerics';
-import Artemis from './pages/hugin/Artemis';
-import Qiime2 from './pages/hugin/Qiime2';
-import Whonet from './pages/hugin/Whonet';
-import ExcelTest from './pages/hugin/ExcelTest';
-import BioAnalyzer from './pages/hugin/BioAnalyzer';
-import MobileBioAnalyzer from './pages/mobile/hugin/BioAnalyzer';
-import ImageAnalyzer from './pages/hugin/ImageAnalyzer';
-import StatisticsLab from './pages/hugin/StatisticsLab';
 import Register from './pages/Register';
-import WhyOdin from './pages/WhyOdin';
-import Enterprise from './pages/Enterprise';
-import Pricing from './pages/Pricing';
-import MobileApps from './pages/MobileApps';
-import Support from './pages/Support';
-import Blog from './pages/Blog';
-import Company from './pages/Company';
-import Careers from './pages/Careers';
-import Congratulations from './pages/Congratulations';
-import Settings from './pages/Settings';
-import Account from './pages/Account';
-import AdminDashboard from './pages/AdminDashboard';
-import Documentation from './pages/Documentation';
-import Features from './pages/Features';
-import Privacy from './pages/Privacy';
-import Terms from './pages/Terms';
-import Cookies from './pages/Cookies';
-import OpenSourceTools from './pages/OpenSourceTools';
-import Tutorial from './pages/Tutorial';
 import ResponsiveRoute from './components/ResponsiveRoute';
 import ShortcutManager from './components/ShortcutManager';
 import KeyboardShortcuts from './components/KeyboardShortcuts';
-import { checkHasAccess, getAccessData } from './utils/ShieldUtils';
 import { ToastProvider } from './components/ToastContext';
 import { LanguageProvider } from './components/LanguageContext';
 import { ThemeProvider } from './components/ThemeContext';
@@ -90,7 +19,107 @@ import CommandPalette from './components/CommandPalette';
 import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop';
 
+// Lazy loading pour les composants moins critiques
+const Munin = lazy(() => import('./pages/Munin'));
+const MobileMunin = lazy(() => import('./pages/mobile/Munin'));
+const Discipline = lazy(() => import('./pages/Discipline'));
+const EntityDetail = lazy(() => import('./pages/EntityDetail'));
+const PropertyDetail = lazy(() => import('./pages/PropertyDetail'));
+const CompareEntities = lazy(() => import('./pages/CompareEntities'));
+const Hugin = lazy(() => import('./pages/Hugin'));
+const MobileHugin = lazy(() => import('./pages/mobile/Hugin'));
+const Messaging = lazy(() => import('./pages/hugin/Messaging'));
+const MobileMessaging = lazy(() => import('./pages/mobile/hugin/Messaging'));
+const Inventory = lazy(() => import('./pages/hugin/Inventory'));
+const Planning = lazy(() => import('./pages/hugin/Planning'));
+const MobilePlanning = lazy(() => import('./pages/mobile/hugin/Planning'));
+const Documents = lazy(() => import('./pages/hugin/Documents'));
+const CultureTracking = lazy(() => import('./pages/hugin/CultureTracking'));
+const ITArchive = lazy(() => import('./pages/hugin/ITArchive'));
+const Meetings = lazy(() => import('./pages/hugin/Meetings'));
+const ScientificResearch = lazy(() => import('./pages/hugin/ScientificResearch'));
+const TableurLab = lazy(() => import('./pages/hugin/TableurLab'));
+const Mimir = lazy(() => import('./pages/hugin/Mimir'));
+const Bibliography = lazy(() => import('./pages/hugin/Bibliography'));
+const LabNotebook = lazy(() => import('./pages/hugin/LabNotebook'));
+const StockManager = lazy(() => import('./pages/hugin/StockManager'));
+const CryoKeeper = lazy(() => import('./pages/hugin/CryoKeeper'));
+const EquipFlow = lazy(() => import('./pages/hugin/EquipFlow'));
+const GrantBudget = lazy(() => import('./pages/hugin/GrantBudget'));
+const SOPLibrary = lazy(() => import('./pages/hugin/SOPLibrary'));
+const BioToolBox = lazy(() => import('./pages/hugin/BioToolBox'));
+const SequenceLens = lazy(() => import('./pages/hugin/SequenceLens'));
+const ColonyVision = lazy(() => import('./pages/hugin/ColonyVision'));
+const ProjectMind = lazy(() => import('./pages/hugin/ProjectMind'));
+const SafetyHub = lazy(() => import('./pages/hugin/SafetyHub'));
+const FlowAnalyzer = lazy(() => import('./pages/hugin/FlowAnalyzer'));
+const SpectrumViewer = lazy(() => import('./pages/hugin/SpectrumViewer'));
+const GelPro = lazy(() => import('./pages/hugin/GelPro'));
+const PhyloGen = lazy(() => import('./pages/hugin/PhyloGen'));
+const MoleculeBox = lazy(() => import('./pages/hugin/MoleculeBox'));
+const KineticsLab = lazy(() => import('./pages/hugin/KineticsLab'));
+const PlateMapper = lazy(() => import('./pages/hugin/PlateMapper'));
+const SolutionMixer = lazy(() => import('./pages/hugin/SolutionMixer'));
+const PrimerStep = lazy(() => import('./pages/hugin/PrimerStep'));
+const CellTracker = lazy(() => import('./pages/hugin/CellTracker'));
+const BlastNCBI = lazy(() => import('./pages/hugin/BlastNCBI'));
+const PhyloMega = lazy(() => import('./pages/hugin/PhyloMega'));
+const BioNumerics = lazy(() => import('./pages/hugin/BioNumerics'));
+const Artemis = lazy(() => import('./pages/hugin/Artemis'));
+const Qiime2 = lazy(() => import('./pages/hugin/Qiime2'));
+const Whonet = lazy(() => import('./pages/hugin/Whonet'));
+const ExcelTest = lazy(() => import('./pages/hugin/ExcelTest'));
+const BioAnalyzer = lazy(() => import('./pages/hugin/BioAnalyzer'));
+const MobileBioAnalyzer = lazy(() => import('./pages/mobile/hugin/BioAnalyzer'));
+const ImageAnalyzer = lazy(() => import('./pages/hugin/ImageAnalyzer'));
+const StatisticsLab = lazy(() => import('./pages/hugin/StatisticsLab'));
+const WhyOdin = lazy(() => import('./pages/WhyOdin'));
+const Enterprise = lazy(() => import('./pages/Enterprise'));
+const Pricing = lazy(() => import('./pages/Pricing'));
+const MobileApps = lazy(() => import('./pages/MobileApps'));
+const Support = lazy(() => import('./pages/Support'));
+const Blog = lazy(() => import('./pages/Blog'));
+const Company = lazy(() => import('./pages/Company'));
+const Careers = lazy(() => import('./pages/Careers'));
+const Congratulations = lazy(() => import('./pages/Congratulations'));
+const Settings = lazy(() => import('./pages/Settings'));
+const Account = lazy(() => import('./pages/Account'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const Documentation = lazy(() => import('./pages/Documentation'));
+const Features = lazy(() => import('./pages/Features'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const Terms = lazy(() => import('./pages/Terms'));
+const Cookies = lazy(() => import('./pages/Cookies'));
+const OpenSourceTools = lazy(() => import('./pages/OpenSourceTools'));
+const Tutorial = lazy(() => import('./pages/Tutorial'));
+
 import type { ReactNode } from 'react';
+import { checkHasAccess, getAccessData } from './utils/ShieldUtils';
+
+// Composant de chargement
+const LoadingFallback = () => (
+  <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+    background: 'var(--bg-primary)',
+    color: 'var(--text-primary)'
+  }}>
+    <div style={{ textAlign: 'center' }}>
+      <div style={{
+        width: '50px',
+        height: '50px',
+        border: '3px solid rgba(59, 130, 246, 0.3)',
+        borderTop: '3px solid #3b82f6',
+        borderRadius: '50%',
+        animation: 'spin 1s linear infinite',
+        margin: '0 auto 1rem'
+      }} />
+      <p>Chargement...</p>
+    </div>
+  </div>
+);
 
 // Enhanced protection wrapper with module check
 const ProtectedRoute = ({ children, module }: { children: ReactNode, module?: string }) => {
@@ -199,7 +228,8 @@ function App() {
               SESSION DEMO : {timeLeft}s RESTANTES
             </div>
           )}
-          <Routes>
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
             <Route path="/" element={
               <ResponsiveRoute 
                 desktopComponent={LandingPage} 
@@ -513,6 +543,7 @@ function App() {
               </ProtectedRoute>
             } />
           </Routes>
+          </Suspense>
         </LanguageProvider>
       </ToastProvider>
     </ThemeProvider>

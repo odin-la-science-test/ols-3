@@ -43,3 +43,13 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Animation de chargement */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
