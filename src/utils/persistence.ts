@@ -73,22 +73,28 @@ const transformPlanningForSupabase = (item: any): any => {
     if (!item.date || !item.time) return item;
     
     try {
-        // La date est déjà au format ISO (YYYY-MM-DD) depuis l'input type="date"
-        const date = item.date; // "2026-02-13"
+        // La date vient de l'input type="date" au format ISO (YYYY-MM-DD)
+        let dateISO = item.date;
+        
+        // Si la date est au format français (DD/MM/YYYY), la convertir
+        if (item.date.includes('/')) {
+            const [day, month, year] = item.date.split('/');
+            dateISO = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+        }
         
         // Parser l'heure (format: "14:30" ou "14:00")
         const timeParts = item.time.split(':');
         const hour = timeParts[0].padStart(2, '0');
-        const minute = timeParts[1]?.padStart(2, '0') || '00';
+        const minute = (timeParts[1] || '00').padStart(2, '0');
         
-        // Créer le timestamp ISO
-        const dateStr = `${date}T${hour}:${minute}:00`;
+        // Créer le timestamp ISO complet
+        const dateTimeISO = `${dateISO}T${hour}:${minute}:00`;
         
         return {
             title: item.title,
             description: item.module || '',
-            start_date: dateStr,
-            end_date: dateStr, // Même heure pour début et fin
+            start_date: dateTimeISO,
+            end_date: dateTimeISO, // Même heure pour début et fin
             location: item.resource || '',
             attendees: item.user ? [item.user] : [],
             reminder: item.reminder || false
