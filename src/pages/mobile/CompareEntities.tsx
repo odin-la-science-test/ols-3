@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Plus, X, GitCompare, Check, Minus } from 'lucide-react';
-import disciplinesData from '../data/disciplines.json';
+import disciplinesData from '../../data/disciplines.json';
 
 const MobileCompareEntities = () => {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ const MobileCompareEntities = () => {
         const entities: any[] = [];
         const allEntities: any[] = [];
 
-        disciplinesData.disciplines.forEach((discipline: any) => {
+        disciplinesData.forEach((discipline: any) => {
             discipline.entities?.forEach((entity: any) => {
                 const fullEntity = {
                     ...entity,

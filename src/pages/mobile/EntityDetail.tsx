@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Info, Layers, ExternalLink } from 'lucide-react';
-import disciplinesData from '../data/disciplines.json';
+import disciplinesData from '../../data/disciplines.json';
 
 const MobileEntityDetail = () => {
     const { disciplineId, entityId } = useParams();
@@ -10,7 +10,7 @@ const MobileEntityDetail = () => {
     const [discipline, setDiscipline] = useState<any>(null);
 
     useEffect(() => {
-        const disc = disciplinesData.disciplines.find((d: any) => d.id === disciplineId);
+        const disc = disciplinesData.find((d: any) => d.id === disciplineId);
         setDiscipline(disc);
         
         if (disc) {

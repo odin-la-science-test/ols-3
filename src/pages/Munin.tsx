@@ -58,7 +58,7 @@ const Munin = () => {
         ...d,
         category: getCategory(d.id)
     })).filter(d =>
-        d.label.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        d.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
         (activeCategory === 'All' || d.category === activeCategory)
     );
 
@@ -210,10 +210,10 @@ const Munin = () => {
                                                 }}>
                                                     <BookOpen size={20} />
                                                 </div>
-                                                <h3 style={{ fontSize: '1.25rem' }}>{d.label}</h3>
+                                                <h3 style={{ fontSize: '1.25rem' }}>{d.name}</h3>
                                             </div>
                                             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: '1.5' }}>
-                                                {getDisciplineDesc(d.label)}
+                                                {getDisciplineDesc(d.name)}
                                             </p>
                                         </div>
                                     ))}

@@ -18,6 +18,7 @@ import { ThemeProvider } from './components/ThemeContext';
 import CommandPalette from './components/CommandPalette';
 import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop';
+import VersionBadge from './components/VersionBadge';
 
 // Lazy loading pour les composants moins critiques
 const Munin = lazy(() => import('./pages/Munin'));
@@ -214,6 +215,7 @@ function App() {
           <CommandPalette />
           <ScrollToTop />
           <BackToTop />
+          <VersionBadge position="bottom-right" />
           {tempSessionActive && (
             <div style={{
               position: 'fixed', top: 0, left: 0, right: 0, height: '3px',

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Info, TrendingUp, BookOpen, ExternalLink } from 'lucide-react';
-import disciplinesData from '../data/disciplines.json';
+import disciplinesData from '../../data/disciplines.json';
 
 const MobilePropertyDetail = () => {
     const { id } = useParams();
@@ -14,7 +14,7 @@ const MobilePropertyDetail = () => {
         let foundProperty: any = null;
         const entities: any[] = [];
 
-        disciplinesData.disciplines.forEach((discipline: any) => {
+        disciplinesData.forEach((discipline: any) => {
             discipline.entities?.forEach((entity: any) => {
                 entity.properties?.forEach((prop: any) => {
                     if (prop.id === id) {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Search, BookOpen, Beaker, Microscope } from 'lucide-react';
-import disciplinesData from '../data/disciplines.json';
+import disciplinesData from '../../data/disciplines.json';
 
 const MobileDiscipline = () => {
     const { id } = useParams();
@@ -10,7 +10,7 @@ const MobileDiscipline = () => {
     const [discipline, setDiscipline] = useState<any>(null);
 
     useEffect(() => {
-        const found = disciplinesData.disciplines.find((d: any) => d.id === id);
+        const found = disciplinesData.find((d: any) => d.id === id);
         setDiscipline(found);
     }, [id]);
 

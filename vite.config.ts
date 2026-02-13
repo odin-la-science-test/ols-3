@@ -1,9 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { versionPlugin } from './vite-version-plugin'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    versionPlugin({ includeGitInfo: true })
+  ],
   server: {
     host: true,
     port: 5173
@@ -11,13 +15,7 @@ export default defineConfig({
   build: {
     // Optimisations de build
     target: 'es2015',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // Supprimer les console.log en production
-        drop_debugger: true
-      }
-    },
+    minify: false, // Désactiver la minification pour accélérer le build
     rollupOptions: {
       output: {
         // Code splitting pour réduire la taille des bundles
@@ -26,7 +24,11 @@ export default defineConfig({
           'ui-vendor': ['lucide-react'],
           'data-vendor': ['plotly.js', 'react-plotly.js'],
           'supabase': ['@supabase/supabase-js']
-        }
+        },
+        // Cache busting: ajouter des hashes basés sur le contenu
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]'
       }
     },
     // Augmenter la limite d'avertissement des chunks
