@@ -172,13 +172,31 @@ const saveToSupabase = async (moduleName: string, item: any): Promise<any> => {
             user_email: userEmail
         };
         
+        // Si l'item a un UUID (format avec tirets), c'est un UPDATE
+        if (itemWithUser.id && typeof itemWithUser.id === 'string' && itemWithUser.id.includes('-')) {
+            // UPDATE
+            const { data, error } = await supabase
+                .from(tableName)
+                .update(itemWithUser)
+                .eq('id', itemWithUser.id)
+                .select()
+                .single();
+            
+            if (error) {
+                console.error('Supabase update error:', error);
+                return null;
+            }
+            
+            return data;
+        }
+        
         // Supprimer l'ID si c'est une string générée localement (pas un UUID)
         // Supabase générera automatiquement un UUID
         if (itemWithUser.id && typeof itemWithUser.id === 'string' && !itemWithUser.id.includes('-')) {
             delete itemWithUser.id;
         }
         
-        // Insertion (Supabase génère l'ID)
+        // INSERT (Supabase génère l'ID)
         const { data, error } = await supabase
             .from(tableName)
             .insert(itemWithUser)
