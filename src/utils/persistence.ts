@@ -72,19 +72,35 @@ const fetchFromSupabase = async (moduleName: string): Promise<any[]> => {
 const transformPlanningForSupabase = (item: any): any => {
     if (!item.date || !item.time) return item;
     
-    // Combiner date et time en timestamp ISO
-    const [day, month, year] = item.date.split('/');
-    const dateStr = `${year || new Date().getFullYear()}-${month}-${day}T${item.time}:00`;
-    
-    return {
-        title: item.title,
-        description: item.module || '',
-        start_date: dateStr,
-        end_date: dateStr, // Même heure pour début et fin
-        location: item.resource || '',
-        attendees: item.user ? [item.user] : [],
-        reminder: item.reminder || false
-    };
+    try {
+        // Parser la date française (format: "13/02/2024" ou "13/02")
+        const dateParts = item.date.split('/');
+        const day = dateParts[0].padStart(2, '0');
+        const month = dateParts[1].padStart(2, '0');
+        const year = dateParts[2] || new Date().getFullYear().toString();
+        
+        // Parser l'heure (format: "14:30")
+        const timeParts = item.time.split(':');
+        const hour = timeParts[0].padStart(2, '0');
+        const minute = timeParts[1]?.padStart(2, '0') || '00';
+        
+        // Créer le timestamp ISO
+        const dateStr = `${year}-${month}-${day}T${hour}:${minute}:00`;
+        
+        return {
+            title: item.title,
+            description: item.module || '',
+            start_date: dateStr,
+            end_date: dateStr, // Même heure pour début et fin
+            location: item.resource || '',
+            attendees: item.user ? [item.user] : [],
+            reminder: item.reminder || false
+        };
+    } catch (error) {
+        console.error('Error transforming planning data:', error, item);
+        // En cas d'erreur, retourner l'item original
+        return item;
+    }
 };
 
 // Transformer les données Supabase pour le Planning
