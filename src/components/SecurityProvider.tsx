@@ -53,7 +53,7 @@ export const SecurityProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     // Détecter l'inactivité
     useEffect(() => {
-        let inactivityTimer: NodeJS.Timeout;
+        let inactivityTimer: number;
         const INACTIVITY_TIMEOUT = 30 * 60 * 1000; // 30 minutes
 
         const resetTimer = () => {

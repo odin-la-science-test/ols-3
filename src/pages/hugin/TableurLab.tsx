@@ -154,16 +154,16 @@ const TableurLab = () => {
             style: {
                 bgcolor: '#ffffff',
                 align: 'left' as const,
-                valign: 'middle',
+                valign: 'middle' as const,
                 textwrap: false,
                 strike: false,
                 underline: false,
                 color: '#0a0a0a',
                 font: {
-                    name: 'Arial',
+                    name: 'Helvetica' as const,
                     size: 10,
-                    bold: false,
-                    italic: false,
+                    bold: false as const,
+                    italic: false as const,
                 },
             },
         };

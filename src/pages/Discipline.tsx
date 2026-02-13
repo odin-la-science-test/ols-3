@@ -676,7 +676,7 @@ const Discipline = () => {
                                                 borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
                                             }}>
                                                 <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>{key}</span>
-                                                <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{value}</span>
+                                                <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{String(value)}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -711,7 +711,7 @@ const Discipline = () => {
                                                 textAlign: 'center'
                                             }}>
                                                 <div style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-munin)', marginBottom: '0.25rem' }}>
-                                                    {value}
+                                                    {String(value)}
                                                 </div>
                                                 <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>
                                                     {key}
@@ -750,7 +750,7 @@ const Discipline = () => {
                                                 borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
                                             }}>
                                                 <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>{key}</span>
-                                                <span style={{ fontWeight: 600, fontSize: '0.9rem', textAlign: 'right' }}>{value}</span>
+                                                <span style={{ fontWeight: 600, fontSize: '0.9rem', textAlign: 'right' }}>{String(value)}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -797,7 +797,7 @@ const Discipline = () => {
                                                         ))}
                                                     </div>
                                                 ) : (
-                                                    <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{value}</div>
+                                                    <div style={{ fontWeight: 600, fontSize: '0.9rem' }}>{String(value)}</div>
                                                 )}
                                             </div>
                                         ))}
@@ -833,7 +833,7 @@ const Discipline = () => {
                                                 borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
                                             }}>
                                                 <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>{key}</span>
-                                                <span style={{ fontWeight: 600, fontSize: '0.9rem', textAlign: 'right', maxWidth: '60%' }}>{value}</span>
+                                                <span style={{ fontWeight: 600, fontSize: '0.9rem', textAlign: 'right', maxWidth: '60%' }}>{String(value)}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -868,7 +868,7 @@ const Discipline = () => {
                                                 borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
                                             }}>
                                                 <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem' }}>{key}</span>
-                                                <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#3b82f6', fontFamily: 'monospace' }}>{value}</span>
+                                                <span style={{ fontWeight: 600, fontSize: '0.9rem', color: '#3b82f6', fontFamily: 'monospace' }}>{String(value)}</span>
                                             </div>
                                         ))}
                                     </div>
