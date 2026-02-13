@@ -73,14 +73,8 @@ const transformPlanningForSupabase = (item: any): any => {
     if (!item.date || !item.time) return item;
     
     try {
-        // La date vient de l'input type="date" au format ISO (YYYY-MM-DD)
-        let dateISO = item.date;
-        
-        // Si la date est au format français (DD/MM/YYYY), la convertir
-        if (item.date.includes('/')) {
-            const [day, month, year] = item.date.split('/');
-            dateISO = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-        }
+        // La date est au format ISO (YYYY-MM-DD) depuis l'input type="date"
+        const dateISO = item.date;
         
         // Parser l'heure (format: "14:30" ou "14:00")
         const timeParts = item.time.split(':');
@@ -111,7 +105,13 @@ const transformPlanningFromSupabase = (item: any): any => {
     if (!item.start_date) return item;
     
     const startDate = new Date(item.start_date);
-    const date = startDate.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    
+    // Garder le format ISO pour la date (YYYY-MM-DD) pour compatibilité avec input type="date"
+    const year = startDate.getFullYear();
+    const month = String(startDate.getMonth() + 1).padStart(2, '0');
+    const day = String(startDate.getDate()).padStart(2, '0');
+    const dateISO = `${year}-${month}-${day}`;
+    
     const time = startDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
     
     return {
@@ -119,7 +119,7 @@ const transformPlanningFromSupabase = (item: any): any => {
         title: item.title,
         resource: item.location || '',
         time: time,
-        date: date,
+        date: dateISO, // Format ISO pour compatibilité
         user: item.attendees?.[0] || '',
         module: item.description || '',
         reminder: item.reminder || false
