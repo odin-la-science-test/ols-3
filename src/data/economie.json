@@ -1,0 +1,55 @@
+{
+  "discipline": "economie",
+  "displayName": "Économie",
+  "description": "Référentiel complet pour le domaine : Économie. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "cell-structure",
+      "name": "Structure Cellulaire",
+      "category": "Fondamental",
+      "overview": "L'unité structurelle, fonctionnelle et biologique de base de tous les organismes vivants connus.",
+      "properties": {
+        "Kingdom": {
+          "value": "Animalia",
+          "description": "Propriété Kingdom standard pour Économie"
+        },
+        "Domain": {
+          "value": "Eukaryota",
+          "description": "Propriété Domain standard pour Économie"
+        }
+      }
+    },
+    {
+      "id": "dna-replication",
+      "name": "Réplication de l'ADN",
+      "category": "Génétique",
+      "overview": "Le processus biologique de production de deux répliques identiques d'ADN à partir d'une molécule d'ADN originale.",
+      "properties": {
+        "Kingdom": {
+          "value": "Animalia",
+          "description": "Propriété Kingdom standard pour Économie"
+        },
+        "Domain": {
+          "value": "Eukaryota",
+          "description": "Propriété Domain standard pour Économie"
+        }
+      }
+    },
+    {
+      "id": "protein-synthesis",
+      "name": "Synthèse des Protéines",
+      "category": "Biochimie",
+      "overview": "Le processus par lequel les cellules individuelles construisent des protéines spécifiques.",
+      "properties": {
+        "Kingdom": {
+          "value": "Animalia",
+          "description": "Propriété Kingdom standard pour Économie"
+        },
+        "Domain": {
+          "value": "Eukaryota",
+          "description": "Propriété Domain standard pour Économie"
+        }
+      }
+    }
+  ]
+}

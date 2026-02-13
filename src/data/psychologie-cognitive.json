@@ -1,0 +1,55 @@
+{
+  "discipline": "psychologie-cognitive",
+  "displayName": "Psychologie cognitive",
+  "description": "Référentiel complet pour le domaine : Psychologie cognitive. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "fundamental-theory",
+      "name": "Théorie Fondamentale",
+      "category": "Théorie",
+      "overview": "Les concepts de base et les paradigmes régissant ce domaine de recherche.",
+      "properties": {
+        "Field": {
+          "value": "Scientific",
+          "description": "Propriété Field standard pour Psychologie cognitive"
+        },
+        "Level": {
+          "value": "Professional",
+          "description": "Propriété Level standard pour Psychologie cognitive"
+        }
+      }
+    },
+    {
+      "id": "methodology",
+      "name": "Méthodologie de Recherche",
+      "category": "Technique",
+      "overview": "Les approches systématiques utilisées pour l'investigation scientifique dans cette discipline.",
+      "properties": {
+        "Field": {
+          "value": "Scientific",
+          "description": "Propriété Field standard pour Psychologie cognitive"
+        },
+        "Level": {
+          "value": "Professional",
+          "description": "Propriété Level standard pour Psychologie cognitive"
+        }
+      }
+    },
+    {
+      "id": "standard-protocols",
+      "name": "Protocoles Standards",
+      "category": "Pratique",
+      "overview": "Ensemble de procédures établies pour mener des expériences et collecter des données.",
+      "properties": {
+        "Field": {
+          "value": "Scientific",
+          "description": "Propriété Field standard pour Psychologie cognitive"
+        },
+        "Level": {
+          "value": "Professional",
+          "description": "Propriété Level standard pour Psychologie cognitive"
+        }
+      }
+    }
+  ]
+}

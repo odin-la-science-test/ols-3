@@ -1,0 +1,69 @@
+{
+    "discipline": "gastrology",
+    "displayName": "Gastrologie",
+    "description": "Base de données sur les pathologies digestives",
+    "entities": [
+        {
+            "id": "gerd",
+            "name": "Reflux gastro-œsophagien (RGO)",
+            "category": "Pathologies œsophagiennes",
+            "overview": "Remontée anormale du contenu gastrique acide dans l'œsophage, causant brûlures d'estomac et inflammation.",
+            "properties": {
+                "prevalence": "10-20% de la population",
+                "symptoms": "Pyrosis, régurgitations acides",
+                "complications": "Œsophagite, sténose, Barrett"
+            },
+            "additionalInfo": {
+                "causes": [
+                    "Dysfonction du sphincter œsophagien inférieur",
+                    "Hernie hiatale",
+                    "Obésité",
+                    "Grossesse"
+                ],
+                "tests": [
+                    "Endoscopie digestive haute",
+                    "pH-métrie œsophagienne",
+                    "Manométrie œsophagienne"
+                ],
+                "treatment": [
+                    "IPP (inhibiteurs de pompe à protons)",
+                    "Modifications du mode de vie",
+                    "Chirurgie (fundoplicature) si réfractaire"
+                ]
+            }
+        },
+        {
+            "id": "ibd-crohn",
+            "name": "Maladie de Crohn",
+            "category": "MICI",
+            "overview": "Maladie inflammatoire chronique de l'intestin pouvant affecter tout le tractus digestif de la bouche à l'anus. Inflammation transmurale avec lésions discontinues.",
+            "properties": {
+                "location": "Tout le tractus GI (souvent iléon terminal)",
+                "pattern": "Lésions discontinues (skip lesions)",
+                "depth": "Inflammation transmurale",
+                "age": "Pic: 15-35 ans"
+            },
+            "additionalInfo": {
+                "symptoms": [
+                    "Diarrhée chronique",
+                    "Douleurs abdominales",
+                    "Perte de poids",
+                    "Fistules, abcès"
+                ],
+                "tests": [
+                    "Coloscopie avec biopsies",
+                    "IRM entérique",
+                    "Calprotectine fécale",
+                    "Sérologie ASCA"
+                ],
+                "treatment": [
+                    "Anti-inflammatoires (5-ASA)",
+                    "Immunosuppresseurs",
+                    "Biothérapies (anti-TNF)",
+                    "Chirurgie si complications"
+                ]
+            }
+        }
+    ],
+    "properties": []
+}

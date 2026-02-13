@@ -1,0 +1,55 @@
+{
+  "discipline": "intelligence-artificielle",
+  "displayName": "Intelligence artificielle",
+  "description": "Référentiel complet pour le domaine : Intelligence artificielle. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "quicksort",
+      "name": "Quicksort",
+      "category": "Algorithmique",
+      "overview": "Un algorithme de tri hautement efficace basé sur le partitionnement d'un tableau de données en deux sous-tableaux.",
+      "properties": {
+        "Complexity": {
+          "value": "O(log n)",
+          "description": "Propriété Complexity standard pour Intelligence artificielle"
+        },
+        "Paradigm": {
+          "value": "Object Oriented",
+          "description": "Propriété Paradigm standard pour Intelligence artificielle"
+        }
+      }
+    },
+    {
+      "id": "neural-networks",
+      "name": "Réseaux de Neurones",
+      "category": "IA",
+      "overview": "Modèles de calcul inspirés par les réseaux de neurones biologiques des cerveaux animaux.",
+      "properties": {
+        "Complexity": {
+          "value": "O(log n)",
+          "description": "Propriété Complexity standard pour Intelligence artificielle"
+        },
+        "Paradigm": {
+          "value": "Object Oriented",
+          "description": "Propriété Paradigm standard pour Intelligence artificielle"
+        }
+      }
+    },
+    {
+      "id": "blockchain",
+      "name": "Blockchain",
+      "category": "Cryptographie",
+      "overview": "Une liste croissante d'enregistrements, appelés blocs, qui sont liés à l'aide de la cryptographie.",
+      "properties": {
+        "Complexity": {
+          "value": "O(log n)",
+          "description": "Propriété Complexity standard pour Intelligence artificielle"
+        },
+        "Paradigm": {
+          "value": "Object Oriented",
+          "description": "Propriété Paradigm standard pour Intelligence artificielle"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1042 @@
+[
+  {
+    "id": "acoustique",
+    "label": "Acoustique"
+  },
+  {
+    "id": "agriculture-durable",
+    "label": "Agriculture durable"
+  },
+  {
+    "id": "agronomie",
+    "label": "Agronomie"
+  },
+  {
+    "id": "agroecologie",
+    "label": "Agroécologie"
+  },
+  {
+    "id": "algorithmique",
+    "label": "Algorithmique"
+  },
+  {
+    "id": "algebre",
+    "label": "Algèbre"
+  },
+  {
+    "id": "algebre-abstraite",
+    "label": "Algèbre abstraite"
+  },
+  {
+    "id": "algebre-lineaire",
+    "label": "Algèbre linéaire"
+  },
+  {
+    "id": "analyse-fonctionnelle",
+    "label": "Analyse fonctionnelle"
+  },
+  {
+    "id": "analyse-mathematique",
+    "label": "Analyse mathématique"
+  },
+  {
+    "id": "anesthesie-reanimation",
+    "label": "Anesthésie-réanimation"
+  },
+  {
+    "id": "anthropologie",
+    "label": "Anthropologie"
+  },
+  {
+    "id": "anthropologie-biologique",
+    "label": "Anthropologie biologique"
+  },
+  {
+    "id": "anthropologie-sociale",
+    "label": "Anthropologie sociale"
+  },
+  {
+    "id": "apprentissage-automatique",
+    "label": "Apprentissage automatique"
+  },
+  {
+    "id": "apprentissage-profond",
+    "label": "Apprentissage profond"
+  },
+  {
+    "id": "aquaculture",
+    "label": "Aquaculture"
+  },
+  {
+    "id": "archeologie",
+    "label": "Archéologie"
+  },
+  {
+    "id": "astrobiologie",
+    "label": "Astrobiologie"
+  },
+  {
+    "id": "astrometrie",
+    "label": "Astrométrie"
+  },
+  {
+    "id": "astronomie",
+    "label": "Astronomie"
+  },
+  {
+    "id": "astrophysique",
+    "label": "Astrophysique"
+  },
+  {
+    "id": "automatique",
+    "label": "Automatique"
+  },
+  {
+    "id": "bacteriologie",
+    "label": "Bactériologie"
+  },
+  {
+    "id": "bio-ingenierie",
+    "label": "Bio-ingénierie"
+  },
+  {
+    "id": "biochimie",
+    "label": "Biochimie"
+  },
+  {
+    "id": "bioinformatique",
+    "label": "Bioinformatique"
+  },
+  {
+    "id": "biologie",
+    "label": "Biologie"
+  },
+  {
+    "id": "biologie-cellulaire",
+    "label": "Biologie cellulaire"
+  },
+  {
+    "id": "biologie-du-developpement",
+    "label": "Biologie du développement"
+  },
+  {
+    "id": "biologie-generale",
+    "label": "Biologie générale"
+  },
+  {
+    "id": "biologie-marine",
+    "label": "Biologie marine"
+  },
+  {
+    "id": "biologie-moleculaire",
+    "label": "Biologie moléculaire"
+  },
+  {
+    "id": "biologie-evolutive",
+    "label": "Biologie évolutive"
+  },
+  {
+    "id": "biophysique",
+    "label": "Biophysique"
+  },
+  {
+    "id": "biostatistique",
+    "label": "Biostatistique"
+  },
+  {
+    "id": "biotechnologies",
+    "label": "Biotechnologies"
+  },
+  {
+    "id": "botanique",
+    "label": "Botanique"
+  },
+  {
+    "id": "cardiologie",
+    "label": "Cardiologie"
+  },
+  {
+    "id": "chimie",
+    "label": "Chimie"
+  },
+  {
+    "id": "chimie-analytique",
+    "label": "Chimie analytique"
+  },
+  {
+    "id": "chimie-atmospherique",
+    "label": "Chimie atmosphérique"
+  },
+  {
+    "id": "chimie-computationnelle",
+    "label": "Chimie computationnelle"
+  },
+  {
+    "id": "chimie-des-materiaux",
+    "label": "Chimie des matériaux"
+  },
+  {
+    "id": "chimie-des-polymeres",
+    "label": "Chimie des polymères"
+  },
+  {
+    "id": "chimie-environnementale",
+    "label": "Chimie environnementale"
+  },
+  {
+    "id": "chimie-industrielle",
+    "label": "Chimie industrielle"
+  },
+  {
+    "id": "chimie-inorganique",
+    "label": "Chimie inorganique"
+  },
+  {
+    "id": "chimie-minerale",
+    "label": "Chimie minérale"
+  },
+  {
+    "id": "chimie-nucleaire",
+    "label": "Chimie nucléaire"
+  },
+  {
+    "id": "chimie-organique",
+    "label": "Chimie organique"
+  },
+  {
+    "id": "chimie-pharmaceutique",
+    "label": "Chimie pharmaceutique"
+  },
+  {
+    "id": "chimie-physique",
+    "label": "Chimie physique"
+  },
+  {
+    "id": "chimie-quantique",
+    "label": "Chimie quantique"
+  },
+  {
+    "id": "chimie-theorique",
+    "label": "Chimie théorique"
+  },
+  {
+    "id": "chirurgie",
+    "label": "Chirurgie"
+  },
+  {
+    "id": "chronobiologie",
+    "label": "Chronobiologie"
+  },
+  {
+    "id": "climatologie",
+    "label": "Climatologie"
+  },
+  {
+    "id": "conservation-de-la-biodiversite",
+    "label": "Conservation de la biodiversité"
+  },
+  {
+    "id": "cosmologie",
+    "label": "Cosmologie"
+  },
+  {
+    "id": "criminologie",
+    "label": "Criminologie"
+  },
+  {
+    "id": "cryptographie",
+    "label": "Cryptographie"
+  },
+  {
+    "id": "cybersecurite",
+    "label": "Cybersécurité"
+  },
+  {
+    "id": "dietetique",
+    "label": "Diététique"
+  },
+  {
+    "id": "demographie",
+    "label": "Démographie"
+  },
+  {
+    "id": "developpement-durable",
+    "label": "Développement durable"
+  },
+  {
+    "id": "entomologie",
+    "label": "Entomologie"
+  },
+  {
+    "id": "ergotherapie",
+    "label": "Ergothérapie"
+  },
+  {
+    "id": "ethnologie",
+    "label": "Ethnologie"
+  },
+  {
+    "id": "fouille-de-donnees",
+    "label": "Fouille de données"
+  },
+  {
+    "id": "gestion-des-ressources-naturelles",
+    "label": "Gestion des ressources naturelles"
+  },
+  {
+    "id": "genie-biomedical",
+    "label": "Génie biomédical"
+  },
+  {
+    "id": "genie-chimique",
+    "label": "Génie chimique"
+  },
+  {
+    "id": "genie-civil",
+    "label": "Génie civil"
+  },
+  {
+    "id": "genie-des-materiaux",
+    "label": "Génie des matériaux"
+  },
+  {
+    "id": "genie-des-procedes",
+    "label": "Génie des procédés"
+  },
+  {
+    "id": "genie-environnemental",
+    "label": "Génie environnemental"
+  },
+  {
+    "id": "genie-industriel",
+    "label": "Génie industriel"
+  },
+  {
+    "id": "genie-informatique",
+    "label": "Génie informatique"
+  },
+  {
+    "id": "genie-logiciel",
+    "label": "Génie logiciel"
+  },
+  {
+    "id": "genie-mecanique",
+    "label": "Génie mécanique"
+  },
+  {
+    "id": "genie-nucleaire",
+    "label": "Génie nucléaire"
+  },
+  {
+    "id": "genie-electrique",
+    "label": "Génie électrique"
+  },
+  {
+    "id": "genie-electronique",
+    "label": "Génie électronique"
+  },
+  {
+    "id": "genie-energetique",
+    "label": "Génie énergétique"
+  },
+  {
+    "id": "genomique",
+    "label": "Génomique"
+  },
+  {
+    "id": "genetique",
+    "label": "Génétique"
+  },
+  {
+    "id": "geochimie",
+    "label": "Géochimie"
+  },
+  {
+    "id": "geographie-humaine",
+    "label": "Géographie humaine"
+  },
+  {
+    "id": "geographie-sociale",
+    "label": "Géographie sociale"
+  },
+  {
+    "id": "geographie-economique",
+    "label": "Géographie économique"
+  },
+  {
+    "id": "geologie",
+    "label": "Géologie"
+  },
+  {
+    "id": "geologie-dynamique",
+    "label": "Géologie dynamique"
+  },
+  {
+    "id": "geologie-structurale",
+    "label": "Géologie structurale"
+  },
+  {
+    "id": "geomorphologie",
+    "label": "Géomorphologie"
+  },
+  {
+    "id": "geometrie",
+    "label": "Géométrie"
+  },
+  {
+    "id": "geometrie-differentielle",
+    "label": "Géométrie différentielle"
+  },
+  {
+    "id": "geophysique",
+    "label": "Géophysique"
+  },
+  {
+    "id": "geopolitique",
+    "label": "Géopolitique"
+  },
+  {
+    "id": "geriatrie",
+    "label": "Gériatrie"
+  },
+  {
+    "id": "herpetologie",
+    "label": "Herpétologie"
+  },
+  {
+    "id": "histoire",
+    "label": "Histoire"
+  },
+  {
+    "id": "hydrogeologie",
+    "label": "Hydrogéologie"
+  },
+  {
+    "id": "ichtyologie",
+    "label": "Ichtyologie"
+  },
+  {
+    "id": "immunologie",
+    "label": "Immunologie"
+  },
+  {
+    "id": "informatique",
+    "label": "Informatique"
+  },
+  {
+    "id": "informatique-fondamentale",
+    "label": "Informatique fondamentale"
+  },
+  {
+    "id": "informatique-quantique",
+    "label": "Informatique quantique"
+  },
+  {
+    "id": "informatique-theorique",
+    "label": "Informatique théorique"
+  },
+  {
+    "id": "intelligence-artificielle",
+    "label": "Intelligence artificielle"
+  },
+  {
+    "id": "kinesitherapie",
+    "label": "Kinésithérapie"
+  },
+  {
+    "id": "linguistique",
+    "label": "Linguistique"
+  },
+  {
+    "id": "linguistique-appliquee",
+    "label": "Linguistique appliquée"
+  },
+  {
+    "id": "linguistique-generale",
+    "label": "Linguistique générale"
+  },
+  {
+    "id": "logique-mathematique",
+    "label": "Logique mathématique"
+  },
+  {
+    "id": "macroeconomie",
+    "label": "Macroéconomie"
+  },
+  {
+    "id": "mammalogie",
+    "label": "Mammalogie"
+  },
+  {
+    "id": "mathematiques",
+    "label": "Mathématiques"
+  },
+  {
+    "id": "mathematiques-appliquees",
+    "label": "Mathématiques appliquées"
+  },
+  {
+    "id": "mathematiques-pures",
+    "label": "Mathématiques pures"
+  },
+  {
+    "id": "microbiologie",
+    "label": "Microbiologie"
+  },
+  {
+    "id": "microeconomie",
+    "label": "Microéconomie"
+  },
+  {
+    "id": "mineralogie",
+    "label": "Minéralogie"
+  },
+  {
+    "id": "mycologie",
+    "label": "Mycologie"
+  },
+  {
+    "id": "mecanique",
+    "label": "Mécanique"
+  },
+  {
+    "id": "mecanique-des-fluides",
+    "label": "Mécanique des fluides"
+  },
+  {
+    "id": "mecatronique",
+    "label": "Mécatronique"
+  },
+  {
+    "id": "medecine",
+    "label": "Médecine"
+  },
+  {
+    "id": "medecine-du-sport",
+    "label": "Médecine du sport"
+  },
+  {
+    "id": "medecine-du-travail",
+    "label": "Médecine du travail"
+  },
+  {
+    "id": "medecine-d-urgence",
+    "label": "Médecine d’urgence"
+  },
+  {
+    "id": "medecine-generale",
+    "label": "Médecine générale"
+  },
+  {
+    "id": "medecine-interne",
+    "label": "Médecine interne"
+  },
+  {
+    "id": "medecine-legale",
+    "label": "Médecine légale"
+  },
+  {
+    "id": "medecine-specialisee",
+    "label": "Médecine spécialisée"
+  },
+  {
+    "id": "meteorologie",
+    "label": "Météorologie"
+  },
+  {
+    "id": "nanotechnologies",
+    "label": "Nanotechnologies"
+  },
+  {
+    "id": "neurobiologie",
+    "label": "Neurobiologie"
+  },
+  {
+    "id": "neurologie",
+    "label": "Neurologie"
+  },
+  {
+    "id": "neurosciences",
+    "label": "Neurosciences"
+  },
+  {
+    "id": "neurosciences-cognitives",
+    "label": "Neurosciences cognitives"
+  },
+  {
+    "id": "neurosciences-computationnelles",
+    "label": "Neurosciences computationnelles"
+  },
+  {
+    "id": "nutrition",
+    "label": "Nutrition"
+  },
+  {
+    "id": "oceanographie-biologique",
+    "label": "Océanographie biologique"
+  },
+  {
+    "id": "oceanographie-chimique",
+    "label": "Océanographie chimique"
+  },
+  {
+    "id": "oceanographie-geologique",
+    "label": "Océanographie géologique"
+  },
+  {
+    "id": "oceanographie-physique",
+    "label": "Océanographie physique"
+  },
+  {
+    "id": "odontologie",
+    "label": "Odontologie"
+  },
+  {
+    "id": "oncologie",
+    "label": "Oncologie"
+  },
+  {
+    "id": "optimisation",
+    "label": "Optimisation"
+  },
+  {
+    "id": "optique",
+    "label": "Optique"
+  },
+  {
+    "id": "ornithologie",
+    "label": "Ornithologie"
+  },
+  {
+    "id": "orthophonie",
+    "label": "Orthophonie"
+  },
+  {
+    "id": "paleontologie",
+    "label": "Paléontologie"
+  },
+  {
+    "id": "parasitologie",
+    "label": "Parasitologie"
+  },
+  {
+    "id": "pharmacie",
+    "label": "Pharmacie"
+  },
+  {
+    "id": "pharmacologie",
+    "label": "Pharmacologie"
+  },
+  {
+    "id": "physico-chimie",
+    "label": "Physico-chimie"
+  },
+  {
+    "id": "physiologie",
+    "label": "Physiologie"
+  },
+  {
+    "id": "physiologie-vegetale",
+    "label": "Physiologie végétale"
+  },
+  {
+    "id": "physique",
+    "label": "Physique"
+  },
+  {
+    "id": "physique-biologique",
+    "label": "Physique biologique"
+  },
+  {
+    "id": "physique-classique",
+    "label": "Physique classique"
+  },
+  {
+    "id": "physique-de-la-matiere-condensee",
+    "label": "Physique de la matière condensée"
+  },
+  {
+    "id": "physique-de-l-atmosphere",
+    "label": "Physique de l’atmosphère"
+  },
+  {
+    "id": "physique-des-materiaux",
+    "label": "Physique des matériaux"
+  },
+  {
+    "id": "physique-des-particules",
+    "label": "Physique des particules"
+  },
+  {
+    "id": "physique-des-plasmas",
+    "label": "Physique des plasmas"
+  },
+  {
+    "id": "physique-du-solide",
+    "label": "Physique du solide"
+  },
+  {
+    "id": "physique-medicale",
+    "label": "Physique médicale"
+  },
+  {
+    "id": "physique-nucleaire",
+    "label": "Physique nucléaire"
+  },
+  {
+    "id": "physique-quantique",
+    "label": "Physique quantique"
+  },
+  {
+    "id": "physique-relativiste",
+    "label": "Physique relativiste"
+  },
+  {
+    "id": "physique-solaire",
+    "label": "Physique solaire"
+  },
+  {
+    "id": "physique-statistique",
+    "label": "Physique statistique"
+  },
+  {
+    "id": "planetologie",
+    "label": "Planétologie"
+  },
+  {
+    "id": "probabilites",
+    "label": "Probabilités"
+  },
+  {
+    "id": "proteomique",
+    "label": "Protéomique"
+  },
+  {
+    "id": "prehistoire",
+    "label": "Préhistoire"
+  },
+  {
+    "id": "psychiatrie",
+    "label": "Psychiatrie"
+  },
+  {
+    "id": "psycholinguistique",
+    "label": "Psycholinguistique"
+  },
+  {
+    "id": "psychologie",
+    "label": "Psychologie"
+  },
+  {
+    "id": "psychologie-clinique",
+    "label": "Psychologie clinique"
+  },
+  {
+    "id": "psychologie-cognitive",
+    "label": "Psychologie cognitive"
+  },
+  {
+    "id": "psychologie-du-developpement",
+    "label": "Psychologie du développement"
+  },
+  {
+    "id": "psychologie-sociale",
+    "label": "Psychologie sociale"
+  },
+  {
+    "id": "pediatrie",
+    "label": "Pédiatrie"
+  },
+  {
+    "id": "pedologie",
+    "label": "Pédologie"
+  },
+  {
+    "id": "petrologie",
+    "label": "Pétrologie"
+  },
+  {
+    "id": "radiologie",
+    "label": "Radiologie"
+  },
+  {
+    "id": "recherche-operationnelle",
+    "label": "Recherche opérationnelle"
+  },
+  {
+    "id": "relations-internationales",
+    "label": "Relations internationales"
+  },
+  {
+    "id": "robotique",
+    "label": "Robotique"
+  },
+  {
+    "id": "reseaux-informatiques",
+    "label": "Réseaux informatiques"
+  },
+  {
+    "id": "sante-publique",
+    "label": "Santé publique"
+  },
+  {
+    "id": "science-de-la-durabilite",
+    "label": "Science de la durabilité"
+  },
+  {
+    "id": "science-des-reseaux",
+    "label": "Science des réseaux"
+  },
+  {
+    "id": "science-politique",
+    "label": "Science politique"
+  },
+  {
+    "id": "sciences-agricoles",
+    "label": "Sciences agricoles"
+  },
+  {
+    "id": "sciences-biomedicales",
+    "label": "Sciences biomédicales"
+  },
+  {
+    "id": "sciences-cognitives",
+    "label": "Sciences cognitives"
+  },
+  {
+    "id": "sciences-de-la-terre",
+    "label": "Sciences de la Terre"
+  },
+  {
+    "id": "sciences-de-la-communication",
+    "label": "Sciences de la communication"
+  },
+  {
+    "id": "sciences-de-la-sante",
+    "label": "Sciences de la santé"
+  },
+  {
+    "id": "sciences-de-l-atmosphere",
+    "label": "Sciences de l’atmosphère"
+  },
+  {
+    "id": "sciences-de-l-environnement",
+    "label": "Sciences de l’environnement"
+  },
+  {
+    "id": "sciences-de-l-information",
+    "label": "Sciences de l’information"
+  },
+  {
+    "id": "sciences-de-l-information-et-de-la-communication",
+    "label": "Sciences de l’information et de la communication"
+  },
+  {
+    "id": "sciences-de-l-ingenieur",
+    "label": "Sciences de l’ingénieur"
+  },
+  {
+    "id": "sciences-de-l-education",
+    "label": "Sciences de l’éducation"
+  },
+  {
+    "id": "sciences-des-donnees",
+    "label": "Sciences des données"
+  },
+  {
+    "id": "sciences-des-systemes-complexes",
+    "label": "Sciences des systèmes complexes"
+  },
+  {
+    "id": "sciences-du-climat",
+    "label": "Sciences du climat"
+  },
+  {
+    "id": "sciences-du-sol",
+    "label": "Sciences du sol"
+  },
+  {
+    "id": "sciences-forestieres",
+    "label": "Sciences forestières"
+  },
+  {
+    "id": "sciences-halieutiques",
+    "label": "Sciences halieutiques"
+  },
+  {
+    "id": "sciences-humaines",
+    "label": "Sciences humaines"
+  },
+  {
+    "id": "sciences-infirmieres",
+    "label": "Sciences infirmières"
+  },
+  {
+    "id": "sciences-interdisciplinaires",
+    "label": "Sciences interdisciplinaires"
+  },
+  {
+    "id": "sciences-marines",
+    "label": "Sciences marines"
+  },
+  {
+    "id": "sciences-spatiales",
+    "label": "Sciences spatiales"
+  },
+  {
+    "id": "sismologie",
+    "label": "Sismologie"
+  },
+  {
+    "id": "sociolinguistique",
+    "label": "Sociolinguistique"
+  },
+  {
+    "id": "sociologie",
+    "label": "Sociologie"
+  },
+  {
+    "id": "statistiques",
+    "label": "Statistiques"
+  },
+  {
+    "id": "statistiques-mathematiques",
+    "label": "Statistiques mathématiques"
+  },
+  {
+    "id": "stratigraphie",
+    "label": "Stratigraphie"
+  },
+  {
+    "id": "structures-de-donnees",
+    "label": "Structures de données"
+  },
+  {
+    "id": "sylviculture",
+    "label": "Sylviculture"
+  },
+  {
+    "id": "systemes-informatiques",
+    "label": "Systèmes informatiques"
+  },
+  {
+    "id": "systematique",
+    "label": "Systématique"
+  },
+  {
+    "id": "taxonomie",
+    "label": "Taxonomie"
+  },
+  {
+    "id": "tectonique-des-plaques",
+    "label": "Tectonique des plaques"
+  },
+  {
+    "id": "thermodynamique",
+    "label": "Thermodynamique"
+  },
+  {
+    "id": "theorie-des-ensembles",
+    "label": "Théorie des ensembles"
+  },
+  {
+    "id": "theorie-des-graphes",
+    "label": "Théorie des graphes"
+  },
+  {
+    "id": "theorie-des-nombres",
+    "label": "Théorie des nombres"
+  },
+  {
+    "id": "topologie",
+    "label": "Topologie"
+  },
+  {
+    "id": "toxicologie",
+    "label": "Toxicologie"
+  },
+  {
+    "id": "traitement-de-l-image",
+    "label": "Traitement de l’image"
+  },
+  {
+    "id": "traitement-du-signal",
+    "label": "Traitement du signal"
+  },
+  {
+    "id": "transcriptomique",
+    "label": "Transcriptomique"
+  },
+  {
+    "id": "virologie",
+    "label": "Virologie"
+  },
+  {
+    "id": "vision-par-ordinateur",
+    "label": "Vision par ordinateur"
+  },
+  {
+    "id": "volcanologie",
+    "label": "Volcanologie"
+  },
+  {
+    "id": "zoologie",
+    "label": "Zoologie"
+  },
+  {
+    "id": "zootechnie",
+    "label": "Zootechnie"
+  },
+  {
+    "id": "ecologie",
+    "label": "Écologie"
+  },
+  {
+    "id": "ecologie-appliquee",
+    "label": "Écologie appliquée"
+  },
+  {
+    "id": "ecologie-comportementale",
+    "label": "Écologie comportementale"
+  },
+  {
+    "id": "ecologie-microbienne",
+    "label": "Écologie microbienne"
+  },
+  {
+    "id": "economie",
+    "label": "Économie"
+  },
+  {
+    "id": "economie-comportementale",
+    "label": "Économie comportementale"
+  },
+  {
+    "id": "economie-du-developpement",
+    "label": "Économie du développement"
+  },
+  {
+    "id": "econometrie",
+    "label": "Économétrie"
+  },
+  {
+    "id": "electrochimie",
+    "label": "Électrochimie"
+  },
+  {
+    "id": "electromagnetisme",
+    "label": "Électromagnétisme"
+  },
+  {
+    "id": "epidemiologie",
+    "label": "Épidémiologie"
+  },
+  {
+    "id": "epigenetique",
+    "label": "Épigénétique"
+  },
+  {
+    "id": "ethologie",
+    "label": "Éthologie"
+  }
+]

@@ -1,0 +1,325 @@
+{
+  "discipline": "bacteriologie",
+  "displayName": "Bactériologie",
+  "description": "Base de données complète des bactéries pathogènes et commensales avec leurs caractéristiques microbiologiques, biochimiques et cliniques.",
+  "entities": [
+    {
+      "id": "staphylococcus-aureus",
+      "name": "Staphylococcus aureus",
+      "category": "Cocci Gram+",
+      "overview": "Bactérie pathogène opportuniste responsable d'infections cutanées, respiratoires et systémiques. Présence fréquente de souches résistantes à la méticilline (SARM).",
+      "properties": {
+        "GRAM": "+",
+        "CAT": "+",
+        "OXY": "-",
+        "Forme": "Cocci en amas"
+      },
+      "taxonomy": {
+        "Règne": "Bacteria",
+        "Embranchement": "Firmicutes",
+        "Classe": "Bacilli",
+        "Ordre": "Bacillales",
+        "Famille": "Staphylococcaceae",
+        "Genre": "Staphylococcus",
+        "Espèce": "S. aureus"
+      },
+      "genomics": {
+        "Taille génome": "2.8 Mb",
+        "GC%": "32.8%",
+        "Gènes": "~2,600",
+        "Plasmides": "Variable",
+        "Séquençage": "Complet"
+      },
+      "culture": {
+        "Milieu primaire": "Gélose au sang",
+        "Milieu sélectif": "Chapman (mannitol salé)",
+        "Température": "37°C",
+        "Atmosphère": "Aérobie",
+        "Temps croissance": "18-24h",
+        "Aspect colonies": "Dorées, β-hémolytiques"
+      },
+      "pathology": {
+        "Infections": ["Furoncles", "Impétigo", "Pneumonie", "Septicémie", "Endocardite", "Ostéomyélite"],
+        "Toxines": ["Entérotoxines", "TSST-1", "Leucocidine de Panton-Valentine"],
+        "Facteurs virulence": ["Coagulase", "Protéine A", "Capsule"],
+        "Transmission": "Contact direct, manuporté"
+      },
+      "resistance": {
+        "Type": "SARM (Staphylococcus aureus résistant à la méticilline)",
+        "Mécanisme": "Gène mecA (PLP2a)",
+        "Antibiotiques": "Résistance β-lactamines",
+        "Traitement": "Vancomycine, Linézolide, Daptomycine"
+      },
+      "api": {
+        "Code API Staph": "6776773",
+        "Profil biochimique": "Coagulase+, DNase+, Mannitol+",
+        "Tests clés": "Coagulase libre et liée"
+      }
+    },
+    {
+      "id": "escherichia-coli",
+      "name": "Escherichia coli",
+      "category": "Bacille Gram-",
+      "overview": "Bactérie commensale du tube digestif, certaines souches sont pathogènes (ECEH, ETEC). Indicateur de contamination fécale.",
+      "properties": {
+        "GRAM": "-",
+        "CAT": "+",
+        "OXY": "-",
+        "Forme": "Bacille"
+      },
+      "taxonomy": {
+        "Règne": "Bacteria",
+        "Embranchement": "Proteobacteria",
+        "Classe": "Gammaproteobacteria",
+        "Ordre": "Enterobacterales",
+        "Famille": "Enterobacteriaceae",
+        "Genre": "Escherichia",
+        "Espèce": "E. coli"
+      },
+      "genomics": {
+        "Taille génome": "4.6-5.5 Mb",
+        "GC%": "50.8%",
+        "Gènes": "~4,300",
+        "Plasmides": "Fréquents",
+        "Séquençage": "Complet (souche K-12)"
+      },
+      "culture": {
+        "Milieu primaire": "Gélose nutritive",
+        "Milieu sélectif": "MacConkey, EMB",
+        "Température": "37°C",
+        "Atmosphère": "Aérobie-anaérobie facultatif",
+        "Temps croissance": "18-24h",
+        "Aspect colonies": "Lactose+ (roses sur MacConkey)"
+      },
+      "pathology": {
+        "Infections": ["Infections urinaires", "Gastro-entérites", "Méningites néonatales", "Septicémies"],
+        "Pathotypes": ["ECEH (O157:H7)", "ETEC", "EPEC", "EIEC", "EAEC"],
+        "Toxines": ["Shiga-toxines", "Entérotoxines thermolabiles/thermostables"],
+        "Transmission": "Féco-orale, alimentaire"
+      },
+      "resistance": {
+        "Type": "BLSE (β-lactamases à spectre étendu)",
+        "Mécanisme": "Gènes blaCTX-M, blaTEM, blaSHV",
+        "Antibiotiques": "Résistance céphalosporines 3G",
+        "Traitement": "Carbapénèmes, Fosfomycine"
+      },
+      "api": {
+        "Code API 20E": "5144572",
+        "Profil biochimique": "Indole+, Lactose+, Glucose+",
+        "Tests clés": "ONPG+, VP-, Citrate-"
+      }
+    },
+    {
+      "id": "pseudomonas-aeruginosa",
+      "name": "Pseudomonas aeruginosa",
+      "category": "Bacille Gram-",
+      "overview": "Bactérie opportuniste des infections nosocomiales, particulièrement chez les patients immunodéprimés. Résistance naturelle à de nombreux antibiotiques.",
+      "properties": {
+        "GRAM": "-",
+        "CAT": "+",
+        "OXY": "+",
+        "Forme": "Bacille"
+      },
+      "taxonomy": {
+        "Règne": "Bacteria",
+        "Embranchement": "Proteobacteria",
+        "Classe": "Gammaproteobacteria",
+        "Ordre": "Pseudomonadales",
+        "Famille": "Pseudomonadaceae",
+        "Genre": "Pseudomonas",
+        "Espèce": "P. aeruginosa"
+      },
+      "genomics": {
+        "Taille génome": "6.3 Mb",
+        "GC%": "66.6%",
+        "Gènes": "~5,500",
+        "Plasmides": "Rares",
+        "Séquençage": "Complet (souche PAO1)"
+      },
+      "culture": {
+        "Milieu primaire": "Gélose nutritive",
+        "Milieu sélectif": "Cétrimide",
+        "Température": "37°C (jusqu'à 42°C)",
+        "Atmosphère": "Aérobie strict",
+        "Temps croissance": "18-24h",
+        "Aspect colonies": "Pigment pyocyanique (bleu-vert), odeur caractéristique"
+      },
+      "pathology": {
+        "Infections": ["Pneumonies nosocomiales", "Infections urinaires", "Infections cutanées", "Septicémies", "Mucoviscidose"],
+        "Facteurs virulence": ["Exotoxine A", "Élastase", "Biofilm", "Flagelle"],
+        "Toxines": ["Exotoxine A", "Exoenzyme S"],
+        "Transmission": "Environnement hospitalier, eau"
+      },
+      "resistance": {
+        "Type": "Multirésistance naturelle et acquise",
+        "Mécanisme": "Pompes à efflux, β-lactamases, imperméabilité",
+        "Antibiotiques": "Résistance large spectre",
+        "Traitement": "Ceftazidime, Pipéracilline-tazobactam, Ciprofloxacine"
+      },
+      "api": {
+        "Code API 20NE": "1156004",
+        "Profil biochimique": "Oxydase+, Glucose- (oxydation), Arginine+",
+        "Tests clés": "Pigments (pyocyanine, pyoverdine)"
+      }
+    },
+    {
+      "id": "mycobacterium-tuberculosis",
+      "name": "Mycobacterium tuberculosis",
+      "category": "Bacille BAAR",
+      "overview": "Agent de la tuberculose, bactérie à croissance lente nécessitant un traitement prolongé. Transmission aérienne.",
+      "properties": {
+        "GRAM": "BAAR+",
+        "CAT": "+",
+        "OXY": "+",
+        "Forme": "Bacille"
+      },
+      "taxonomy": {
+        "Règne": "Bacteria",
+        "Embranchement": "Actinobacteria",
+        "Classe": "Actinobacteria",
+        "Ordre": "Corynebacteriales",
+        "Famille": "Mycobacteriaceae",
+        "Genre": "Mycobacterium",
+        "Espèce": "M. tuberculosis"
+      },
+      "genomics": {
+        "Taille génome": "4.4 Mb",
+        "GC%": "65.6%",
+        "Gènes": "~4,000",
+        "Plasmides": "Absents",
+        "Séquençage": "Complet (souche H37Rv)"
+      },
+      "culture": {
+        "Milieu primaire": "Löwenstein-Jensen",
+        "Milieu sélectif": "Coletsos",
+        "Température": "37°C",
+        "Atmosphère": "Aérobie strict",
+        "Temps croissance": "3-8 semaines",
+        "Aspect colonies": "Rugueuses, beiges, sèches"
+      },
+      "pathology": {
+        "Infections": ["Tuberculose pulmonaire", "Tuberculose extra-pulmonaire", "Méningite tuberculeuse"],
+        "Facteurs virulence": ["Paroi mycobactérienne", "Cord factor", "Survie intramacrophagique"],
+        "Toxines": ["Aucune toxine classique"],
+        "Transmission": "Aérienne (gouttelettes)"
+      },
+      "resistance": {
+        "Type": "MDR-TB, XDR-TB",
+        "Mécanisme": "Mutations chromosomiques (rpoB, katG, inhA)",
+        "Antibiotiques": "Résistance rifampicine, isoniazide",
+        "Traitement": "Quadrithérapie (RHZE) 6 mois minimum"
+      },
+      "api": {
+        "Code API": "Non applicable",
+        "Profil biochimique": "Niacine+, Nitrate réductase+",
+        "Tests clés": "Coloration Ziehl-Neelsen, GeneXpert MTB/RIF"
+      }
+    },
+    {
+      "id": "streptococcus-pyogenes",
+      "name": "Streptococcus pyogenes",
+      "category": "Cocci Gram+",
+      "overview": "Streptocoque β-hémolytique du groupe A, responsable d'angines, scarlatine et infections invasives. Sensible à la pénicilline.",
+      "properties": {
+        "GRAM": "+",
+        "CAT": "-",
+        "OXY": "-",
+        "Forme": "Cocci en chaînettes"
+      },
+      "taxonomy": {
+        "Règne": "Bacteria",
+        "Embranchement": "Firmicutes",
+        "Classe": "Bacilli",
+        "Ordre": "Lactobacillales",
+        "Famille": "Streptococcaceae",
+        "Genre": "Streptococcus",
+        "Espèce": "S. pyogenes"
+      },
+      "genomics": {
+        "Taille génome": "1.8-1.9 Mb",
+        "GC%": "38.5%",
+        "Gènes": "~1,700",
+        "Plasmides": "Rares",
+        "Séquençage": "Complet"
+      },
+      "culture": {
+        "Milieu primaire": "Gélose au sang",
+        "Milieu sélectif": "Gélose au sang + bacitracine",
+        "Température": "37°C",
+        "Atmosphère": "Anaérobie facultatif (5% CO2)",
+        "Temps croissance": "18-24h",
+        "Aspect colonies": "Petites, β-hémolytiques"
+      },
+      "pathology": {
+        "Infections": ["Pharyngite", "Scarlatine", "Érysipèle", "Fasciite nécrosante", "Choc toxique"],
+        "Toxines": ["Streptolysines O et S", "Toxine érythrogène", "Exotoxines pyrogènes"],
+        "Facteurs virulence": ["Protéine M", "Capsule", "Streptolysines"],
+        "Transmission": "Gouttelettes, contact direct"
+      },
+      "resistance": {
+        "Type": "Résistance rare",
+        "Mécanisme": "Résistance macrolides (gène erm)",
+        "Antibiotiques": "Sensible pénicilline",
+        "Traitement": "Pénicilline G, Amoxicilline"
+      },
+      "api": {
+        "Code API 20 Strep": "0040000",
+        "Profil biochimique": "Bacitracine sensible, PYR+",
+        "Tests clés": "Groupage Lancefield A, β-hémolyse"
+      }
+    },
+    {
+      "id": "klebsiella-pneumoniae",
+      "name": "Klebsiella pneumoniae",
+      "category": "Bacille Gram-",
+      "overview": "Entérobactérie responsable de pneumonies et infections urinaires. Émergence de souches productrices de carbapénémases.",
+      "properties": {
+        "GRAM": "-",
+        "CAT": "+",
+        "OXY": "-",
+        "Forme": "Bacille capsulé"
+      },
+      "taxonomy": {
+        "Règne": "Bacteria",
+        "Embranchement": "Proteobacteria",
+        "Classe": "Gammaproteobacteria",
+        "Ordre": "Enterobacterales",
+        "Famille": "Enterobacteriaceae",
+        "Genre": "Klebsiella",
+        "Espèce": "K. pneumoniae"
+      },
+      "genomics": {
+        "Taille génome": "5.3-5.7 Mb",
+        "GC%": "57.5%",
+        "Gènes": "~5,000",
+        "Plasmides": "Fréquents (résistance)",
+        "Séquençage": "Complet"
+      },
+      "culture": {
+        "Milieu primaire": "Gélose nutritive",
+        "Milieu sélectif": "MacConkey",
+        "Température": "37°C",
+        "Atmosphère": "Aérobie-anaérobie facultatif",
+        "Temps croissance": "18-24h",
+        "Aspect colonies": "Muqueuses, lactose+"
+      },
+      "pathology": {
+        "Infections": ["Pneumonies", "Infections urinaires", "Septicémies", "Infections nosocomiales"],
+        "Facteurs virulence": ["Capsule polysaccharidique", "Sidérophores", "Fimbriae"],
+        "Toxines": ["Aucune toxine majeure"],
+        "Transmission": "Manuportée, environnement hospitalier"
+      },
+      "resistance": {
+        "Type": "KPC, NDM, OXA-48",
+        "Mécanisme": "Carbapénémases, BLSE",
+        "Antibiotiques": "Résistance carbapénèmes",
+        "Traitement": "Colistine, Tigécycline, Ceftazidime-avibactam"
+      },
+      "api": {
+        "Code API 20E": "7743572",
+        "Profil biochimique": "Lactose+, Urée+, Citrate+, VP+",
+        "Tests clés": "Immobile, capsule épaisse"
+      }
+    }
+  ]
+}

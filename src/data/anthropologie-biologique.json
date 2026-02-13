@@ -1,0 +1,55 @@
+{
+  "discipline": "anthropologie-biologique",
+  "displayName": "Anthropologie biologique",
+  "description": "Référentiel complet pour le domaine : Anthropologie biologique. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "cell-structure",
+      "name": "Structure Cellulaire",
+      "category": "Fondamental",
+      "overview": "L'unité structurelle, fonctionnelle et biologique de base de tous les organismes vivants connus.",
+      "properties": {
+        "Kingdom": {
+          "value": "Animalia",
+          "description": "Propriété Kingdom standard pour Anthropologie biologique"
+        },
+        "Domain": {
+          "value": "Eukaryota",
+          "description": "Propriété Domain standard pour Anthropologie biologique"
+        }
+      }
+    },
+    {
+      "id": "dna-replication",
+      "name": "Réplication de l'ADN",
+      "category": "Génétique",
+      "overview": "Le processus biologique de production de deux répliques identiques d'ADN à partir d'une molécule d'ADN originale.",
+      "properties": {
+        "Kingdom": {
+          "value": "Animalia",
+          "description": "Propriété Kingdom standard pour Anthropologie biologique"
+        },
+        "Domain": {
+          "value": "Eukaryota",
+          "description": "Propriété Domain standard pour Anthropologie biologique"
+        }
+      }
+    },
+    {
+      "id": "protein-synthesis",
+      "name": "Synthèse des Protéines",
+      "category": "Biochimie",
+      "overview": "Le processus par lequel les cellules individuelles construisent des protéines spécifiques.",
+      "properties": {
+        "Kingdom": {
+          "value": "Animalia",
+          "description": "Propriété Kingdom standard pour Anthropologie biologique"
+        },
+        "Domain": {
+          "value": "Eukaryota",
+          "description": "Propriété Domain standard pour Anthropologie biologique"
+        }
+      }
+    }
+  ]
+}
