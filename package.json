@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.95.3",
     "bio-parsers": "^9.3.6",
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",

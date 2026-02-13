@@ -9,15 +9,19 @@ export interface DeviceInfo {
 }
 
 export const useDeviceDetection = (): DeviceInfo => {
+    const [mounted, setMounted] = useState(false);
     const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
     const [isTouch, setIsTouch] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         const handleResize = () => setWidth(window.innerWidth);
         const handleTouch = () => setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
-        window.addEventListener('resize', handleResize);
+        handleResize();
         handleTouch();
+        
+        window.addEventListener('resize', handleResize);
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
