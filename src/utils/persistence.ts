@@ -1,36 +1,6 @@
 import { SessionManager, CSRFProtection } from './encryption';
 import { supabase, isSupabaseConfigured, getTableName, getCurrentUserEmail } from './supabaseClient';
 
-const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
-const API_BASE_URL = isProduction 
-    ? 'https://odin-la-science.infinityfree.me'
-    : 'http://localhost:3001';
-
-// Vérifier si le serveur backend est disponible
-let serverAvailable: boolean | null = null;
-
-const checkServerAvailability = async (): Promise<boolean> => {
-    if (serverAvailable !== null) return serverAvailable;
-    
-    try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 2000); // 2s timeout
-        
-        const response = await fetch(`${API_BASE_URL}/api/health`, {
-            signal: controller.signal,
-            headers: { 'Content-Type': 'application/json' }
-        });
-        
-        clearTimeout(timeoutId);
-        serverAvailable = response.ok;
-        return serverAvailable;
-    } catch (error) {
-        console.log('Backend server not available');
-        serverAvailable = false;
-        return false;
-    }
-};
-
 // Fallback localStorage functions
 const getLocalStorageData = (moduleName: string): any[] => {
     try {
@@ -157,29 +127,10 @@ export const fetchModuleData = async (moduleName: string) => {
         if (isSupabaseConfigured()) {
             console.log('Using Supabase for:', moduleName);
             const data = await fetchFromSupabase(moduleName);
-            if (data.length > 0 || data.length === 0) {
-                return data;
-            }
+            return data;
         }
         
-        // Priorité 2: Backend server
-        const isServerAvailable = await checkServerAvailability();
-        
-        if (isServerAvailable) {
-            const response = await fetch(`${API_BASE_URL}/api/module/${moduleName}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            
-            if (response.ok) {
-                const data = await response.json();
-                console.log('Fetch successful from backend, items:', data.length);
-                return data;
-            }
-        }
-        
-        // Priorité 3: localStorage fallback
+        // Priorité 2: localStorage fallback
         console.log('Using localStorage fallback for:', moduleName);
         return getLocalStorageData(moduleName);
     } catch (error) {
@@ -202,26 +153,7 @@ export const saveModuleItem = async (moduleName: string, item: any) => {
             }
         }
         
-        // Priorité 2: Backend server
-        const isServerAvailable = await checkServerAvailability();
-        
-        if (isServerAvailable) {
-            const response = await fetch(`${API_BASE_URL}/api/module/${moduleName}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(item)
-            });
-            
-            if (response.ok) {
-                const result = await response.json();
-                console.log('Save successful to backend:', result);
-                return result;
-            }
-        }
-        
-        // Priorité 3: localStorage fallback
+        // Priorité 2: localStorage fallback
         console.log('Using localStorage fallback for save:', moduleName);
         const currentData = getLocalStorageData(moduleName);
         
@@ -268,25 +200,7 @@ export const deleteModuleItem = async (moduleName: string, id: string | number) 
             }
         }
         
-        // Priorité 2: Backend server
-        const isServerAvailable = await checkServerAvailability();
-        
-        if (isServerAvailable) {
-            const response = await fetch(`${API_BASE_URL}/api/module/${moduleName}/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            
-            if (response.ok) {
-                const result = await response.json();
-                console.log('Delete successful from backend:', result);
-                return result;
-            }
-        }
-        
-        // Priorité 3: localStorage fallback
+        // Priorité 2: localStorage fallback
         console.log('Using localStorage fallback for delete:', moduleName);
         const currentData = getLocalStorageData(moduleName);
         const filteredData = currentData.filter((item: any) => item.id !== id);
