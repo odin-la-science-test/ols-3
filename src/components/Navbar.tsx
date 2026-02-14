@@ -32,9 +32,12 @@ const Navbar = () => {
         { code: 'KO', label: '한국어', flag: '🇰🇷' }
     ];
 
-    const currentUserEmail = localStorage.getItem('currentUser');
-    const username = currentUserEmail || 'User';
-    const isLoggedIn = !!currentUserEmail;
+    const currentUser = localStorage.getItem('currentUser');
+    const profileStr = currentUser ? localStorage.getItem(`user_profile_${currentUser}`) : null;
+    const profile = profileStr ? JSON.parse(profileStr) : null;
+    const currentUserEmail = profile?.email || currentUser || '';
+    const username = currentUser || 'User';
+    const isLoggedIn = !!currentUser;
 
     const handleLogout = () => {
         localStorage.removeItem('currentUser');

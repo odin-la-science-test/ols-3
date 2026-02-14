@@ -21,6 +21,7 @@ import VersionBadge from './components/VersionBadge';
 const Munin = lazy(() => import('./pages/Munin'));
 const Discipline = lazy(() => import('./pages/Discipline'));
 const EntityDetail = lazy(() => import('./pages/EntityDetail'));
+const MobileEntityDetail = lazy(() => import('./pages/mobile/EntityDetail'));
 const PropertyDetail = lazy(() => import('./pages/PropertyDetail'));
 const CompareEntities = lazy(() => import('./pages/CompareEntities'));
 const Hugin = lazy(() => import('./pages/Hugin'));
@@ -281,7 +282,10 @@ function App() {
             } />
             <Route path="/munin/:disciplineId/:entityId" element={
               <ProtectedRoute module="munin">
-                <EntityDetail />
+                <ResponsiveRoute 
+                  desktop={<EntityDetail />}
+                  mobile={<MobileEntityDetail />}
+                />
               </ProtectedRoute>
             } />
             <Route path="/munin/:id/compare" element={

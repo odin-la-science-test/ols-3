@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { getProfilePicture, getInitials } from '../utils/profilePicture';
 
 interface AvatarProps {
@@ -9,8 +10,35 @@ interface AvatarProps {
 }
 
 const Avatar = ({ email = '', name, size = 40, editable = false, onImageChange }: AvatarProps) => {
-  const profilePic = getProfilePicture(email);
+  const [profilePic, setProfilePic] = useState<string | null>(null);
   const initials = getInitials(name, email);
+
+  // Load profile picture on mount and when email changes
+  useEffect(() => {
+    const loadPicture = () => {
+      const pic = getProfilePicture(email);
+      setProfilePic(pic);
+      console.log('Avatar - Loading for:', email, 'Result:', pic ? 'Found' : 'Not found');
+      console.log('Avatar - Storage key:', `profilePicture_${email}`);
+    };
+
+    loadPicture();
+
+    // Listen for avatar updates
+    const handleAvatarUpdate = (e: Event) => {
+      const customEvent = e as CustomEvent;
+      if (customEvent.detail?.email === email || !customEvent.detail?.email) {
+        console.log('Avatar - Update event received for:', email);
+        loadPicture();
+      }
+    };
+
+    window.addEventListener('avatarUpdate', handleAvatarUpdate as EventListener);
+    return () => window.removeEventListener('avatarUpdate', handleAvatarUpdate as EventListener);
+  }, [email]);
+
+  // Debug: log pour voir si la photo est chargée
+  console.log('Avatar - Email:', email, 'ProfilePic:', profilePic ? 'Loaded' : 'Not found');
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -24,6 +52,14 @@ const Avatar = ({ email = '', name, size = 40, editable = false, onImageChange }
       reader.onload = (event) => {
         const imageData = event.target?.result as string;
         localStorage.setItem(`profilePicture_${email}`, imageData);
+        console.log('Avatar - Photo saved for:', email);
+        
+        // Force immediate re-render of this component
+        setProfilePic(imageData);
+        
+        // Notify all other Avatar components
+        window.dispatchEvent(new CustomEvent('avatarUpdate', { detail: { email } }));
+        
         if (onImageChange) onImageChange();
       };
       reader.readAsDataURL(file);

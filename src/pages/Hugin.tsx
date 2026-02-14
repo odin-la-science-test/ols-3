@@ -38,56 +38,57 @@ const Hugin = () => {
     const hasAccess = (moduleId: string) => checkHasAccess(moduleId, userStr, sub || undefined, hiddenTools);
 
     const modules = [
+        // Core
+        { id: 'messaging', name: 'Messagerie', desc: 'Messages et communications', icon: <Mail size={24} />, category: 'Core', path: '/hugin/messaging' },
+        { id: 'planning', name: 'Planning', desc: 'Gestion du temps', icon: <Calendar size={24} />, category: 'Core', path: '/hugin/planning' },
+        { id: 'documents', name: 'Documents', desc: 'Fichiers et archives', icon: <HardDrive size={24} />, category: 'Core', path: '/hugin/documents' },
+        { id: 'inventory', name: 'Inventaire', desc: 'Gestion des stocks', icon: <Beaker size={24} />, category: 'Core', path: '/hugin/inventory' },
+        { id: 'meetings', name: 'Réunions', desc: 'Gestion des réunions', icon: <Video size={24} />, category: 'Core', path: '/hugin/meetings' },
+        { id: 'projects', name: 'Projets', desc: 'Gestion de projets', icon: <Layers size={24} />, category: 'Core', path: '/hugin/projects' },
+        { id: 'tableur', name: 'Tableur', desc: 'Tableur de laboratoire', icon: <Grid size={24} />, category: 'Core', path: '/hugin/tableur' },
+        { id: 'it_archive', name: 'Archives IT', desc: 'Archives informatiques', icon: <HardDrive size={24} />, category: 'Core', path: '/hugin/it-archive' },
+
         // Lab Management
-        { id: 'inventory', icon: <Beaker size={24} />, category: 'Management', path: '/hugin/inventory' },
-        { id: 'stock', icon: <Package size={24} />, category: 'Management', path: '/hugin/stock' },
-        { id: 'budget', icon: <Wallet size={24} />, category: 'Management', path: '/hugin/budget' },
-        { id: 'planning', icon: <Calendar size={24} />, category: 'Management', path: '/hugin/planning' },
-        { id: 'safety', icon: <ShieldAlert size={24} />, category: 'Management', path: '/hugin/safety' },
-        { id: 'sop', icon: <BookOpen size={24} />, category: 'Management', path: '/hugin/sop' },
-        { id: 'cryo', icon: <Snowflake size={24} />, category: 'Management', path: '/hugin/cryo' },
-        { id: 'equip', icon: <Activity size={24} />, category: 'Management', path: '/hugin/equip' },
+        { id: 'stock', name: 'Stocks', desc: 'Gestion des stocks', icon: <Package size={24} />, category: 'Lab', path: '/hugin/stock' },
+        { id: 'cryo', name: 'Cryoconservation', desc: 'Gestion cryo', icon: <Snowflake size={24} />, category: 'Lab', path: '/hugin/cryo' },
+        { id: 'equip', name: 'Équipements', desc: 'Gestion équipements', icon: <Activity size={24} />, category: 'Lab', path: '/hugin/equip' },
+        { id: 'budget', name: 'Budget', desc: 'Gestion budgétaire', icon: <Wallet size={24} />, category: 'Lab', path: '/hugin/budget' },
+        { id: 'safety', name: 'Sécurité', desc: 'Protocoles de sécurité', icon: <ShieldAlert size={24} />, category: 'Lab', path: '/hugin/safety' },
+        { id: 'sop', name: 'SOPs', desc: 'Procédures opératoires', icon: <BookOpen size={24} />, category: 'Lab', path: '/hugin/sop' },
 
-        // Communication
-        { id: 'messaging', icon: <Mail size={24} />, category: 'Communication', path: '/hugin/messaging' },
-        { id: 'meetings', icon: <Video size={24} />, category: 'Communication', path: '/hugin/meetings' },
-        { id: 'projects', icon: <Layers size={24} />, category: 'Communication', path: '/hugin/projects' },
+        // Research
+        { id: 'culture', name: 'Cultures', desc: 'Suivi des cultures', icon: <Beaker size={24} />, category: 'Research', path: '/hugin/culture' },
+        { id: 'research', name: 'Recherche', desc: 'Projets scientifiques', icon: <Brain size={24} />, category: 'Research', path: '/hugin/research' },
+        { id: 'mimir', name: 'Mimir', desc: 'Assistant IA', icon: <Brain size={24} />, category: 'Research', path: '/hugin/mimir' },
+        { id: 'bibliography', name: 'Bibliographie', desc: 'Références scientifiques', icon: <Quote size={24} />, category: 'Research', path: '/hugin/bibliography' },
+        { id: 'notebook', name: 'Cahier de labo', desc: 'Notes de laboratoire', icon: <Book size={24} />, category: 'Research', path: '/hugin/notebook' },
 
-        // Research & Data
-        { id: 'research', icon: <Brain size={24} />, category: 'Research', path: '/hugin/research' },
-        { id: 'mimir', icon: <Brain size={24} />, category: 'Research', path: '/hugin/mimir' },
-        { id: 'bibliography', icon: <Quote size={24} />, category: 'Research', path: '/hugin/bibliography' },
-        { id: 'notebook', icon: <Book size={24} />, category: 'Research', path: '/hugin/notebook' },
-        { id: 'it_archive', icon: <HardDrive size={24} />, category: 'Research', path: '/hugin/it-archive' },
-        { id: 'tableur', icon: <Grid size={24} />, category: 'Research', path: '/hugin/tableur' },
-
-        // Scientific Analysis
-        { id: 'bioanalyzer', icon: <Dna size={24} />, category: 'Analysis', path: '/hugin/bioanalyzer' },
-        { id: 'imageanalyzer', icon: <Camera size={24} />, category: 'Analysis', path: '/hugin/imageanalyzer' },
-        { id: 'statistics', icon: <TrendingUp size={24} />, category: 'Analysis', path: '/hugin/statistics' },
-        { id: 'biotools', icon: <Calculator size={24} />, category: 'Analysis', path: '/hugin/biotools' },
-        { id: 'sequence', icon: <Dna size={24} />, category: 'Analysis', path: '/hugin/sequence' },
-        { id: 'flow', icon: <Activity size={24} />, category: 'Analysis', path: '/hugin/flow' },
-        { id: 'spectrum', icon: <Zap size={24} />, category: 'Analysis', path: '/hugin/spectrum' },
-        { id: 'gel', icon: <Layers size={24} />, category: 'Analysis', path: '/hugin/gel' },
-        { id: 'phylo', icon: <Share2 size={24} />, category: 'Analysis', path: '/hugin/phylo' },
-        { id: 'molecules', icon: <Box size={24} />, category: 'Analysis', path: '/hugin/molecules' },
-        { id: 'kinetics', icon: <TrendingUp size={24} />, category: 'Analysis', path: '/hugin/kinetics' },
-        { id: 'plates', icon: <Grid size={24} />, category: 'Analysis', path: '/hugin/plates' },
-        { id: 'mixer', icon: <Beaker size={24} />, category: 'Analysis', path: '/hugin/mixer' },
-        { id: 'primers', icon: <Dna size={24} />, category: 'Analysis', path: '/hugin/primers' },
-        { id: 'cells', icon: <UserCheck size={24} />, category: 'Analysis', path: '/hugin/cells' },
-        { id: 'colony', icon: <Camera size={24} />, category: 'Analysis', path: '/hugin/colony' },
-        { id: 'culture', icon: <Beaker size={24} />, category: 'Analysis', path: '/hugin/culture' }
+        // Analysis
+        { id: 'bioanalyzer', name: 'BioAnalyzer', desc: 'Analyses biologiques', icon: <Dna size={24} />, category: 'Analysis', path: '/hugin/bioanalyzer' },
+        { id: 'imageanalyzer', name: 'Image Analyzer', desc: 'Analyse d\'images', icon: <Camera size={24} />, category: 'Analysis', path: '/hugin/imageanalyzer' },
+        { id: 'statistics', name: 'Statistiques', desc: 'Analyses statistiques', icon: <TrendingUp size={24} />, category: 'Analysis', path: '/hugin/statistics' },
+        { id: 'biotools', name: 'BioTools', desc: 'Outils biologiques', icon: <Calculator size={24} />, category: 'Analysis', path: '/hugin/biotools' },
+        { id: 'sequence', name: 'Séquences', desc: 'Analyse de séquences', icon: <Dna size={24} />, category: 'Analysis', path: '/hugin/sequence' },
+        { id: 'flow', name: 'Cytométrie', desc: 'Analyse de flux', icon: <Activity size={24} />, category: 'Analysis', path: '/hugin/flow' },
+        { id: 'spectrum', name: 'Spectres', desc: 'Analyse spectrale', icon: <Zap size={24} />, category: 'Analysis', path: '/hugin/spectrum' },
+        { id: 'gel', name: 'Gels', desc: 'Analyse de gels', icon: <Layers size={24} />, category: 'Analysis', path: '/hugin/gel' },
+        { id: 'phylo', name: 'Phylogénie', desc: 'Arbres phylogénétiques', icon: <Share2 size={24} />, category: 'Analysis', path: '/hugin/phylo' },
+        { id: 'molecules', name: 'Molécules', desc: 'Structures moléculaires', icon: <Box size={24} />, category: 'Analysis', path: '/hugin/molecules' },
+        { id: 'kinetics', name: 'Cinétique', desc: 'Analyses cinétiques', icon: <TrendingUp size={24} />, category: 'Analysis', path: '/hugin/kinetics' },
+        { id: 'plates', name: 'Plaques', desc: 'Gestion de plaques', icon: <Grid size={24} />, category: 'Analysis', path: '/hugin/plates' },
+        { id: 'mixer', name: 'Solutions', desc: 'Préparation solutions', icon: <Beaker size={24} />, category: 'Analysis', path: '/hugin/mixer' },
+        { id: 'primers', name: 'Primers', desc: 'Design de primers', icon: <Dna size={24} />, category: 'Analysis', path: '/hugin/primers' },
+        { id: 'cells', name: 'Cellules', desc: 'Suivi cellulaire', icon: <UserCheck size={24} />, category: 'Analysis', path: '/hugin/cells' },
+        { id: 'colony', name: 'Colonies', desc: 'Comptage colonies', icon: <Camera size={24} />, category: 'Analysis', path: '/hugin/colony' }
     ];
 
-    const categories = ['All', 'Management', 'Communication', 'Research', 'Analysis', 'Bacteriology', 'Cell Culture', 'Hematology', 'Bio Production', 'Biochemistry'];
+    const categories = ['All', 'Core', 'Lab', 'Research', 'Analysis'];
 
     const accessibleModules = modules.filter(m => hasAccess(m.id));
 
     const filteredModules = accessibleModules.filter(m => {
-        const name = (m as any).name || t(`hugin.${m.id}`);
-        const desc = (m as any).desc || t(`hugin.${m.id}_desc`);
+        const name = (m as any).name;
+        const desc = (m as any).desc;
         const matchesSearch = name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             desc.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesCategory = activeCategory === 'All' || m.category === activeCategory;
@@ -152,8 +153,8 @@ const Hugin = () => {
                                 }}
                             >
                                 {cat === 'All' && <Grid size={16} />}
-                                {cat === 'Management' && <Package size={16} />}
-                                {cat === 'Communication' && <Mail size={16} />}
+                                {cat === 'Core' && <Layers size={16} />}
+                                {cat === 'Lab' && <Package size={16} />}
                                 {cat === 'Research' && <Brain size={16} />}
                                 {cat === 'Analysis' && <Activity size={16} />}
                                 {cat}
@@ -173,35 +174,48 @@ const Hugin = () => {
                                 <h2 style={{ fontSize: '1.25rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--accent-hugin)', fontWeight: 700 }}>{cat}</h2>
                                 <div style={{ height: '1px', flex: 1, background: 'linear-gradient(to left, transparent, rgba(255,255,255,0.1))' }}></div>
                             </div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
                                 {catModules.map(m => {
                                     return (
                                         <div
                                             key={m.id}
                                             className="card glass-panel"
-                                            onClick={() => {
-                                                if (m.id === 'bact_blast') navigate('/hugin/blast');
-                                                else if (m.id === 'bact_mega') navigate('/hugin/mega');
-                                                else if (m.id === 'bact_bionumerics') navigate('/hugin/bionumerics');
-                                                else if (m.id === 'bact_artemis') navigate('/hugin/artemis');
-                                                else if (m.id === 'bact_qiime2') navigate('/hugin/qiime2');
-                                                else if (m.id === 'bact_whonet') navigate('/hugin/whonet');
-                                                else navigate(m.path);
-                                            }}
+                                            onClick={() => navigate(m.path)}
                                             style={{
                                                 cursor: 'pointer',
-                                                position: 'relative'
+                                                position: 'relative',
+                                                padding: '1.25rem',
+                                                transition: 'all 0.2s',
+                                                border: '1px solid rgba(255, 255, 255, 0.1)'
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.transform = 'translateY(-4px)';
+                                                e.currentTarget.style.boxShadow = '0 8px 24px rgba(99, 102, 241, 0.2)';
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.transform = 'translateY(0)';
+                                                e.currentTarget.style.boxShadow = '';
                                             }}
                                         >
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                                                <div style={{ padding: '0.75rem', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '0.5rem', color: 'var(--accent-hugin)' }}>
+                                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                                                <div style={{ 
+                                                    padding: '0.75rem', 
+                                                    background: 'rgba(99, 102, 241, 0.15)', 
+                                                    borderRadius: '0.75rem', 
+                                                    color: 'var(--accent-hugin)',
+                                                    flexShrink: 0
+                                                }}>
                                                     {m.icon}
                                                 </div>
-                                                <h3 style={{ fontSize: '1.25rem' }}>{(m as any).name || t(`hugin.${m.id}`)}</h3>
+                                                <div style={{ flex: 1 }}>
+                                                    <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.5rem' }}>
+                                                        {(m as any).name}
+                                                    </h3>
+                                                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', lineHeight: 1.4, margin: 0 }}>
+                                                        {(m as any).desc}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <p style={{ color: 'var(--text-secondary)' }}>
-                                                {(m as any).desc || t(`hugin.${m.id}_desc`)}
-                                            </p>
                                         </div>
                                     );
                                 })}
