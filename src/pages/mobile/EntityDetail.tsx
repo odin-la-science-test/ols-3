@@ -13,8 +13,8 @@ const MobileEntityDetail = () => {
   useEffect(() => {
     const loadEntity = async () => {
       try {
-        const disciplinesData = await import('../../data/disciplines.json');
-        const disciplines = disciplinesData.default || [];
+        const response = await fetch('/data/disciplines.json');
+        const disciplines = await response.json();
         const foundDiscipline = disciplines.find((d: any) => d.id === disciplineId);
         setDiscipline(foundDiscipline);
 

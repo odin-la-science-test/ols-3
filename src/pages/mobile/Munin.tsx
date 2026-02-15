@@ -12,8 +12,9 @@ const MobileMunin = () => {
   useEffect(() => {
     const loadDisciplines = async () => {
       try {
-        const data = await import('../../data/disciplines.json');
-        setDisciplines(data.default || []);
+        const response = await fetch('/data/disciplines.json');
+        const data = await response.json();
+        setDisciplines(data || []);
       } catch (error) {
         console.error('Error loading disciplines:', error);
       }

@@ -14,8 +14,8 @@ const MobileDiscipline = () => {
   useEffect(() => {
     const loadDiscipline = async () => {
       try {
-        const disciplinesData = await import('../../data/disciplines.json');
-        const disciplines = disciplinesData.default || [];
+        const response = await fetch('/data/disciplines.json');
+        const disciplines = await response.json();
         const found = disciplines.find((d: any) => d.id === id);
         setDiscipline(found);
 
