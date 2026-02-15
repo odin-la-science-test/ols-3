@@ -1,0 +1,55 @@
+{
+  "discipline": "gestion-des-ressources-naturelles",
+  "displayName": "Gestion des ressources naturelles",
+  "description": "Référentiel complet pour le domaine : Gestion des ressources naturelles. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "fundamental-theory",
+      "name": "Théorie Fondamentale",
+      "category": "Théorie",
+      "overview": "Les concepts de base et les paradigmes régissant ce domaine de recherche.",
+      "properties": {
+        "Field": {
+          "value": "Scientific",
+          "description": "Propriété Field standard pour Gestion des ressources naturelles"
+        },
+        "Level": {
+          "value": "Professional",
+          "description": "Propriété Level standard pour Gestion des ressources naturelles"
+        }
+      }
+    },
+    {
+      "id": "methodology",
+      "name": "Méthodologie de Recherche",
+      "category": "Technique",
+      "overview": "Les approches systématiques utilisées pour l'investigation scientifique dans cette discipline.",
+      "properties": {
+        "Field": {
+          "value": "Scientific",
+          "description": "Propriété Field standard pour Gestion des ressources naturelles"
+        },
+        "Level": {
+          "value": "Professional",
+          "description": "Propriété Level standard pour Gestion des ressources naturelles"
+        }
+      }
+    },
+    {
+      "id": "standard-protocols",
+      "name": "Protocoles Standards",
+      "category": "Pratique",
+      "overview": "Ensemble de procédures établies pour mener des expériences et collecter des données.",
+      "properties": {
+        "Field": {
+          "value": "Scientific",
+          "description": "Propriété Field standard pour Gestion des ressources naturelles"
+        },
+        "Level": {
+          "value": "Professional",
+          "description": "Propriété Level standard pour Gestion des ressources naturelles"
+        }
+      }
+    }
+  ]
+}

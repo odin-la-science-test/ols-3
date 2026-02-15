@@ -1,0 +1,55 @@
+{
+  "discipline": "chimie-organique",
+  "displayName": "Chimie organique",
+  "description": "Référentiel complet pour le domaine : Chimie organique. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "fundamental-theory",
+      "name": "Théorie Fondamentale",
+      "category": "Théorie",
+      "overview": "Les concepts de base et les paradigmes régissant ce domaine de recherche.",
+      "properties": {
+        "Field": {
+          "value": "Scientific",
+          "description": "Propriété Field standard pour Chimie organique"
+        },
+        "Level": {
+          "value": "Professional",
+          "description": "Propriété Level standard pour Chimie organique"
+        }
+      }
+    },
+    {
+      "id": "methodology",
+      "name": "Méthodologie de Recherche",
+      "category": "Technique",
+      "overview": "Les approches systématiques utilisées pour l'investigation scientifique dans cette discipline.",
+      "properties": {
+        "Field": {
+          "value": "Scientific",
+          "description": "Propriété Field standard pour Chimie organique"
+        },
+        "Level": {
+          "value": "Professional",
+          "description": "Propriété Level standard pour Chimie organique"
+        }
+      }
+    },
+    {
+      "id": "standard-protocols",
+      "name": "Protocoles Standards",
+      "category": "Pratique",
+      "overview": "Ensemble de procédures établies pour mener des expériences et collecter des données.",
+      "properties": {
+        "Field": {
+          "value": "Scientific",
+          "description": "Propriété Field standard pour Chimie organique"
+        },
+        "Level": {
+          "value": "Professional",
+          "description": "Propriété Level standard pour Chimie organique"
+        }
+      }
+    }
+  ]
+}

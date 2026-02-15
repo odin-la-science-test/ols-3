@@ -14,8 +14,8 @@ const PropertyDetail = () => {
         const loadData = async () => {
             try {
                 setLoading(true);
-                const data = await import(`../data/${disciplineId}.json`);
-                const loadedData: DisciplineData = data.default || data;
+                const response = await fetch(`/data/${disciplineId}.json`);
+                const loadedData: DisciplineData = await response.json();
                 setDisciplineData(loadedData);
 
                 const foundProperty = loadedData.properties.find(p => p.id === propertyId);

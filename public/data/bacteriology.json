@@ -1,0 +1,1083 @@
+{
+    "discipline": "bacteriology",
+    "displayName": "Bactériologie",
+    "description": "Base de données complète sur les bactéries pathogènes et non-pathogènes",
+    "entities": [
+        {
+            "id": "ecoli",
+            "name": "Escherichia coli",
+            "category": "Enterobacteriaceae",
+            "overview": "Bactérie Gram négatif en forme de bâtonnet, membre de la famille des Enterobacteriaceae. Présente naturellement dans le tractus intestinal des humains et des animaux à sang chaud. Certaines souches sont pathogènes et causent des infections graves.",
+            "properties": {
+                "gramStain": {
+                    "value": "Négatif",
+                    "link": "/munin/bacteriology/property/gram-stain",
+                    "description": "Coloration rose/rouge après coloration de Gram"
+                },
+                "morphology": {
+                    "value": "Bacille (bâtonnet)",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Anaérobie facultatif",
+                "motility": "Motile (flagelles péritriches)",
+                "temperature": "Optimum: 37°C (mésophile)",
+                "habitat": "Tractus intestinal, eau, sol",
+                "size": "1-3 μm de longueur, 0.4-0.7 μm de largeur",
+                "capsule": "Certaines souches possèdent une capsule polysaccharidique",
+                "spores": "Non sporulé",
+                "catalase": "Positif",
+                "oxidase": "Négatif",
+                "lactose": "Fermentation positive (sur MacConkey)",
+                "h2s": "Négatif",
+                "urease": "Négatif",
+                "indole": "Positif",
+                "citrate": "Négatif",
+                "mr": "Positif",
+                "vp": "Négatif"
+            },
+            "relatedEntities": [
+                {
+                    "id": "salmonella",
+                    "name": "Salmonella",
+                    "link": "/munin/bacteriology/salmonella",
+                    "description": "Autre Enterobacteriaceae pathogène"
+                },
+                {
+                    "id": "klebsiella",
+                    "name": "Klebsiella pneumoniae",
+                    "link": "/munin/bacteriology/klebsiella",
+                    "description": "Enterobacteriaceae opportuniste"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Souches commensales (non pathogènes) dans le microbiote intestinal",
+                    "Souches pathogènes: ETEC, EPEC, EHEC, EIEC, EAEC",
+                    "E. coli O157:H7 (EHEC) produit toxine Shiga",
+                    "Facteurs de virulence: fimbriae, adhésines, toxines, systèmes de sécrétion"
+                ],
+                "diseases": [
+                    "Infections urinaires (80% des cas)",
+                    "Gastro-entérite (diarrhée du voyageur)",
+                    "Méningite néonatale (souche K1)",
+                    "Septicémie/bactériémie",
+                    "Syndrome hémolytique et urémique (SHU) - EHEC"
+                ],
+                "transmission": [
+                    "Voie féco-orale",
+                    "Aliments contaminés (viande hachée, légumes crus)",
+                    "Eau contaminée",
+                    "Contact direct personne-à-personne",
+                    "Infections nosocomiales (cathéters urinaires)"
+                ],
+                "antibiotics": [
+                    "Ciprofloxacine (généralement sensible, résistance croissante)",
+                    "Amoxicilline (résistance variable, 30-50%)",
+                    "Ceftriaxone (efficace, céphalosporine 3G)",
+                    "Triméthoprime-sulfaméthoxazole",
+                    "Résistance: BLSE (bêta-lactamases à spectre étendu) en augmentation"
+                ],
+                "diagnostics": [
+                    "Culture sur gélose MacConkey (colonies roses, lactose+)",
+                    "Test IMViC (Indole+, Méthyl rouge+, Voges-Proskauer-, Citrate-)",
+                    "PCR pour gènes de virulence (stx1, stx2 pour EHEC)",
+                    "Sérotypage (antigènes O, H, K)",
+                    "Antibiogramme obligatoire"
+                ],
+                "epidemiology": [
+                    "Présence universelle dans le microbiote intestinal",
+                    "Cause #1 d'infections urinaires communautaires",
+                    "Incidence UTI: 150 millions de cas/an dans le monde",
+                    "Mortalité EHEC O157:H7: 3-5% (SHU)",
+                    "Réservoir: humains, animaux domestiques et sauvages"
+                ],
+                "prevention": [
+                    "Hygiène des mains rigoureuse",
+                    "Cuisson complète de la viande (>70°C)",
+                    "Éviter lait et jus non pasteurisés",
+                    "Lavage des fruits et légumes",
+                    "Prévention des infections nosocomiales (asepsie cathéters)"
+                ]
+            }
+        },
+        {
+            "id": "staphylococcus-aureus",
+            "name": "Staphylococcus aureus",
+            "category": "Staphylococcaceae",
+            "overview": "Bactérie Gram positif sphérique formant des grappes. Pathogène opportuniste majeur responsable d'infections cutanées, respiratoires et systémiques. Connu pour sa résistance aux antibiotiques (MRSA).",
+            "properties": {
+                "gramStain": {
+                    "value": "Positif",
+                    "link": "/munin/bacteriology/property/gram-stain",
+                    "description": "Coloration violette après coloration de Gram"
+                },
+                "morphology": {
+                    "value": "Cocci en grappes",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Anaérobie facultatif",
+                "motility": "Non motile",
+                "temperature": "Optimum: 30-37°C",
+                "size": "0.5-1.5 μm de diamètre",
+                "catalase": "Positif (différencie des Streptococcus)",
+                "coagulase": "Positif (différencie de S. epidermidis)",
+                "mannitol": "Fermentation positive",
+                "hemolysis": "Bêta-hémolytique",
+                "dnase": "Positif",
+                "pigment": "Colonies dorées (caroténoïdes)",
+                "urease": "Positif (souvent)",
+                "oxidase": "Négatif"
+            },
+            "relatedEntities": [
+                {
+                    "id": "staphylococcus-epidermidis",
+                    "name": "Staphylococcus epidermidis",
+                    "link": "/munin/bacteriology/staphylococcus-epidermidis",
+                    "description": "Staphylocoque coagulase négatif"
+                },
+                {
+                    "id": "streptococcus-pyogenes",
+                    "name": "Streptococcus pyogenes",
+                    "link": "/munin/bacteriology/streptococcus-pyogenes",
+                    "description": "Autre cocci Gram+ pathogène"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Portage nasal asymptomatique (20-30% de la population)",
+                    "Facteurs de virulence: protéine A, coagulase, toxines",
+                    "Toxines: TSST-1 (choc toxique), entérotoxines, exfoliatines",
+                    "Biofilm sur dispositifs médicaux",
+                    "Enzymes: lipases, nucléases, hyaluronidase"
+                ],
+                "diseases": [
+                    "Infections cutanées (furoncles, impétigo, abcès)",
+                    "Pneumonie (souvent post-grippale)",
+                    "Endocardite (valves natives et prothétiques)",
+                    "Ostéomyélite et arthrite septique",
+                    "Syndrome du choc toxique staphylococcique",
+                    "Syndrome de la peau ébouillantée (enfants)",
+                    "Intoxication alimentaire (entérotoxines)"
+                ],
+                "transmission": [
+                    "Contact direct avec porteur ou malade",
+                    "Manuportage (mains contaminées)",
+                    "Gouttelettes respiratoires",
+                    "Aliments contaminés (intoxication)",
+                    "Infections nosocomiales (cathéters, plaies chirurgicales)"
+                ],
+                "antibiotics": [
+                    "Méthicilline (MSSA sensible, MRSA résistant)",
+                    "Vancomycine (traitement de choix pour MRSA)",
+                    "Linézolide (alternative MRSA)",
+                    "Daptomycine (infections sévères MRSA)",
+                    "Clindamycine (infections cutanées légères)",
+                    "MRSA: résistance via gène mecA (PBP2a modifiée)"
+                ],
+                "diagnostics": [
+                    "Culture sur gélose au sang (colonies dorées, bêta-hémolyse)",
+                    "Gélose Chapman (mannitol-sel, colonies jaunes)",
+                    "Test de coagulase (tube ou latex) - POSITIF",
+                    "Test catalase - POSITIF",
+                    "Antibiogramme + détection MRSA (cefoxitine, PCR mecA)",
+                    "Identification MALDI-TOF"
+                ],
+                "epidemiology": [
+                    "Portage nasal: 20-30% population générale",
+                    "MRSA: 40-60% des S. aureus en milieu hospitalier",
+                    "CA-MRSA (communautaire) en augmentation",
+                    "Mortalité bactériémie MRSA: 15-30%",
+                    "Infections nosocomiales: 2ème cause après E. coli"
+                ],
+                "prevention": [
+                    "Hygiène des mains (friction hydro-alcoolique)",
+                    "Décolonisation nasale (mupirocine) si porteur",
+                    "Isolement contact pour MRSA",
+                    "Asepsie stricte pour actes invasifs",
+                    "Surveillance et contrôle des infections nosocomiales"
+                ]
+            }
+        },
+        {
+            "id": "streptococcus-pyogenes",
+            "name": "Streptococcus pyogenes",
+            "category": "Streptococcaceae",
+            "overview": "Streptocoque bêta-hémolytique du groupe A (SGA). Pathogène humain strict responsable de pharyngites, infections cutanées et complications post-infectieuses graves comme le rhumatisme articulaire aigu et la glomérulonéphrite.",
+            "properties": {
+                "gramStain": {
+                    "value": "Positif",
+                    "link": "/munin/bacteriology/property/gram-stain"
+                },
+                "morphology": {
+                    "value": "Cocci en chaînettes",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Anaérobie facultatif",
+                "size": "0.6-1.0 μm de diamètre",
+                "hemolysis": "Bêta-hémolytique (hémolyse complète)",
+                "lancefield": "Groupe A (antigène C polysaccharidique)",
+                "catalase": "Négatif",
+                "bacitracin": "Sensible (test de différenciation)",
+                "capsule": "Capsule d'acide hyaluronique",
+                "temperature": "Optimum: 37°C",
+                "oxidase": "Négatif",
+                "lactose": "Négatif",
+                "urease": "Négatif"
+            },
+            "relatedEntities": [
+                {
+                    "id": "streptococcus-pneumoniae",
+                    "name": "Streptococcus pneumoniae",
+                    "link": "/munin/bacteriology/streptococcus-pneumoniae",
+                    "description": "Pneumocoque"
+                },
+                {
+                    "id": "staphylococcus-aureus",
+                    "name": "Staphylococcus aureus",
+                    "link": "/munin/bacteriology/staphylococcus-aureus",
+                    "description": "Cocci Gram+ en grappes"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Pathogène humain strict (pas de réservoir animal)",
+                    "Protéine M (>100 sérotypes, antiphagocytaire)",
+                    "Toxines: streptolysines O et S (hémolysines)",
+                    "Exotoxines pyrogènes (SPE A, B, C) - scarlatine, choc toxique",
+                    "Enzymes: streptokinase, hyaluronidase, DNases"
+                ],
+                "diseases": [
+                    "Pharyngite streptococcique (angine rouge)",
+                    "Scarlatine (éruption cutanée + angine)",
+                    "Érysipèle (infection cutanée superficielle)",
+                    "Impétigo (infection cutanée croûteuse)",
+                    "Fasciite nécrosante (infection des tissus profonds)",
+                    "Syndrome de choc toxique streptococcique",
+                    "Rhumatisme articulaire aigu (RAA) - complication",
+                    "Glomérulonéphrite post-streptococcique - complication"
+                ],
+                "transmission": [
+                    "Gouttelettes respiratoires (toux, éternuements)",
+                    "Contact direct avec sécrétions",
+                    "Portage pharyngé asymptomatique (5-15% enfants)",
+                    "Transmission cutanée (impétigo)",
+                    "Contagiosité élevée en collectivité"
+                ],
+                "antibiotics": [
+                    "Pénicilline G (traitement de choix, pas de résistance)",
+                    "Amoxicilline (voie orale, 1ère intention)",
+                    "Azithromycine (allergie pénicilline, 3 jours)",
+                    "Céphalosporines (alternative)",
+                    "Durée: 10 jours (prévention RAA)",
+                    "Aucune résistance aux bêta-lactamines rapportée"
+                ],
+                "diagnostics": [
+                    "Test rapide antigénique (TDR) - sensibilité 85-95%",
+                    "Culture sur gélose au sang (bêta-hémolyse complète)",
+                    "Test de sensibilité à la bacitracine (zone d'inhibition)",
+                    "Sérologie ASO/ASLO (anticorps anti-streptolysine O)",
+                    "Critères de Centor (score clinique pour angine)"
+                ],
+                "epidemiology": [
+                    "Incidence pharyngite: 15-30% des angines enfants, 5-15% adultes",
+                    "Pic saisonnier: hiver et printemps",
+                    "RAA: 0.3-3% des pharyngites non traitées",
+                    "Fasciite nécrosante: mortalité 20-30%",
+                    "Réémergence de souches invasives (emm1, emm3)"
+                ],
+                "prevention": [
+                    "Traitement antibiotique précoce (prévention RAA)",
+                    "Éviction scolaire 48h après début antibiotique",
+                    "Hygiène respiratoire (masque, mouchoirs)",
+                    "Pas de vaccin disponible",
+                    "Antibioprophylaxie RAA (pénicilline retard mensuelle)"
+                ]
+            }
+        },
+        {
+            "id": "mycobacterium-tuberculosis",
+            "name": "Mycobacterium tuberculosis",
+            "category": "Mycobacteriaceae",
+            "overview": "Agent de la tuberculose. Bacille acido-alcoolo-résistant (BAAR) à croissance lente. Pathogène intracellulaire obligatoire affectant principalement les poumons. Maladie à déclaration obligatoire.",
+            "properties": {
+                "gramStain": {
+                    "value": "Acido-résistant (BAAR)",
+                    "link": "/munin/bacteriology/property/acid-fast"
+                },
+                "morphology": {
+                    "value": "Bacille fin et incurvé",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Aérobie strict",
+                "growth": "Croissance très lente (2-8 semaines)",
+                "temperature": "Optimum: 37°C",
+                "size": "1-4 μm × 0.3-0.6 μm",
+                "cellWall": "Riche en acides mycoliques (60% lipides)",
+                "catalase": "Positif",
+                "niacin": "Positif (test d'identification)",
+                "spores": "Non sporulé",
+                "motility": "Non motile"
+            },
+            "relatedEntities": [
+                {
+                    "id": "mycobacterium-leprae",
+                    "name": "Mycobacterium leprae",
+                    "link": "/munin/bacteriology/mycobacterium-leprae",
+                    "description": "Agent de la lèpre"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Pathogène intracellulaire (macrophages)",
+                    "Transmission aérienne (gouttelettes <5 μm)",
+                    "Survie dans macrophages via inhibition fusion phagosome-lysosome",
+                    "Formation de granulomes (tubercules)",
+                    "Infection latente vs active (10% développent maladie)",
+                    "Facteurs de virulence: lipides de paroi, cord factor"
+                ],
+                "diseases": [
+                    "Tuberculose pulmonaire (85% des cas)",
+                    "Tuberculose extrapulmonaire (ganglions, os, méninges, reins)",
+                    "Méningite tuberculeuse (grave, mortalité élevée)",
+                    "Tuberculose miliaire (dissémination hématogène)",
+                    "Mal de Pott (tuberculose vertébrale)",
+                    "Primo-infection tuberculeuse (souvent asymptomatique)"
+                ],
+                "transmission": [
+                    "Voie aérienne exclusive (toux, éternuements)",
+                    "Patients bacillifères (BAAR+ à l'examen direct)",
+                    "Contagiosité: 10-15 contacts infectés par patient",
+                    "Pas de transmission par objets/aliments",
+                    "Facteurs de risque: immunodépression, VIH, précarité"
+                ],
+                "antibiotics": [
+                    "Quadrithérapie initiale (2 mois): RHZE",
+                    "- Rifampicine (R): bactéricide",
+                    "- Isoniazide (H/INH): bactéricide",
+                    "- Pyrazinamide (Z): bactéricide en milieu acide",
+                    "- Éthambutol (E): bactériostatique",
+                    "Bithérapie de continuation (4 mois): RH",
+                    "TB-MDR: résistance R+H (traitement 18-24 mois)",
+                    "TB-XDR: résistance R+H+fluoroquinolones+injectable"
+                ],
+                "diagnostics": [
+                    "Coloration de Ziehl-Neelsen (BAAR roses sur fond bleu)",
+                    "Culture sur milieu Löwenstein-Jensen (2-8 semaines)",
+                    "Test GeneXpert MTB/RIF (PCR, 2h, détecte résistance rifampicine)",
+                    "Test cutané à la tuberculine (TCT/IDR) - infection latente",
+                    "Test IGRA (QuantiFERON) - libération interféron gamma",
+                    "Radiographie thoracique (cavernes, infiltrats)"
+                ],
+                "epidemiology": [
+                    "10 millions de nouveaux cas/an dans le monde",
+                    "1.5 million de décès/an (2ème cause infectieuse après COVID)",
+                    "1/4 de la population mondiale infectée (latente)",
+                    "Incidence élevée: Afrique subsaharienne, Asie du Sud-Est",
+                    "Co-infection VIH: risque ×20 de développer TB active",
+                    "TB-MDR: 3-5% des nouveaux cas"
+                ],
+                "prevention": [
+                    "Vaccin BCG (efficacité variable, protège formes graves enfant)",
+                    "Dépistage des contacts (enquête autour d'un cas)",
+                    "Traitement infection latente (isoniazide 6-9 mois)",
+                    "Isolement respiratoire (chambre pression négative)",
+                    "Masque FFP2 pour soignants",
+                    "Déclaration obligatoire",
+                    "DOT (Directly Observed Therapy) pour observance"
+                ]
+            }
+        },
+        {
+            "id": "pseudomonas-aeruginosa",
+            "name": "Pseudomonas aeruginosa",
+            "category": "Pseudomonadaceae",
+            "overview": "Bacille Gram négatif aérobie strict. Pathogène opportuniste majeur en milieu hospitalier. Produit des pigments caractéristiques (pyocyanine). Résistance naturelle et acquise aux antibiotiques.",
+            "properties": {
+                "gramStain": {
+                    "value": "Négatif",
+                    "link": "/munin/bacteriology/property/gram-stain"
+                },
+                "morphology": {
+                    "value": "Bacille fin",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Aérobie strict",
+                "motility": "Motile (flagelle polaire monotriche)",
+                "temperature": "Optimum: 37°C (peut croître à 42°C)",
+                "size": "1.5-3 μm × 0.5-0.8 μm",
+                "pigment": "Pyocyanine (bleu-vert), pyoverdine (jaune-vert)",
+                "odor": "Odeur de raisin/seringa caractéristique",
+                "catalase": "Positif",
+                "oxidase": "Positif",
+                "lactose": "Non fermentant",
+                "habitat": "Eau, sol, plantes, surfaces humides"
+            },
+            "relatedEntities": [
+                {
+                    "id": "acinetobacter-baumannii",
+                    "name": "Acinetobacter baumannii",
+                    "link": "/munin/bacteriology/acinetobacter-baumannii",
+                    "description": "Autre BGN opportuniste multirésistant"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Pathogène opportuniste (patients immunodéprimés)",
+                    "Biofilm (cathéters, prothèses, mucoviscidose)",
+                    "Facteurs de virulence: exotoxine A, élastase, phospholipase C",
+                    "Système de sécrétion type III",
+                    "Quorum sensing (régulation virulence)",
+                    "Résistance naturelle: membrane externe imperméable, efflux"
+                ],
+                "diseases": [
+                    "Infections nosocomiales (pneumonies acquises sous ventilation)",
+                    "Pneumonie chez patients ventilés (PAVM)",
+                    "Infections urinaires (cathéters)",
+                    "Infections de plaies et brûlures",
+                    "Bactériémies (cathéters vasculaires)",
+                    "Otite externe maligne (diabétiques)",
+                    "Infections pulmonaires chroniques (mucoviscidose)",
+                    "Kératite (lentilles de contact)"
+                ],
+                "transmission": [
+                    "Environnement hospitalier (eau, surfaces humides)",
+                    "Manuportage par personnel soignant",
+                    "Dispositifs médicaux contaminés",
+                    "Aérosols (nébuliseurs, humidificateurs)",
+                    "Pas de transmission interhumaine directe"
+                ],
+                "antibiotics": [
+                    "Pipéracilline-tazobactam (bêta-lactamine anti-Pseudomonas)",
+                    "Ceftazidime ou céfépime (céphalosporines anti-Pseudomonas)",
+                    "Ciprofloxacine (fluoroquinolone)",
+                    "Méropénème ou imipénème (carbapénèmes)",
+                    "Amikacine ou tobramycine (aminosides)",
+                    "Bithérapie recommandée (infections sévères)",
+                    "Résistance: BMR fréquent, souches XDR émergentes"
+                ],
+                "diagnostics": [
+                    "Culture sur gélose cétrimide (sélectif)",
+                    "Gélose au sang (colonies plates, pigment bleu-vert)",
+                    "Test oxydase POSITIF",
+                    "Odeur caractéristique de raisin/seringa",
+                    "Pigmentation pyocyanine (bleu-vert)",
+                    "Antibiogramme élargi obligatoire",
+                    "Identification MALDI-TOF"
+                ],
+                "epidemiology": [
+                    "3ème cause d'infections nosocomiales",
+                    "PAVM: 15-20% des pneumonies sous ventilation",
+                    "Mortalité bactériémie: 30-40%",
+                    "Mucoviscidose: colonisation 60-80% adultes",
+                    "BMR: 15-30% des souches en réanimation",
+                    "Ubiquitaire dans environnement hospitalier"
+                ],
+                "prevention": [
+                    "Hygiène des mains stricte",
+                    "Entretien dispositifs médicaux (nébuliseurs, respirateurs)",
+                    "Éviter eau stagnante en milieu hospitalier",
+                    "Isolement contact pour souches BMR",
+                    "Surveillance microbiologique environnementale",
+                    "Antibiothérapie raisonnée (éviter sélection résistance)"
+                ]
+            }
+        },
+        {
+            "id": "clostridium-difficile",
+            "name": "Clostridioides difficile",
+            "category": "Clostridiaceae",
+            "overview": "Bacille Gram positif anaérobie strict formant des spores. Cause majeure de diarrhée associée aux antibiotiques (DACD) et de colite pseudomembraneuse. Les spores résistent à l'alcool et aux désinfectants courants.",
+            "properties": {
+                "gramStain": {
+                    "value": "Positif",
+                    "link": "/munin/bacteriology/property/gram-stain"
+                },
+                "morphology": {
+                    "value": "Bacille sporulé",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Anaérobie strict",
+                "motility": "Motile (flagelles péritriches)",
+                "temperature": "Optimum: 37°C",
+                "size": "3-5 μm × 0.5-1.5 μm",
+                "spores": "Spores terminales/subterminales (aspect raquette)",
+                "toxins": "Produit toxines A (entérotoxine) et B (cytotoxine)",
+                "odor": "Odeur caractéristique de crottin de cheval",
+                "catalase": "Négatif",
+                "oxidase": "Négatif"
+            },
+            "relatedEntities": [
+                {
+                    "id": "clostridium-perfringens",
+                    "name": "Clostridium perfringens",
+                    "link": "/munin/bacteriology/clostridium-perfringens",
+                    "description": "Autre Clostridium pathogène"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Toxines A et B (TcdA, TcdB) - cytotoxiques",
+                    "Toxine binaire (CDT) - certaines souches hypervirulentes",
+                    "Spores résistantes (chaleur, désinfectants, antibiotiques)",
+                    "Dysbiose intestinale (antibiotiques) favorise colonisation",
+                    "Adhésion à muqueuse colique",
+                    "Inflammation et destruction épithélium intestinal"
+                ],
+                "diseases": [
+                    "Diarrhée associée aux antibiotiques (DACD)",
+                    "Colite pseudomembraneuse (forme sévère)",
+                    "Mégacôlon toxique (complication grave)",
+                    "Récidives fréquentes (20-30% après 1er épisode)",
+                    "Formes fulminantes (souche 027/NAP1/BI)",
+                    "Portage asymptomatique (3-15% adultes sains)"
+                ],
+                "transmission": [
+                    "Voie féco-orale (spores)",
+                    "Manuportage par personnel soignant",
+                    "Surfaces contaminées (spores persistent des mois)",
+                    "Transmission nosocomiale (épidémies)",
+                    "Facteurs de risque: antibiotiques, âge >65 ans, hospitalisation"
+                ],
+                "antibiotics": {
+                    "treatment": [
+                        "Métronidazole (formes légères à modérées)",
+                        "Vancomycine orale (1ère intention formes sévères)",
+                        "Fidaxomicine (moins de récidives, coût élevé)",
+                        "Transplantation fécale (récidives multiples)",
+                        "ARRÊT antibiotique déclenchant si possible"
+                    ],
+                    "risk": [
+                        "Antibiotiques à risque: fluoroquinolones, céphalosporines, clindamycine",
+                        "Risque augmente avec durée et nombre d'antibiotiques",
+                        "IPP (inhibiteurs pompe à protons) augmentent risque"
+                    ]
+                },
+                "diagnostics": [
+                    "Détection toxines A/B (EIA, immunochromatographie)",
+                    "PCR pour gènes tcdA, tcdB (très sensible)",
+                    "Test GDH (glutamate déshydrogénase) - screening",
+                    "Culture anaérobie (rarement utilisée, 3-5 jours)",
+                    "Endoscopie: pseudomembranes jaunâtres (colite)",
+                    "Algorithme en 2 ou 3 étapes recommandé"
+                ],
+                "epidemiology": [
+                    "1ère cause de diarrhée nosocomiale infectieuse",
+                    "Incidence: 5-10 cas/10000 jours-patients",
+                    "Mortalité: 5-15% (formes sévères jusqu'à 30%)",
+                    "Souche hypervirulente 027: épidémies en Amérique du Nord et Europe",
+                    "Récidives: 20-30% après 1er épisode, 50-60% après 2ème",
+                    "Coût: >1 milliard $/an aux USA"
+                ],
+                "prevention": [
+                    "Hygiène des mains: eau + savon (alcool inefficace sur spores)",
+                    "Isolement contact + précautions entériques",
+                    "Désinfection surfaces: eau de Javel (sporicide)",
+                    "Antibiothérapie raisonnée (éviter antibiotiques à risque)",
+                    "Chambre individuelle pour patients infectés",
+                    "Gants + surblouse pour soins",
+                    "Probiotiques: efficacité non prouvée en prévention"
+                ]
+            }
+        },
+        {
+            "id": "salmonella",
+            "name": "Salmonella enterica",
+            "category": "Enterobacteriaceae",
+            "overview": "Bacille Gram négatif responsable de gastro-entérites (salmonelloses) et de fièvres typhoïdes. Plus de 2500 sérotypes identifiés. Transmission principalement alimentaire.",
+            "properties": {
+                "gramStain": {
+                    "value": "Négatif",
+                    "link": "/munin/bacteriology/property/gram-stain"
+                },
+                "morphology": {
+                    "value": "Bacille",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Anaérobie facultatif",
+                "motility": "Motile (flagelles péritriches)",
+                "temperature": "Optimum: 35-37°C",
+                "size": "2-5 μm × 0.7-1.5 μm",
+                "lactose": "Non fermentant",
+                "h2s": "Production H2S positif",
+                "catalase": "Positif",
+                "oxidase": "Négatif",
+                "urease": "Négatif",
+                "indole": "Négatif",
+                "citrate": "Positif",
+                "mr": "Positif",
+                "vp": "Négatif"
+            },
+            "relatedEntities": [
+                {
+                    "id": "ecoli",
+                    "name": "Escherichia coli",
+                    "link": "/munin/bacteriology/ecoli",
+                    "description": "Autre Enterobacteriaceae"
+                },
+                {
+                    "id": "shigella",
+                    "name": "Shigella",
+                    "link": "/munin/bacteriology/shigella",
+                    "description": "Entérobactérie causant dysenterie"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Invasion cellules épithéliales intestinales",
+                    "Système de sécrétion type III (SPI-1, SPI-2)",
+                    "Survie intracellulaire dans macrophages",
+                    "Sérotypes: Typhi, Paratyphi (fièvres typhoïdes), Enteritidis, Typhimurium (gastro-entérites)"
+                ],
+                "diseases": [
+                    "Gastro-entérite (salmonellose mineure)",
+                    "Fièvre typhoïde (S. Typhi)",
+                    "Fièvres paratyphoïdes (S. Paratyphi A, B, C)",
+                    "Bactériémies (immunodéprimés)",
+                    "Infections focales (ostéomyélite, endocardite - rares)"
+                ],
+                "transmission": [
+                    "Aliments contaminés (œufs, volaille, viande)",
+                    "Eau contaminée",
+                    "Contact avec animaux (reptiles, volailles)",
+                    "Transmission féco-orale",
+                    "Portage asymptomatique chronique (vésicule biliaire)"
+                ],
+                "antibiotics": [
+                    "Gastro-entérite: réhydratation, pas d'antibiotiques (sauf formes sévères)",
+                    "Fièvre typhoïde: ceftriaxone, azithromycine, fluoroquinolones",
+                    "Résistance croissante aux fluoroquinolones",
+                    "Traitement prolonge excrétion fécale (gastro-entérite)"
+                ],
+                "diagnostics": [
+                    "Coproculture (gélose SS, Hektoen)",
+                    "Hémoculture (fièvre typhoïde)",
+                    "Sérotypage (antigènes O, H)",
+                    "Sérologie de Widal (fièvre typhoïde, peu spécifique)",
+                    "PCR (identification rapide)"
+                ],
+                "epidemiology": [
+                    "93 millions de cas/an dans le monde",
+                    "Fièvre typhoïde: 21 millions de cas/an, 200000 décès",
+                    "Réservoir: humains (Typhi), animaux (autres sérotypes)",
+                    "Endémique: Asie du Sud, Afrique subsaharienne",
+                    "TIAC (toxi-infections alimentaires collectives) fréquentes"
+                ],
+                "prevention": [
+                    "Cuisson complète des aliments (>65°C)",
+                    "Hygiène alimentaire stricte",
+                    "Réfrigération adéquate",
+                    "Vaccin typhoïde (voyageurs zones endémiques)",
+                    "Contrôle vétérinaire des élevages",
+                    "Traitement porteurs chroniques"
+                ]
+            }
+        },
+        {
+            "id": "klebsiella",
+            "name": "Klebsiella pneumoniae",
+            "category": "Enterobacteriaceae",
+            "overview": "Bacille Gram négatif encapsulé. Pathogène opportuniste responsable d'infections nosocomiales. Résistance aux antibiotiques en augmentation (BLSE, carbapénémases).",
+            "properties": {
+                "gramStain": {
+                    "value": "Négatif",
+                    "link": "/munin/bacteriology/property/gram-stain"
+                },
+                "morphology": {
+                    "value": "Bacille court et large",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Anaérobie facultatif",
+                "motility": "Non motile",
+                "temperature": "Optimum: 37°C",
+                "size": "0.5-0.8 μm × 1-2 μm",
+                "capsule": "Capsule polysaccharidique épaisse",
+                "lactose": "Fermentation positive",
+                "urease": "Positif",
+                "citrate": "Positif",
+                "vp": "Positif",
+                "mr": "Négatif",
+                "indole": "Négatif",
+                "h2s": "Négatif",
+                "oxidase": "Négatif"
+            },
+            "relatedEntities": [
+                {
+                    "id": "ecoli",
+                    "name": "Escherichia coli",
+                    "link": "/munin/bacteriology/ecoli",
+                    "description": "Autre Enterobacteriaceae"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Capsule polysaccharidique (>77 types K)",
+                    "Adhésines (fimbriae type 1 et 3)",
+                    "Sidérophores (acquisition fer)",
+                    "Biofilm sur dispositifs médicaux",
+                    "Souches hypervirulentes (hvKp) - abcès hépatiques"
+                ],
+                "diseases": [
+                    "Pneumonies nosocomiales",
+                    "Infections urinaires",
+                    "Bactériémies/septicémies",
+                    "Infections de plaies chirurgicales",
+                    "Abcès hépatiques (souches hypervirulentes, Asie)",
+                    "Méningites néonatales"
+                ],
+                "transmission": [
+                    "Manuportage en milieu hospitalier",
+                    "Dispositifs médicaux (cathéters, ventilation)",
+                    "Portage digestif asymptomatique",
+                    "Transmission croisée entre patients"
+                ],
+                "antibiotics": [
+                    "Amoxicilline-acide clavulanique (souches sensibles)",
+                    "Céphalosporines 3G (si non BLSE)",
+                    "Carbapénèmes (BLSE)",
+                    "Colistine (dernier recours, souches productrices carbapénémases)",
+                    "BLSE: 20-40% des souches en milieu hospitalier",
+                    "KPC, NDM, OXA-48: carbapénémases émergentes"
+                ],
+                "diagnostics": [
+                    "Culture sur gélose MacConkey (colonies muqueuses, lactose+)",
+                    "Colonies très muqueuses (capsule)",
+                    "Test urease positif",
+                    "Antibiogramme + recherche BLSE/carbapénémases",
+                    "PCR pour gènes de résistance"
+                ],
+                "epidemiology": [
+                    "3-8% des infections nosocomiales",
+                    "BLSE: prévalence 20-40% en milieu hospitalier",
+                    "Carbapénémases: émergence mondiale (KPC, NDM)",
+                    "Mortalité bactériémie: 20-50%",
+                    "Souches hypervirulentes: Asie du Sud-Est principalement"
+                ],
+                "prevention": [
+                    "Hygiène des mains",
+                    "Isolement contact (BMR)",
+                    "Dépistage portage digestif (patients à risque)",
+                    "Antibiothérapie raisonnée",
+                    "Surveillance épidémiologique BMR"
+                ]
+            }
+        },
+        {
+            "id": "neisseria-meningitidis",
+            "name": "Neisseria meningitidis",
+            "category": "Neisseriaceae",
+            "overview": "Diplocoque Gram négatif en grains de café. Agent de méningites bactériennes et de septicémies fulminantes (purpura fulminans). Urgence médicale absolue.",
+            "properties": {
+                "gramStain": {
+                    "value": "Négatif",
+                    "link": "/munin/bacteriology/property/gram-stain"
+                },
+                "morphology": {
+                    "value": "Diplocoques en grains de café",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Aérobie strict (capnophile)",
+                "motility": "Non motile",
+                "temperature": "Optimum: 35-37°C (fragile hors organisme)",
+                "size": "0.6-1.0 μm",
+                "capsule": "Capsule polysaccharidique (sérogroupes A, B, C, W, Y, X)",
+                "oxidase": "Positif",
+                "catalase": "Positif",
+                "glucose": "Fermentation positive",
+                "maltose": "Fermentation positive",
+                "h2s": "Négatif",
+                "urease": "Négatif"
+            },
+            "relatedEntities": [
+                {
+                    "id": "neisseria-gonorrhoeae",
+                    "name": "Neisseria gonorrhoeae",
+                    "link": "/munin/bacteriology/neisseria-gonorrhoeae",
+                    "description": "Gonocoque, IST"
+                },
+                {
+                    "id": "haemophilus-influenzae",
+                    "name": "Haemophilus influenzae",
+                    "link": "/munin/bacteriology/haemophilus-influenzae",
+                    "description": "Autre agent de méningite"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Capsule polysaccharidique (antiphagocytaire)",
+                    "Pili (adhésion muqueuse nasopharyngée)",
+                    "LOS (lipooligosaccharide) - endotoxine",
+                    "IgA protéase",
+                    "Variation antigénique (échappement immunitaire)",
+                    "Invasion barrière hémato-méningée"
+                ],
+                "diseases": [
+                    "Méningite cérébro-spinale",
+                    "Méningococcémie (septicémie)",
+                    "Purpura fulminans (choc septique + CIVD)",
+                    "Syndrome de Waterhouse-Friderichsen (nécrose surrénales)",
+                    "Portage nasopharyngé asymptomatique (5-10% population)"
+                ],
+                "transmission": [
+                    "Gouttelettes respiratoires (contact proche)",
+                    "Portage nasopharyngé asymptomatique",
+                    "Transmission favorisée: collectivités, promiscuité",
+                    "Contagiosité faible (contact prolongé nécessaire)",
+                    "Cas sporadiques ou épidémies (ceinture de la méningite, Afrique)"
+                ],
+                "antibiotics": [
+                    "Ceftriaxone IV (traitement de choix)",
+                    "Cefotaxime IV (alternative)",
+                    "Pénicilline G (si sensible)",
+                    "Traitement d'urgence: ceftriaxone IM pré-hospitalier",
+                    "Chimioprophylaxie contacts: rifampicine, ciprofloxacine, ceftriaxone",
+                    "Durée: 7 jours IV"
+                ],
+                "diagnostics": [
+                    "Ponction lombaire (LCR trouble, PNN, glucose bas)",
+                    "Examen direct LCR (diplocoques Gram- intracellulaires)",
+                    "Culture LCR sur gélose chocolat (CO2, 37°C)",
+                    "Hémoculture (méningococcémie)",
+                    "PCR LCR (sensible, rapide)",
+                    "Antigènes solubles (latex)",
+                    "Purpura: ne PAS retarder traitement pour PL"
+                ],
+                "epidemiology": [
+                    "Incidence France: 1-2 cas/100000 habitants/an",
+                    "Mortalité: 10-15% malgré traitement",
+                    "Séquelles: 10-20% (surdité, amputation, déficit neurologique)",
+                    "Pic: nourrissons, adolescents/jeunes adultes",
+                    "Sérogroupes: B (60%), C (20%), W, Y en France",
+                    "Ceinture de la méningite (Afrique): sérogroupe A, épidémies"
+                ],
+                "prevention": [
+                    "Vaccination: Men-C (nourrissons), Men-ACWY, Men-B",
+                    "Chimioprophylaxie contacts proches (<48h après diagnostic)",
+                    "Éviction scolaire jusqu'à 24h après début antibiotique",
+                    "Déclaration obligatoire",
+                    "Vaccination pèlerinage La Mecque (ACWY)",
+                    "Campagnes de vaccination (épidémies)"
+                ]
+            }
+        },
+        {
+            "id": "listeria-monocytogenes",
+            "name": "Listeria monocytogenes",
+            "category": "Listeriaceae",
+            "overview": "Bacille Gram positif intracellulaire. Pathogène d'origine alimentaire causant listériose. Particulièrement dangereux pour femmes enceintes, nouveau-nés, personnes âgées et immunodéprimés.",
+            "properties": {
+                "gramStain": {
+                    "value": "Positif",
+                    "link": "/munin/bacteriology/property/gram-stain"
+                },
+                "morphology": {
+                    "value": "Bacille court (coccobacille)",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Anaérobie facultatif",
+                "motility": "Motile à 20-25°C (mobilité en culbute)",
+                "temperature": "Croissance 4-45°C (psychrotrophe)",
+                "size": "0.4-0.5 μm × 1-1.5 μm",
+                "catalase": "Positif",
+                "hemolysis": "Bêta-hémolytique",
+                "camp": "Test CAMP positif",
+                "esculine": "Hydrolyse positive",
+                "oxidase": "Négatif"
+            },
+            "relatedEntities": [],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Pathogène intracellulaire facultatif",
+                    "Listériolysine O (LLO) - lyse phagosome",
+                    "ActA - motilité intracellulaire (polymérisation actine)",
+                    "Internalines (InlA, InlB) - invasion cellules",
+                    "Traverse barrière intestinale, placentaire, hémato-méningée",
+                    "Multiplication à 4°C (réfrigérateur)"
+                ],
+                "diseases": [
+                    "Listériose materno-néonatale (granulomatose septique)",
+                    "Méningite/méningo-encéphalite",
+                    "Septicémie",
+                    "Gastro-entérite fébrile (forme bénigne)",
+                    "Avortement spontané (femmes enceintes)",
+                    "Formes localisées (endocardite, arthrite - rares)"
+                ],
+                "transmission": [
+                    "Aliments contaminés (charcuterie, fromages au lait cru, poissons fumés)",
+                    "Transmission materno-fœtale (transplacentaire)",
+                    "Environnement (sol, eau, végétaux)",
+                    "Multiplication à température réfrigération (4°C)",
+                    "Biofilm dans industries agroalimentaires"
+                ],
+                "antibiotics": [
+                    "Amoxicilline + gentamicine (synergie, traitement de choix)",
+                    "Ampicilline",
+                    "Triméthoprime-sulfaméthoxazole (allergie pénicilline)",
+                    "Durée: 3 semaines (méningite), 6 semaines (endocardite)",
+                    "Résistance naturelle: céphalosporines"
+                ],
+                "diagnostics": [
+                    "Hémoculture (septicémie)",
+                    "Culture LCR (méningite)",
+                    "Culture placenta, liquide amniotique (forme materno-fœtale)",
+                    "Gélose au sang (petites colonies bêta-hémolytiques)",
+                    "Mobilité en culbute à 20-25°C",
+                    "Test CAMP positif",
+                    "PCR (aliments)"
+                ],
+                "epidemiology": [
+                    "Incidence: 5-10 cas/million habitants/an",
+                    "Mortalité: 20-30% (formes invasives)",
+                    "Groupes à risque: >65 ans, immunodéprimés, femmes enceintes",
+                    "Listériose néonatale: mortalité 20-30%",
+                    "TIAC (épidémies alimentaires)",
+                    "Maladie à déclaration obligatoire"
+                ],
+                "prevention": [
+                    "Femmes enceintes: éviter fromages lait cru, charcuterie, poissons fumés",
+                    "Cuisson complète des aliments",
+                    "Respect chaîne du froid",
+                    "Nettoyage réfrigérateur régulier",
+                    "Consommation rapide produits entamés",
+                    "Contrôles industries agroalimentaires",
+                    "Rappels de lots contaminés"
+                ]
+            }
+        },
+        {
+            "id": "haemophilus-influenzae",
+            "name": "Haemophilus influenzae",
+            "category": "Pasteurellaceae",
+            "overview": "Coccobacille Gram négatif. Agent de méningites, pneumonies et otites. Le sérotype b (Hib) était la principale cause de méningite avant vaccination. Exige facteurs X (hémine) et V (NAD) pour croissance.",
+            "properties": {
+                "gramStain": {
+                    "value": "Négatif",
+                    "link": "/munin/bacteriology/property/gram-stain"
+                },
+                "morphology": {
+                    "value": "Coccobacille pléomorphe",
+                    "link": "/munin/bacteriology/property/morphology"
+                },
+                "oxygen": "Aérobie facultatif (capnophile)",
+                "motility": "Non motile",
+                "temperature": "Optimum: 35-37°C",
+                "size": "0.3-0.5 μm × 0.5-2 μm",
+                "capsule": "Sérotypes capsulés (a-f) et non capsulés (NTHi)",
+                "factors": "Exige facteurs X (hémine) et V (NAD)",
+                "catalase": "Positif",
+                "oxidase": "Positif",
+                "urease": "Négatif",
+                "indole": "Variable"
+            },
+            "relatedEntities": [
+                {
+                    "id": "neisseria-meningitidis",
+                    "name": "Neisseria meningitidis",
+                    "link": "/munin/bacteriology/neisseria-meningitidis",
+                    "description": "Autre agent de méningite"
+                },
+                {
+                    "id": "streptococcus-pneumoniae",
+                    "name": "Streptococcus pneumoniae",
+                    "link": "/munin/bacteriology/streptococcus-pneumoniae",
+                    "description": "Pneumocoque"
+                }
+            ],
+            "additionalInfo": {
+                "pathogenicity": [
+                    "Capsule polysaccharidique (sérotype b le plus virulent)",
+                    "Pili (adhésion muqueuses respiratoires)",
+                    "IgA protéase",
+                    "LOS (lipooligosaccharide)",
+                    "Souches non capsulées (NTHi): infections ORL"
+                ],
+                "diseases": [
+                    "Méningite (surtout Hib avant vaccination)",
+                    "Pneumonie",
+                    "Otite moyenne aiguë (NTHi)",
+                    "Sinusite",
+                    "Épiglottite (urgence, Hib)",
+                    "Septicémie",
+                    "Arthrite septique"
+                ],
+                "transmission": [
+                    "Gouttelettes respiratoires",
+                    "Portage nasopharyngé (NTHi: 50-80% enfants)",
+                    "Contact proche",
+                    "Collectivités (crèches)"
+                ],
+                "antibiotics": [
+                    "Amoxicilline (1ère intention si sensible)",
+                    "Amoxicilline-acide clavulanique (souches productrices bêta-lactamases)",
+                    "Ceftriaxone (méningite)",
+                    "Azithromycine (alternative)",
+                    "Résistance: 20-30% productrices bêta-lactamases"
+                ],
+                "diagnostics": [
+                    "Culture sur gélose chocolat (facteurs X et V)",
+                    "Satellitisme autour de S. aureus (facteur V)",
+                    "LCR (méningite): Gram, culture, antigènes solubles",
+                    "PCR",
+                    "Sérotypage (latex)"
+                ],
+                "epidemiology": [
+                    "Méningite Hib: quasi-disparition après vaccination",
+                    "Otites: 20-30% dues à H. influenzae (NTHi)",
+                    "Incidence méningite Hib: <1 cas/100000 (pays vaccinés)",
+                    "Mortalité méningite: 5-10%",
+                    "Séquelles: 15-30% (surdité, déficit neurologique)"
+                ],
+                "prevention": [
+                    "Vaccin Hib (nourrissons, 2-4-11 mois)",
+                    "Efficacité vaccinale: >95%",
+                    "Chimioprophylaxie contacts (méningite): rifampicine",
+                    "Pas de vaccin pour NTHi"
+                ]
+            }
+        }
+    ],
+    "properties": [
+        {
+            "id": "gram-stain",
+            "name": "Coloration de Gram",
+            "description": "Technique de coloration différentielle qui classe les bactéries en Gram positif (violet) ou Gram négatif (rose) selon la structure de leur paroi cellulaire. Les bactéries Gram positif ont une paroi épaisse de peptidoglycane, tandis que les Gram négatif ont une membrane externe.",
+            "types": [
+                "Positif",
+                "Négatif",
+                "Variable"
+            ],
+            "relatedConcepts": [
+                "Paroi cellulaire",
+                "Peptidoglycane",
+                "Membrane externe"
+            ]
+        },
+        {
+            "id": "morphology",
+            "name": "Morphologie bactérienne",
+            "description": "Forme et arrangement des cellules bactériennes observés au microscope.",
+            "types": [
+                "Cocci (sphérique)",
+                "Bacille (bâtonnet)",
+                "Spirille (spirale)",
+                "Vibrion (virgule)",
+                "En chaînettes",
+                "En grappes",
+                "En paires (diplo-)"
+            ]
+        },
+        {
+            "id": "acid-fast",
+            "name": "Acido-résistance",
+            "description": "Propriété de certaines bactéries (notamment Mycobacterium) de résister à la décoloration par des solutions acides après coloration. Due à la présence d'acides mycoliques dans la paroi cellulaire.",
+            "types": [
+                "BAAR positif",
+                "BAAR négatif"
+            ],
+            "relatedConcepts": [
+                "Coloration de Ziehl-Neelsen",
+                "Acides mycoliques",
+                "Mycobactéries"
+            ]
+        }
+    ]
+}

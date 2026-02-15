@@ -1,0 +1,83 @@
+{
+    "discipline": "hematology",
+    "displayName": "Hématologie",
+    "description": "Base de données sur les cellules sanguines, troubles hématologiques et analyses",
+    "entities": [
+        {
+            "id": "erythrocyte",
+            "name": "Érythrocyte (Globule rouge)",
+            "category": "Cellules sanguines",
+            "overview": "Cellule sanguine la plus abondante, responsable du transport de l'oxygène via l'hémoglobine. Forme biconcave caractéristique, sans noyau chez les mammifères.",
+            "properties": {
+                "size": "6-8 μm de diamètre",
+                "lifespan": "120 jours",
+                "count": "4.5-5.5 millions/μL (hommes), 4.0-5.0 millions/μL (femmes)",
+                "function": "Transport d'oxygène et CO2",
+                "hemoglobin": "12-16 g/dL (femmes), 14-18 g/dL (hommes)"
+            },
+            "additionalInfo": {
+                "disorders": [
+                    "Anémie (déficit)",
+                    "Polycythémie (excès)",
+                    "Drépanocytose",
+                    "Thalassémie"
+                ],
+                "tests": [
+                    "Numération globulaire (CBC)",
+                    "Hématocrite",
+                    "Frottis sanguin",
+                    "Électrophorèse de l'hémoglobine"
+                ]
+            }
+        },
+        {
+            "id": "neutrophil",
+            "name": "Neutrophile",
+            "category": "Leucocytes",
+            "overview": "Type de globule blanc le plus abondant. Première ligne de défense contre les infections bactériennes et fongiques. Capable de phagocytose.",
+            "properties": {
+                "size": "10-12 μm",
+                "nucleus": "Multilobé (2-5 lobes)",
+                "count": "40-70% des leucocytes (2000-7500/μL)",
+                "lifespan": "6-8 heures dans le sang",
+                "granules": "Granules azurophiles et spécifiques"
+            },
+            "additionalInfo": {
+                "disorders": [
+                    "Neutropénie (déficit)",
+                    "Neutrophilie (excès)",
+                    "Leucémie myéloïde"
+                ],
+                "tests": [
+                    "Formule leucocytaire",
+                    "Myélogramme"
+                ]
+            }
+        },
+        {
+            "id": "platelet",
+            "name": "Plaquette (Thrombocyte)",
+            "category": "Cellules sanguines",
+            "overview": "Fragment cellulaire anucléé dérivé des mégacaryocytes. Essentiel pour l'hémostase et la coagulation sanguine.",
+            "properties": {
+                "size": "2-4 μm",
+                "count": "150,000-400,000/μL",
+                "lifespan": "7-10 jours",
+                "function": "Hémostase et coagulation"
+            },
+            "additionalInfo": {
+                "disorders": [
+                    "Thrombopénie (déficit)",
+                    "Thrombocytose (excès)",
+                    "Purpura thrombopénique"
+                ],
+                "tests": [
+                    "Numération plaquettaire",
+                    "Temps de saignement",
+                    "Agrégation plaquettaire"
+                ]
+            }
+        }
+    ],
+    "properties": []
+}

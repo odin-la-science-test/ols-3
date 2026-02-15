@@ -1,0 +1,55 @@
+{
+  "discipline": "ecologie-appliquee",
+  "displayName": "Écologie appliquée",
+  "description": "Référentiel complet pour le domaine : Écologie appliquée. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "cell-structure",
+      "name": "Structure Cellulaire",
+      "category": "Fondamental",
+      "overview": "L'unité structurelle, fonctionnelle et biologique de base de tous les organismes vivants connus.",
+      "properties": {
+        "Kingdom": {
+          "value": "Animalia",
+          "description": "Propriété Kingdom standard pour Écologie appliquée"
+        },
+        "Domain": {
+          "value": "Eukaryota",
+          "description": "Propriété Domain standard pour Écologie appliquée"
+        }
+      }
+    },
+    {
+      "id": "dna-replication",
+      "name": "Réplication de l'ADN",
+      "category": "Génétique",
+      "overview": "Le processus biologique de production de deux répliques identiques d'ADN à partir d'une molécule d'ADN originale.",
+      "properties": {
+        "Kingdom": {
+          "value": "Animalia",
+          "description": "Propriété Kingdom standard pour Écologie appliquée"
+        },
+        "Domain": {
+          "value": "Eukaryota",
+          "description": "Propriété Domain standard pour Écologie appliquée"
+        }
+      }
+    },
+    {
+      "id": "protein-synthesis",
+      "name": "Synthèse des Protéines",
+      "category": "Biochimie",
+      "overview": "Le processus par lequel les cellules individuelles construisent des protéines spécifiques.",
+      "properties": {
+        "Kingdom": {
+          "value": "Animalia",
+          "description": "Propriété Kingdom standard pour Écologie appliquée"
+        },
+        "Domain": {
+          "value": "Eukaryota",
+          "description": "Propriété Domain standard pour Écologie appliquée"
+        }
+      }
+    }
+  ]
+}

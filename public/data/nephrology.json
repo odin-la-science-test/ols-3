@@ -1,0 +1,70 @@
+{
+    "discipline": "nephrology",
+    "displayName": "Néphrologie",
+    "description": "Base de données sur les pathologies rénales et tests associés",
+    "entities": [
+        {
+            "id": "acute-kidney-injury",
+            "name": "Insuffisance rénale aiguë (IRA)",
+            "category": "Pathologies rénales",
+            "overview": "Diminution rapide de la fonction rénale sur quelques heures à jours. Caractérisée par l'accumulation de déchets azotés et déséquilibres hydro-électrolytiques.",
+            "properties": {
+                "onset": "Aigu (heures à jours)",
+                "reversibility": "Potentiellement réversible",
+                "creatinine": "Augmentation ≥0.3 mg/dL en 48h",
+                "urine": "Oligurie (<0.5 mL/kg/h pendant 6h)"
+            },
+            "additionalInfo": {
+                "causes": [
+                    "Hypovolémie (pré-rénale)",
+                    "Nécrose tubulaire aiguë",
+                    "Glomérulonéphrite",
+                    "Obstruction urinaire (post-rénale)"
+                ],
+                "tests": [
+                    "Créatinine sérique",
+                    "Urée sanguine",
+                    "Ionogramme",
+                    "Analyse d'urine"
+                ],
+                "treatment": [
+                    "Correction de la cause",
+                    "Dialyse si nécessaire",
+                    "Gestion des fluides"
+                ]
+            }
+        },
+        {
+            "id": "chronic-kidney-disease",
+            "name": "Maladie rénale chronique (MRC)",
+            "category": "Pathologies rénales",
+            "overview": "Diminution progressive et irréversible de la fonction rénale sur plus de 3 mois. Classée en 5 stades selon le DFG.",
+            "properties": {
+                "onset": "Chronique (>3 mois)",
+                "reversibility": "Irréversible",
+                "gfr": "DFG <60 mL/min/1.73m²",
+                "stages": "5 stades (1-5)"
+            },
+            "additionalInfo": {
+                "causes": [
+                    "Diabète (cause #1)",
+                    "Hypertension",
+                    "Glomérulonéphrites",
+                    "Polykystose rénale"
+                ],
+                "tests": [
+                    "DFG estimé (eGFR)",
+                    "Ratio albumine/créatinine urinaire",
+                    "Échographie rénale"
+                ],
+                "complications": [
+                    "Anémie",
+                    "Ostéodystrophie rénale",
+                    "Hypertension",
+                    "Insuffisance rénale terminale"
+                ]
+            }
+        }
+    ],
+    "properties": []
+}

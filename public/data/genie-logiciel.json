@@ -1,0 +1,55 @@
+{
+  "discipline": "genie-logiciel",
+  "displayName": "Génie logiciel",
+  "description": "Référentiel complet pour le domaine : Génie logiciel. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "fibonacci-sequence",
+      "name": "Suite de Fibonacci",
+      "category": "Théorie des Nombres",
+      "overview": "Une suite d'entiers dans laquelle chaque terme est la somme des deux termes qui le précèdent.",
+      "properties": {
+        "Complexity": {
+          "value": "N/A",
+          "description": "Propriété Complexity standard pour Génie logiciel"
+        },
+        "Axioms": {
+          "value": "ZFC",
+          "description": "Propriété Axioms standard pour Génie logiciel"
+        }
+      }
+    },
+    {
+      "id": "euler-identity",
+      "name": "Identité d'Euler",
+      "category": "Analyse",
+      "overview": "Considérée comme la plus belle formule des mathématiques, reliant cinq constantes fondamentales.",
+      "properties": {
+        "Complexity": {
+          "value": "N/A",
+          "description": "Propriété Complexity standard pour Génie logiciel"
+        },
+        "Axioms": {
+          "value": "ZFC",
+          "description": "Propriété Axioms standard pour Génie logiciel"
+        }
+      }
+    },
+    {
+      "id": "prime-numbers",
+      "name": "Nombres Premiers",
+      "category": "Arithmétique",
+      "overview": "Nombre naturel supérieur à 1 qui n'a pas de diviseurs positifs autres que 1 et lui-même.",
+      "properties": {
+        "Complexity": {
+          "value": "N/A",
+          "description": "Propriété Complexity standard pour Génie logiciel"
+        },
+        "Axioms": {
+          "value": "ZFC",
+          "description": "Propriété Axioms standard pour Génie logiciel"
+        }
+      }
+    }
+  ]
+}

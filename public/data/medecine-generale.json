@@ -1,0 +1,55 @@
+{
+  "discipline": "medecine-generale",
+  "displayName": "Médecine générale",
+  "description": "Référentiel complet pour le domaine : Médecine générale. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "immune-response",
+      "name": "Réponse Immunitaire",
+      "category": "Immunologie",
+      "overview": "La réaction du système immunitaire face à des substances étrangères.",
+      "properties": {
+        "Diagnostic": {
+          "value": "Symptom-based",
+          "description": "Propriété Diagnostic standard pour Médecine générale"
+        },
+        "Treatment": {
+          "value": "Pharma/Surgery",
+          "description": "Propriété Treatment standard pour Médecine générale"
+        }
+      }
+    },
+    {
+      "id": "cardiovascular-system",
+      "name": "Système Cardiovasculaire",
+      "category": "Anatomie",
+      "overview": "Le système d'organes qui permet au sang de circuler et de transporter les nutriments.",
+      "properties": {
+        "Diagnostic": {
+          "value": "Symptom-based",
+          "description": "Propriété Diagnostic standard pour Médecine générale"
+        },
+        "Treatment": {
+          "value": "Pharma/Surgery",
+          "description": "Propriété Treatment standard pour Médecine générale"
+        }
+      }
+    },
+    {
+      "id": "chemotherapy",
+      "name": "Chimiothérapie",
+      "category": "Oncologie",
+      "overview": "Un type de traitement contre le cancer qui utilise des médicaments pour tuer les cellules cancéreuses.",
+      "properties": {
+        "Diagnostic": {
+          "value": "Symptom-based",
+          "description": "Propriété Diagnostic standard pour Médecine générale"
+        },
+        "Treatment": {
+          "value": "Pharma/Surgery",
+          "description": "Propriété Treatment standard pour Médecine générale"
+        }
+      }
+    }
+  ]
+}

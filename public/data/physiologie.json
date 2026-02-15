@@ -1,0 +1,55 @@
+{
+  "discipline": "physiologie",
+  "displayName": "Physiologie",
+  "description": "Référentiel complet pour le domaine : Physiologie. Ce module explore les théories, les pratiques et les entités clés de la discipline.",
+  "entities": [
+    {
+      "id": "quantum-entanglement",
+      "name": "Intrication Quantique",
+      "category": "Mécanique Quantique",
+      "overview": "Phénomène physique se produisant lorsque des paires ou des groupes de particules sont générés ou interagissent d'une manière telle que l'état quantique de chaque particule ne peut être décrit indépendamment.",
+      "properties": {
+        "Scale": {
+          "value": "Microscopic/Macroscopic",
+          "description": "Propriété Scale standard pour Physiologie"
+        },
+        "Interactions": {
+          "value": "Weak/Strong/EM/Gravity",
+          "description": "Propriété Interactions standard pour Physiologie"
+        }
+      }
+    },
+    {
+      "id": "general-relativity",
+      "name": "Relativité Générale",
+      "category": "Astrophysique",
+      "overview": "La théorie géométrique de la gravitation publiée par Albert Einstein en 1915.",
+      "properties": {
+        "Scale": {
+          "value": "Microscopic/Macroscopic",
+          "description": "Propriété Scale standard pour Physiologie"
+        },
+        "Interactions": {
+          "value": "Weak/Strong/EM/Gravity",
+          "description": "Propriété Interactions standard pour Physiologie"
+        }
+      }
+    },
+    {
+      "id": "thermodynamics-laws",
+      "name": "Lois de la Thermodynamique",
+      "category": "Thermodynamique",
+      "overview": "Les principes fondamentaux décrivant le transport de l'énergie thermique.",
+      "properties": {
+        "Scale": {
+          "value": "Microscopic/Macroscopic",
+          "description": "Propriété Scale standard pour Physiologie"
+        },
+        "Interactions": {
+          "value": "Weak/Strong/EM/Gravity",
+          "description": "Propriété Interactions standard pour Physiologie"
+        }
+      }
+    }
+  ]
+}
