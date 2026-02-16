@@ -11,24 +11,43 @@ export interface DeviceInfo {
 export const useDeviceDetection = (): DeviceInfo => {
     const [mounted, setMounted] = useState(false);
     const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
-    const [isTouch, setIsTouch] = useState(false);
+    const [deviceType, setDeviceType] = useState({ isMobile: false, isTablet: false });
 
     useEffect(() => {
         setMounted(true);
-        const handleResize = () => setWidth(window.innerWidth);
-        const handleTouch = () => setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+        
+        // Detect device type based on User Agent and touch capability
+        const detectDevice = () => {
+            const ua = navigator.userAgent.toLowerCase();
+            const isMobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua);
+            const isTabletUA = /ipad|android(?!.*mobile)|tablet/i.test(ua);
+            const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            
+            // Mobile if: mobile UA OR (touch device AND small screen initially)
+            const isMobile = isMobileUA && !isTabletUA;
+            const isTablet = isTabletUA;
+            
+            setDeviceType({ isMobile, isTablet });
+        };
 
+        const handleResize = () => setWidth(window.innerWidth);
+
+        detectDevice();
         handleResize();
-        handleTouch();
         
         window.addEventListener('resize', handleResize);
 
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const isMobile = width < 768;
-    const isTablet = width >= 768 && width < 1024;
-    const isDesktop = width >= 1024;
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isDesktop = !deviceType.isMobile && !deviceType.isTablet;
 
-    return { isMobile, isTablet, isDesktop, isTouch, width };
+    return { 
+        isMobile: deviceType.isMobile, 
+        isTablet: deviceType.isTablet, 
+        isDesktop, 
+        isTouch, 
+        width 
+    };
 };
