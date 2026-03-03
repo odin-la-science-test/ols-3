@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../components/ToastContext';
+import { LOGOS } from '../utils/logoCache';
 import './DesktopLogin.css';
 
 const DesktopLogin = () => {

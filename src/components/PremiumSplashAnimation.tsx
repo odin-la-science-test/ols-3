@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 interface PremiumSplashAnimationProps {
-  onComplete: () => void;
+  onComplete?: () => void;
   loadingProgress?: number; // 0-100, optionnel pour sync avec chargement réel
 }
 
@@ -100,7 +100,7 @@ const PremiumSplashAnimation = ({ onComplete, loadingProgress = 0 }: PremiumSpla
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [phase, setPhase] = useState<'converging' | 'formed' | 'loading' | 'expanding' | 'done'>('converging');
   const particlesRef = useRef<Particle[]>([]);
-  const animationFrameRef = useRef<number | undefined>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   const startTimeRef = useRef<number>(Date.now());
 
   useEffect(() => {
@@ -171,7 +171,7 @@ const PremiumSplashAnimation = ({ onComplete, loadingProgress = 0 }: PremiumSpla
         setPhase('expanding');
       } else if (phase === 'expanding' && elapsed > 7000) {
         setPhase('done');
-        onComplete();
+        onComplete?.();
         return;
       }
 
