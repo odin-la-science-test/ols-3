@@ -5,9 +5,17 @@ import Navbar from '../components/Navbar';
 import {
     Users, Building2, CreditCard, TrendingUp, CheckCircle, XCircle,
     Clock, Search, Filter, Download, Eye, Edit, Trash2, Shield,
-    AlertTriangle, FileText, GraduationCap, Landmark, Beaker
+    AlertTriangle, FileText, GraduationCap, Landmark, Beaker,
+    DollarSign, PieChart, TrendingDown, Wallet
 } from 'lucide-react';
 import { checkBetaAccess } from '../utils/betaAccess';
+import { 
+    calculateFinancialMetrics, 
+    calculateAnnualProjections,
+    formatCurrency,
+    formatPercentage,
+    isSuperAdminFinance
+} from '../utils/financialAnalytics';
 
 interface User {
     email: string;
@@ -56,9 +64,11 @@ const Admin = () => {
     `;
 
     useEffect(() => {
-        // Vérifier si l'utilisateur est admin
-        const currentUserRole = localStorage.getItem('currentUserRole');
-        if (currentUserRole !== 'admin' && currentUserRole !== 'super_admin') {
+        // Vérifier si l'utilisateur est un des trois super admins
+        const currentUserEmail = localStorage.getItem('currentUser');
+        const superAdmins = ['ethan@OLS.com', 'bastien@OLS.com', 'issam@OLS.com'];
+        
+        if (!currentUserEmail || !superAdmins.includes(currentUserEmail)) {
             navigate('/home');
             return;
         }
@@ -66,6 +76,10 @@ const Admin = () => {
         // Charger tous les utilisateurs
         loadUsers();
     }, [navigate]);
+
+    // Vérifier si l'utilisateur actuel est un super admin pour les finances
+    const currentUserEmail = localStorage.getItem('currentUser');
+    const canViewFinances = isSuperAdminFinance(currentUserEmail);
 
     const loadUsers = () => {
         const allUsers: User[] = [];
@@ -117,13 +131,19 @@ const Admin = () => {
             (u.enterpriseType === 'public' && u.publicJustification)
         ).length;
 
+        // Calculs financiers
+        const financialMetrics = calculateFinancialMetrics(users);
+        const annualProjections = calculateAnnualProjections(financialMetrics);
+
         return {
             totalUsers,
             personalUsers,
             enterpriseUsers,
             students,
             totalRevenue,
-            pendingValidations
+            pendingValidations,
+            financial: financialMetrics,
+            annual: annualProjections
         };
     };
 
@@ -262,6 +282,374 @@ const Admin = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Section Financière - Réservée aux Super Admins */}
+                {canViewFinances && (
+                <div style={{
+                    background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05))',
+                    border: '2px solid rgba(16, 185, 129, 0.3)',
+                    borderRadius: '1.5rem',
+                    padding: '2rem',
+                    marginBottom: '2rem'
+                }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+                        <h2 style={{
+                            fontSize: '1.5rem',
+                            fontWeight: 700,
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.75rem',
+                            color: c.textPrimary
+                        }}>
+                            <Wallet size={28} color="#10b981" />
+                            Analyse Financière Mensuelle
+                        </h2>
+                        <div style={{
+                            padding: '0.5rem 1rem',
+                            background: 'rgba(245, 158, 11, 0.2)',
+                            border: '1px solid rgba(245, 158, 11, 0.4)',
+                            borderRadius: '0.5rem',
+                            fontSize: '0.85rem',
+                            fontWeight: 600,
+                            color: '#f59e0b'
+                        }}>
+                            🔒 Super Admin Only
+                        </div>
+                    </div>
+
+                    {/* Métriques principales */}
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                        gap: '1rem',
+                        marginBottom: '1.5rem'
+                    }}>
+                        <div style={{
+                            padding: '1.25rem',
+                            background: 'rgba(16, 185, 129, 0.1)',
+                            borderRadius: '1rem',
+                            border: '1px solid rgba(16, 185, 129, 0.2)'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <DollarSign size={20} color="#10b981" />
+                                <p style={{ color: c.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
+                                    REVENU MENSUEL
+                                </p>
+                            </div>
+                            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#10b981' }}>
+                                {formatCurrency(stats.financial.totalRevenue)}
+                            </h3>
+                            <p style={{ fontSize: '0.75rem', color: c.textSecondary, marginTop: '0.25rem' }}>
+                                Équivalent mensuel
+                            </p>
+                        </div>
+
+                        <div style={{
+                            padding: '1.25rem',
+                            background: 'rgba(34, 197, 94, 0.1)',
+                            borderRadius: '1rem',
+                            border: '1px solid rgba(34, 197, 94, 0.2)'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <Wallet size={20} color="#22c55e" />
+                                <p style={{ color: c.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
+                                    ARGENT COLLECTÉ
+                                </p>
+                            </div>
+                            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#22c55e' }}>
+                                {formatCurrency(stats.financial.totalRevenueCollected)}
+                            </h3>
+                            <p style={{ fontSize: '0.75rem', color: c.textSecondary, marginTop: '0.25rem' }}>
+                                Incluant annuels
+                            </p>
+                        </div>
+
+                        <div style={{
+                            padding: '1.25rem',
+                            background: 'rgba(239, 68, 68, 0.1)',
+                            borderRadius: '1rem',
+                            border: '1px solid rgba(239, 68, 68, 0.2)'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <TrendingDown size={20} color="#ef4444" />
+                                <p style={{ color: c.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
+                                    COÛTS TOTAUX
+                                </p>
+                            </div>
+                            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#ef4444' }}>
+                                {formatCurrency(stats.financial.totalCosts)}
+                            </h3>
+                            <p style={{ fontSize: '0.75rem', color: c.textSecondary, marginTop: '0.25rem' }}>
+                                {formatCurrency(stats.financial.costPerUser)} / utilisateur
+                            </p>
+                            <p style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.15rem' }}>
+                                {formatCurrency(stats.financial.costPerSeat)} / licence payée
+                            </p>
+                        </div>
+
+                        <div style={{
+                            padding: '1.25rem',
+                            background: stats.financial.grossProfit >= 0 
+                                ? 'rgba(34, 197, 94, 0.1)' 
+                                : 'rgba(239, 68, 68, 0.1)',
+                            borderRadius: '1rem',
+                            border: stats.financial.grossProfit >= 0 
+                                ? '1px solid rgba(34, 197, 94, 0.2)' 
+                                : '1px solid rgba(239, 68, 68, 0.2)'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <TrendingUp size={20} color={stats.financial.grossProfit >= 0 ? '#22c55e' : '#ef4444'} />
+                                <p style={{ color: c.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
+                                    BÉNÉFICE BRUT
+                                </p>
+                            </div>
+                            <h3 style={{ 
+                                fontSize: '1.75rem', 
+                                fontWeight: 800, 
+                                color: stats.financial.grossProfit >= 0 ? '#22c55e' : '#ef4444'
+                            }}>
+                                {formatCurrency(stats.financial.grossProfit)}
+                            </h3>
+                            <p style={{ fontSize: '0.75rem', color: c.textSecondary, marginTop: '0.25rem' }}>
+                                {formatCurrency(stats.financial.profitPerUser)} / utilisateur
+                            </p>
+                            <p style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.15rem' }}>
+                                {formatCurrency(stats.financial.profitPerSeat)} / licence payée
+                            </p>
+                        </div>
+
+                        <div style={{
+                            padding: '1.25rem',
+                            background: 'rgba(139, 92, 246, 0.1)',
+                            borderRadius: '1rem',
+                            border: '1px solid rgba(139, 92, 246, 0.2)'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <PieChart size={20} color="#8b5cf6" />
+                                <p style={{ color: c.textSecondary, fontSize: '0.85rem', fontWeight: 600 }}>
+                                    MARGE BRUTE
+                                </p>
+                            </div>
+                            <h3 style={{ fontSize: '1.75rem', fontWeight: 800, color: '#8b5cf6' }}>
+                                {formatPercentage(stats.financial.grossMargin)}
+                            </h3>
+                            <p style={{ fontSize: '0.75rem', color: c.textSecondary, marginTop: '0.25rem' }}>
+                                {stats.financial.grossMargin >= 0 ? 'Rentable' : 'Déficitaire'}
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Informations sur les Licences/Sièges */}
+                    <div style={{
+                        background: 'rgba(99, 102, 241, 0.1)',
+                        borderRadius: '1rem',
+                        padding: '1.5rem',
+                        marginBottom: '1.5rem',
+                        border: '1px solid rgba(99, 102, 241, 0.2)'
+                    }}>
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: c.textPrimary }}>
+                            📊 Gestion des Licences
+                        </h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Licences Payées
+                                </p>
+                                <p style={{ fontSize: '1.5rem', fontWeight: 700, color: '#6366f1' }}>
+                                    {stats.financial.seatsInfo.totalPaidSeats}
+                                </p>
+                                <p style={{ fontSize: '0.75rem', color: c.textSecondary, marginTop: '0.25rem' }}>
+                                    Sièges achetés
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Utilisateurs Actifs
+                                </p>
+                                <p style={{ fontSize: '1.5rem', fontWeight: 700, color: '#10b981' }}>
+                                    {stats.financial.seatsInfo.totalActiveUsers}
+                                </p>
+                                <p style={{ fontSize: '0.75rem', color: c.textSecondary, marginTop: '0.25rem' }}>
+                                    Comptes créés
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Taux d'Utilisation
+                                </p>
+                                <p style={{ fontSize: '1.5rem', fontWeight: 700, color: '#8b5cf6' }}>
+                                    {stats.financial.seatsInfo.utilizationRate.toFixed(1)}%
+                                </p>
+                                <p style={{ fontSize: '0.75rem', color: c.textSecondary, marginTop: '0.25rem' }}>
+                                    Licences utilisées
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Licences Disponibles
+                                </p>
+                                <p style={{ fontSize: '1.5rem', fontWeight: 700, color: '#f59e0b' }}>
+                                    {stats.financial.seatsInfo.totalPaidSeats - stats.financial.seatsInfo.totalActiveUsers}
+                                </p>
+                                <p style={{ fontSize: '0.75rem', color: c.textSecondary, marginTop: '0.25rem' }}>
+                                    Sièges libres
+                                </p>
+                            </div>
+                        </div>
+                        <div style={{ 
+                            marginTop: '1rem', 
+                            padding: '0.75rem', 
+                            background: 'rgba(0, 0, 0, 0.2)', 
+                            borderRadius: '0.5rem',
+                            fontSize: '0.85rem',
+                            color: c.textSecondary
+                        }}>
+                            💡 Les coûts sont calculés sur les <strong style={{ color: c.textPrimary }}>{stats.financial.seatsInfo.totalPaidSeats} licences payées</strong>, pas sur les {stats.financial.seatsInfo.totalActiveUsers} utilisateurs actifs
+                        </div>
+                    </div>
+
+                    {/* Détail des coûts */}
+                    <div style={{
+                        background: 'rgba(0, 0, 0, 0.2)',
+                        borderRadius: '1rem',
+                        padding: '1.5rem',
+                        marginBottom: '1.5rem'
+                    }}>
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: c.textPrimary }}>
+                            Répartition des Coûts Fixes
+                        </h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Salaires
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: c.textPrimary }}>
+                                    {formatCurrency(stats.financial.costBreakdown.salaries)}
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Infrastructure
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: c.textPrimary }}>
+                                    {formatCurrency(stats.financial.costBreakdown.infrastructure)}
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Marketing
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: c.textPrimary }}>
+                                    {formatCurrency(stats.financial.costBreakdown.marketing)}
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Support
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: c.textPrimary }}>
+                                    {formatCurrency(stats.financial.costBreakdown.support)}
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Maintenance
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: c.textPrimary }}>
+                                    {formatCurrency(stats.financial.costBreakdown.maintenance)}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Projections annuelles */}
+                    <div style={{
+                        background: 'rgba(0, 0, 0, 0.2)',
+                        borderRadius: '1rem',
+                        padding: '1.5rem'
+                    }}>
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: c.textPrimary }}>
+                            Projections Annuelles
+                        </h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Revenu Annuel
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: '#10b981' }}>
+                                    {formatCurrency(stats.annual.annualRevenue)}
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Coûts Annuels
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: '#ef4444' }}>
+                                    {formatCurrency(stats.annual.annualCosts)}
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Bénéfice Annuel
+                                </p>
+                                <p style={{ 
+                                    fontSize: '1.25rem', 
+                                    fontWeight: 700, 
+                                    color: stats.annual.annualProfit >= 0 ? '#22c55e' : '#ef4444'
+                                }}>
+                                    {formatCurrency(stats.annual.annualProfit)}
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Seuil de Rentabilité
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: '#8b5cf6' }}>
+                                    {stats.annual.breakEvenUsers} users
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Détail des revenus par type */}
+                    <div style={{
+                        background: 'rgba(0, 0, 0, 0.2)',
+                        borderRadius: '1rem',
+                        padding: '1.5rem',
+                        marginTop: '1.5rem'
+                    }}>
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '1rem', color: c.textPrimary }}>
+                            Répartition des Revenus
+                        </h3>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Abonnements Mensuels
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: '#10b981' }}>
+                                    {formatCurrency(stats.financial.revenueByType.monthly)}
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Abonnements Annuels
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: '#22c55e' }}>
+                                    {formatCurrency(stats.financial.revenueByType.annual)}
+                                </p>
+                            </div>
+                            <div>
+                                <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.25rem' }}>
+                                    Annuels (Mensuel Équiv.)
+                                </p>
+                                <p style={{ fontSize: '1.25rem', fontWeight: 700, color: '#8b5cf6' }}>
+                                    {formatCurrency(stats.financial.revenueByType.annualEquivalent)}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                )}
 
                 {/* Beta Hub Access Button */}
                 {checkBetaAccess() && (

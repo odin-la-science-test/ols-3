@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 import { BookOpen, FlaskConical, TrendingUp, Clock, Star, Zap, Award, Target, Beaker } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import OnboardingMissions from '../components/OnboardingMissions';
+import ParticleBackground from '../components/ParticleBackground';
 import { useTheme } from '../components/ThemeContext';
 import { useDeviceDetection } from '../hooks/useDeviceDetection';
 import GlobalSearch from '../components/GlobalSearch';
 import UsageStats from '../components/UsageStats';
 import FavoritesPanel from '../components/FavoritesPanel';
 import ProgressTracker from '../components/ProgressTracker';
+import PredictiveSuggestions from '../components/PredictiveSuggestions';
 import { getFavorites, type Favorite } from '../utils/favorites';
 import { checkBetaAccess } from '../utils/betaAccess';
 
@@ -18,6 +20,15 @@ const Home = () => {
     const { isMobile } = useDeviceDetection();
     const c = theme.colors;
     const [showOnboarding, setShowOnboarding] = useState(false);
+    
+    // Détecter le mode étudiant
+    const userEmail = localStorage.getItem('currentUser') || '';
+    const userType = localStorage.getItem('userType') || 'professional';
+    const studentView = localStorage.getItem('studentView') === 'true';
+    const isStudentMode = userType === 'student' || studentView;
+    
+    // Debug
+    console.log('Home - Mode étudiant:', { userType, studentView, isStudentMode });
 
     useEffect(() => {
         const isFirstTime = localStorage.getItem('firstTimeLogin') === 'true';
@@ -439,11 +450,15 @@ const Home = () => {
                         <FlaskConical size={isMobile ? 32 : 48} />
                     </div>
                     <div>
-                        <h2 style={{ fontSize: isMobile ? '1.1rem' : 'var(--font-size-xl)', marginBottom: '0.5rem', fontWeight: 700 }}>Hugin Lab</h2>
+                        <h2 style={{ fontSize: isMobile ? '1.1rem' : 'var(--font-size-xl)', marginBottom: '0.5rem', fontWeight: 700 }}>
+                            {isStudentMode ? 'Hugin Scholar' : 'Hugin Lab'}
+                        </h2>
                         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', lineHeight: 1.4, display: isMobile ? 'block' : 'none' }}>
-                            Lancer des analyses
+                            {isStudentMode ? 'Outils académiques' : 'Lancer des analyses'}
                         </p>
-                        {!isMobile && <p style={{ color: c.textSecondary, fontSize: 'var(--font-size-sm)', lineHeight: 1.6 }}>Outils de laboratoire avancés</p>}
+                        {!isMobile && <p style={{ color: c.textSecondary, fontSize: 'var(--font-size-sm)', lineHeight: 1.6 }}>
+                            {isStudentMode ? 'Plateforme universitaire complète' : 'Outils de laboratoire avancés'}
+                        </p>}
                     </div>
                 </div>
             </div>
@@ -638,10 +653,19 @@ const Home = () => {
 
     return (
         <div style={{ minHeight: '100vh', position: 'relative' }}>
+            <ParticleBackground 
+                particleCount={60} 
+                colors={[c.accentPrimary, c.accentSecondary, c.accentMunin, c.accentHugin]}
+                speed={0.3}
+                enableClickable={true}
+                onTombolaReached={() => {
+                    console.log('🎉 Tombola atteinte!');
+                }}
+            />
             <Navbar />
             <GlobalSearch isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
             {/* <ThemeSelector /> */}
-            <div style={{ padding: '2rem', position: 'relative' }}>
+            <div style={{ padding: '2rem', position: 'relative', zIndex: 1 }}>
                 {content}
                 {showOnboarding && <OnboardingMissions onComplete={handleCompleteOnboarding} />}
             </div>

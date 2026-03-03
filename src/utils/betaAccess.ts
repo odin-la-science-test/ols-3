@@ -68,6 +68,15 @@ export const getBetaFeatures = () => {
       features: ['Backup auto', 'Restauration', 'Export/Import', 'Historique', 'Taille optimisée']
     },
     {
+      id: 'gel-simulator',
+      name: 'Simulateur de Gel d\'Électrophorèse',
+      description: 'Simulation réaliste de migration sur gel avec marqueurs et export d\'image',
+      path: '/beta/gel-simulator',
+      status: 'stable',
+      category: 'Outils Bio',
+      features: ['Marqueurs de taille', 'Paramètres avancés', 'Export PNG', 'Calculs précis', 'Visualisation 3D']
+    },
+    {
       id: 'equipment-booking',
       name: 'Réservation d\'Équipements',
       description: 'Système de réservation d\'équipements partagés avec calendrier',

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { LOGOS } from '../utils/logoCache';
 import { Loader2 } from 'lucide-react';
 
 interface SplashScreenProps {
@@ -55,7 +56,7 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                 animation: 'pulse 2s ease-in-out infinite'
             }}>
                 <img 
-                    src="/logo1.png" 
+                    src={LOGOS.main}
                     alt="Odin La Science" 
                     style={{ 
                         width: '120px', 

@@ -25,6 +25,9 @@ const AIAssistant = () => {
   const [selectedModel, setSelectedModel] = useState<'llama-3.3-70b-versatile' | 'llama-3.1-70b-versatile' | 'mixtral-8x7b-32768' | 'openai/gpt-oss-120b'>('openai/gpt-oss-120b');
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const isUserScrollingRef = useRef(false);
+  const lastScrollTopRef = useRef(0);
 
   useEffect(() => {
     const key = groqService.getApiKey();
@@ -41,8 +44,36 @@ const AIAssistant = () => {
     }
   }, []);
 
+  // Gestion intelligente du scroll
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const container = messagesContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+      
+      // Détecter si l'utilisateur scroll manuellement vers le haut
+      if (scrollTop < lastScrollTopRef.current) {
+        isUserScrollingRef.current = true;
+      } else if (isNearBottom) {
+        isUserScrollingRef.current = false;
+      }
+      
+      lastScrollTopRef.current = scrollTop;
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Auto-scroll uniquement si l'utilisateur n'a pas scrollé manuellement
+  useEffect(() => {
+    if (!isUserScrollingRef.current && messagesEndRef.current) {
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    }
   }, [messages]);
 
   const loadConversations = () => {
@@ -82,18 +113,35 @@ Ton rôle :
 - Conseiller sur les méthodologies
 - Aider à la rédaction scientifique
 
+Format de réponse :
+- Utilise le Markdown pour formater tes réponses
+- Pour les tableaux : utilise la syntaxe Markdown (| col1 | col2 |)
+- Pour le code : utilise les blocs de code avec le langage (\`\`\`python)
+- Pour les schémas : utilise du texte ASCII art ou des descriptions structurées
+- Structure avec des titres (##), listes (-, *), gras (**), italique (*)
+- IMPORTANT : N'utilise PAS Mermaid, préfère les tableaux ou le texte structuré
+
 Réponds toujours en français, sauf si on te demande explicitement de traduire.`
       };
 
       // Préparer l'historique avec le prompt système
       const historyWithSystem = [systemPrompt, ...newMessages];
-      groqService.setHistory(historyWithSystem.slice(1)); // Sans le system prompt pour l'historique
+      
+      // Limiter l'historique à 10 derniers messages pour éviter l'erreur 413
+      const recentMessages = newMessages.slice(-10);
+      groqService.setHistory(recentMessages);
+
+      // Avertir si l'historique est tronqué
+      if (newMessages.length > 10) {
+        console.log(`📝 Historique limité aux 10 derniers messages (${newMessages.length} total)`);
+      }
 
       let fullResponse = '';
       const assistantMessage: GroqMessage = { role: 'assistant', content: '' };
       setMessages([...newMessages, assistantMessage]);
 
-      // Streaming
+      // Streaming avec historique limité
+      const limitedHistory = [systemPrompt, ...recentMessages];
       for await (const chunk of groqService.sendMessageStream(userMessage, {
         model: selectedModel,
         temperature: 0.7,
@@ -170,6 +218,75 @@ Réponds toujours en français, sauf si on te demande explicitement de traduire.
     { icon: <FileText size={16} />, label: 'Aide rédaction', prompt: 'Améliore ce texte scientifique : ' },
     { icon: <Lightbulb size={16} />, label: 'Expliquer concept', prompt: 'Explique-moi ce concept scientifique : ' }
   ];
+
+  // Fonction pour formater le message avec support Markdown
+  const formatMessage = (text: string): string => {
+    let formatted = text;
+
+    // Code blocks (traiter en premier pour éviter les conflits)
+    formatted = formatted.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
+      const language = lang || 'text';
+      const displayLang = language.toUpperCase();
+      return `<div style="margin: 1rem 0;"><div style="background: var(--bg-secondary); padding: 0.5rem 1rem; border-radius: 0.5rem 0.5rem 0 0; font-size: 0.75rem; color: var(--text-secondary); border: 1px solid var(--border-color); border-bottom: none;">${displayLang}</div><pre style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-top: none; border-radius: 0 0 0.5rem 0.5rem; padding: 1rem; overflow-x: auto; margin: 0;"><code style="font-family: 'Courier New', monospace; font-size: 0.875rem; color: var(--text-primary); white-space: pre-wrap;">${code.trim()}</code></pre></div>`;
+    });
+
+    // Tables
+    const tableRegex = /\|(.+)\|[\r\n]+\|[-:\s|]+\|[\r\n]+((?:\|.+\|[\r\n]*)+)/g;
+    formatted = formatted.replace(tableRegex, (match) => {
+      const lines = match.trim().split('\n');
+      const headers = lines[0].split('|').filter(cell => cell.trim());
+      const rows = lines.slice(2).map(line => 
+        line.split('|').filter(cell => cell.trim())
+      );
+
+      let html = '<table style="border-collapse: collapse; width: 100%; margin: 1rem 0; border: 1px solid var(--border-color);">';
+      html += '<thead><tr>';
+      headers.forEach(header => {
+        html += `<th style="border: 1px solid var(--border-color); padding: 0.75rem; background: var(--bg-secondary); text-align: left; font-weight: 600;">${header.trim()}</th>`;
+      });
+      html += '</tr></thead><tbody>';
+      rows.forEach(row => {
+        html += '<tr>';
+        row.forEach(cell => {
+          html += `<td style="border: 1px solid var(--border-color); padding: 0.75rem;">${cell.trim()}</td>`;
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      return html;
+    });
+
+    // Code blocks
+    formatted = formatted.replace(/```(\w+)?\n([\s\S]*?)```/g, (_, lang, code) => {
+      return `<pre style="background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 0.5rem; padding: 1rem; overflow-x: auto; margin: 1rem 0;"><code style="font-family: 'Courier New', monospace; font-size: 0.875rem; color: var(--text-primary);">${code.trim()}</code></pre>`;
+    });
+
+    // Inline code
+    formatted = formatted.replace(/`([^`]+)`/g, '<code style="background: var(--bg-secondary); padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-family: \'Courier New\', monospace; font-size: 0.875rem;">$1</code>');
+
+    // Headers
+    formatted = formatted.replace(/^### (.+)$/gm, '<h3 style="font-size: 1.125rem; font-weight: 600; margin: 1rem 0 0.5rem 0;">$1</h3>');
+    formatted = formatted.replace(/^## (.+)$/gm, '<h2 style="font-size: 1.25rem; font-weight: 600; margin: 1rem 0 0.5rem 0;">$1</h2>');
+    formatted = formatted.replace(/^# (.+)$/gm, '<h1 style="font-size: 1.5rem; font-weight: 700; margin: 1rem 0 0.5rem 0;">$1</h1>');
+
+    // Bold
+    formatted = formatted.replace(/\*\*(.+?)\*\*/g, '<strong style="font-weight: 600;">$1</strong>');
+
+    // Italic
+    formatted = formatted.replace(/\*(.+?)\*/g, '<em style="font-style: italic;">$1</em>');
+
+    // Lists
+    formatted = formatted.replace(/^- (.+)$/gm, '<li style="margin-left: 1.5rem; margin-bottom: 0.25rem;">$1</li>');
+    formatted = formatted.replace(/^(\d+)\. (.+)$/gm, '<li style="margin-left: 1.5rem; margin-bottom: 0.25rem; list-style-type: decimal;">$2</li>');
+
+    // Quotes
+    formatted = formatted.replace(/^> (.+)$/gm, '<blockquote style="border-left: 3px solid var(--accent-hugin); padding-left: 1rem; margin: 0.5rem 0; color: var(--text-secondary); font-style: italic;">$1</blockquote>');
+
+    // Links
+    formatted = formatted.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: var(--accent-hugin); text-decoration: underline;">$1</a>');
+
+    return formatted;
+  };
 
   const filteredConversations = conversations.filter(c =>
     c.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -415,7 +532,10 @@ Réponds toujours en français, sauf si on te demande explicitement de traduire.
         </div>
 
         {/* Messages */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '1.5rem' }}>
+        <div 
+          ref={messagesContainerRef}
+          style={{ flex: 1, overflowY: 'auto', padding: '1.5rem' }}
+        >
           {messages.length === 0 && (
             <div style={{ textAlign: 'center', padding: '3rem 1rem' }}>
               <Bot size={64} style={{ color: 'var(--accent-hugin)', marginBottom: '1rem' }} />
@@ -488,15 +608,16 @@ Réponds toujours en français, sauf si on te demande explicitement de traduire.
                 <div style={{ fontSize: '0.875rem', fontWeight: 600, marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
                   {msg.role === 'user' ? 'Vous' : 'Mímir'}
                 </div>
-                <div style={{
-                  fontSize: '0.9375rem',
-                  lineHeight: 1.6,
-                  color: 'var(--text-primary)',
-                  whiteSpace: 'pre-wrap',
-                  wordBreak: 'break-word'
-                }}>
-                  {msg.content}
-                </div>
+                <div 
+                  style={{
+                    fontSize: '0.9375rem',
+                    lineHeight: 1.6,
+                    color: 'var(--text-primary)',
+                    whiteSpace: 'pre-wrap',
+                    wordBreak: 'break-word'
+                  }}
+                  dangerouslySetInnerHTML={{ __html: formatMessage(msg.content) }}
+                />
               </div>
             </div>
           ))}

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useToast } from '../components/ToastContext';
 import Navbar from '../components/Navbar';
 import Avatar from '../components/Avatar';
 import { useDeviceDetection } from '../hooks/useDeviceDetection';
 
 const Account = () => {
+    const navigate = useNavigate();
     const { showToast } = useToast();
     const { isMobile } = useDeviceDetection();
     const [refreshAvatar, setRefreshAvatar] = useState(0);
@@ -216,9 +218,16 @@ const Account = () => {
                             </div>
                         )}
 
-                        <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                            <button className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
-                                🔄 Gérer l'abonnement ou Upgrader
+                        <div style={{ textAlign: 'center', marginTop: '10px', display: 'flex', gap: '10px' }}>
+                            <button 
+                                className="btn btn-secondary" 
+                                style={{ flex: 1, justifyContent: 'center' }}
+                                onClick={() => navigate('/license-management')}
+                            >
+                                👥 Gérer les licences de l'équipe
+                            </button>
+                            <button className="btn btn-secondary" style={{ flex: 1, justifyContent: 'center' }}>
+                                🔄 Upgrader l'abonnement
                             </button>
                         </div>
                     </Section>

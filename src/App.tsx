@@ -6,6 +6,7 @@ import { useDeviceDetection } from './hooks/useDeviceDetection';
 import { SecurityManager } from './utils/advancedSecurity';
 import { useElectron } from './hooks/useElectron';
 import SplashScreen from './components/SplashScreen';
+import { runMigrationIfNeeded } from './utils/migrateUserProfiles';
 
 // Composants critiques chargés immédiatement
 import LandingPage from './pages/LandingPage';
@@ -23,6 +24,7 @@ import KeyboardShortcuts from './components/KeyboardShortcuts';
 import QuickNotes from './components/QuickNotes';
 import { ToastProvider } from './components/ToastContext';
 import { ThemeProvider } from './components/ThemeContext';
+import MimirFloatingButton from './components/MimirFloatingButton';
 import CommandPalette from './components/CommandPalette';
 import ScrollToTop from './components/ScrollToTop';
 import BackToTop from './components/BackToTop';
@@ -83,6 +85,7 @@ const StatisticsLab = lazy(() => import('./pages/hugin/StatisticsLab'));
 const PosterMaker = lazy(() => import('./pages/hugin/PosterMaker'));
 const WordProcessor = lazy(() => import('./pages/hugin/WordProcessor'));
 const ProteinFold = lazy(() => import('./pages/hugin/ProteinFold'));
+const PredictiveDashboard = lazy(() => import('./pages/hugin/PredictiveDashboard'));
 const LabTimer = lazy(() => import('./pages/hugin/LabTimer'));
 const BufferCalc = lazy(() => import('./pages/hugin/BufferCalc'));
 const PCRDesigner = lazy(() => import('./pages/hugin/PCRDesigner'));
@@ -91,6 +94,11 @@ const ProteinCalculator = lazy(() => import('./pages/hugin/ProteinCalculator'));
 const RestrictionMapper = lazy(() => import('./pages/hugin/RestrictionMapper'));
 const CloningAssistant = lazy(() => import('./pages/hugin/CloningAssistant'));
 const BacterialGrowthPredictor = lazy(() => import('./pages/hugin/BacterialGrowthPredictor'));
+const ResistancePhenotypes = lazy(() => import('./pages/hugin/ResistancePhenotypes'));
+const LabEquipment = lazy(() => import('./pages/hugin/LabEquipment'));
+const QCMMultiDisciplines = lazy(() => import('./pages/hugin/university/ExamsProfessional'));
+const LearningManagement = lazy(() => import('./pages/hugin/university/LMSProfessional'));
+const CloudStorage = lazy(() => import('./pages/hugin/university/CloudStorageProfessional'));
 const WhyOdin = lazy(() => import('./pages/WhyOdin'));
 const Enterprise = lazy(() => import('./pages/Enterprise'));
 const Pricing = lazy(() => import('./pages/Pricing'));
@@ -102,6 +110,7 @@ const Careers = lazy(() => import('./pages/Careers'));
 const Congratulations = lazy(() => import('./pages/Congratulations'));
 const Settings = lazy(() => import('./pages/Settings'));
 const Account = lazy(() => import('./pages/Account'));
+const LicenseManagement = lazy(() => import('./pages/LicenseManagement'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const Documentation = lazy(() => import('./pages/Documentation'));
 const Features = lazy(() => import('./pages/Features'));
@@ -119,6 +128,7 @@ const BetaChemicalInventory = lazy(() => import('./pages/beta/BetaChemicalInvent
 const BetaBackupManager = lazy(() => import('./pages/beta/BetaBackupManager'));
 const BetaEquipmentBooking = lazy(() => import('./pages/beta/BetaEquipmentBooking'));
 const BetaExperimentPlanner = lazy(() => import('./pages/beta/BetaExperimentPlanner'));
+const BetaGelSimulator = lazy(() => import('./pages/beta/BetaGelSimulator'));
 
 // Mobile pages
 const MobileHome = lazy(() => import('./pages/mobile/Home'));
@@ -201,6 +211,9 @@ function App() {
 
   // Initialiser le gestionnaire de sécurité
   useEffect(() => {
+    // Exécuter la migration des profils utilisateurs
+    runMigrationIfNeeded();
+    
     SecurityManager.initialize({
       enableClickjackingProtection: true,
       enableBotDetection: true,
@@ -697,6 +710,11 @@ function App() {
                 <ProteinFold />
               </ProtectedRoute>
             } />
+            <Route path="/hugin/PredictiveDashboard" element={
+              <ProtectedRoute module="hugin_core">
+                <PredictiveDashboard />
+              </ProtectedRoute>
+            } />
             <Route path="/hugin/lab-timer" element={
               <ProtectedRoute module="hugin_core">
                 <LabTimer />
@@ -737,6 +755,34 @@ function App() {
                 <BacterialGrowthPredictor />
               </ProtectedRoute>
             } />
+            
+            {/* Hugin Scholar Modules - Nouveaux modules éducatifs avancés */}
+            <Route path="/hugin/resistance-phenotypes" element={
+              <ProtectedRoute module="hugin_analysis">
+                <ResistancePhenotypes />
+              </ProtectedRoute>
+            } />
+            <Route path="/hugin/lab-equipment" element={
+              <ProtectedRoute module="hugin_core">
+                <LabEquipment />
+              </ProtectedRoute>
+            } />
+            <Route path="/hugin/qcm-multi-disciplines" element={
+              <ProtectedRoute module="hugin_core">
+                <QCMMultiDisciplines />
+              </ProtectedRoute>
+            } />
+            <Route path="/hugin/learning-management" element={
+              <ProtectedRoute module="hugin_core">
+                <LearningManagement />
+              </ProtectedRoute>
+            } />
+            <Route path="/hugin/cloud-storage" element={
+              <ProtectedRoute module="hugin_core">
+                <CloudStorage />
+              </ProtectedRoute>
+            } />
+            
             <Route path="/hugin/biotools" element={
               <ProtectedRoute module="hugin_analysis">
                 <BioTools />
@@ -748,6 +794,11 @@ function App() {
                   desktop={<Account />}
                   mobile={<MobileAccount />}
                 />
+              </ProtectedRoute>
+            } />
+            <Route path="/license-management" element={
+              <ProtectedRoute>
+                <LicenseManagement />
               </ProtectedRoute>
             } />
             <Route path="/settings" element={
@@ -790,6 +841,11 @@ function App() {
                 <BetaBackupManager />
               </ProtectedRoute>
             } />
+            <Route path="/beta/gel-simulator" element={
+              <ProtectedRoute>
+                <BetaGelSimulator />
+              </ProtectedRoute>
+            } />
             <Route path="/beta/equipment-booking" element={
               <ProtectedRoute>
                 <BetaEquipmentBooking />
@@ -803,6 +859,7 @@ function App() {
           </Routes>
           </Suspense>
           <CookieConsent />
+          <MimirFloatingButton />
         </ElectronWrapper>
       </ToastProvider>
     </ThemeProvider>

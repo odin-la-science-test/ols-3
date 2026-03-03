@@ -3,7 +3,8 @@ import {
     Beaker, Calendar, Mail, HardDrive, Video, Brain, Quote, Book,
     Package, Snowflake, Activity, Wallet, BookOpen, Calculator,
     Dna, Camera, Layers, ShieldAlert, Zap, Share2, Box,
-    TrendingUp, Grid, UserCheck, Search, FileText, Clock, GitBranch, Bot, Edit3
+    TrendingUp, Grid, UserCheck, Search, FileText, Clock, GitBranch, Bot, Edit3, GraduationCap,
+    Shield, Microscope, Cloud
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useToast } from '../components/ToastContext';
@@ -21,6 +22,8 @@ import {
 } from '../utils/huginCustomization';
 import type { ModuleOrder } from '../utils/huginCustomization';
 import { getBetaFeatures, isSuperAdmin } from '../utils/betaAccess';
+import { usePredictiveTracking } from '../hooks/usePredictiveTracking';
+import { shouldShowStudentView, getHuginPlatformName, getHuginPlatformDescription } from '../utils/studentModules';
 
 const Hugin = () => {
     const navigate = useNavigate();
@@ -32,10 +35,21 @@ const Hugin = () => {
     const [activeCategory, setActiveCategory] = useState('Tout');
     const [editMode, setEditMode] = useState(false);
     const [customOrder, setCustomOrder] = useState<ModuleOrder[]>(() => getHuginModulesOrder());
+    
+    // Tracking prédictif
+    const { trackToolUse, trackSearch } = usePredictiveTracking();
 
     // Subscription Check logic
     const userStr = localStorage.getItem('currentUser');
     const { sub, hiddenTools } = getAccessData(userStr);
+    
+    // Détection de la vue étudiante
+    const profileStr = userStr ? localStorage.getItem(`user_profile_${userStr}`) : null;
+    const profile = profileStr ? JSON.parse(profileStr) : null;
+    const isUserStudent = profile?.isStudent || false;
+    const isStudentView = shouldShowStudentView(userStr, isUserStudent);
+    const platformName = getHuginPlatformName(isStudentView);
+    const platformDescription = getHuginPlatformDescription(isStudentView);
 
     // Check for denied access message
     useEffect(() => {
@@ -104,12 +118,53 @@ const Hugin = () => {
         { id: 'cloningassist', name: 'Assistant de clonage', desc: 'Aide au clonage moléculaire', icon: <GitBranch size={24} />, category: 'Analysis', path: '/hugin/cloning-assistant' },
         { id: 'bacterialgrowth', name: 'Croissance bactérienne', desc: 'Prédiction de croissance', icon: <TrendingUp size={24} />, category: 'Analysis', path: '/hugin/bacterial-growth' },
         { id: 'biotools', name: 'Outils Bio', desc: 'Calculateurs et convertisseurs (dilutions, concentrations, masse moléculaire)', icon: <Calculator size={24} />, category: 'Analysis', path: '/hugin/biotools' },
-        { id: 'ai-assistant', name: 'Mímir', desc: 'Assistant scientifique intelligent - Votre conseiller en sagesse scientifique', icon: <Bot size={24} />, category: 'Analysis', path: '/hugin/ai-assistant' }
+        { id: 'ai-assistant', name: 'Mímir', desc: 'Assistant scientifique intelligent - Votre conseiller en sagesse scientifique', icon: <Bot size={24} />, category: 'Analysis', path: '/hugin/ai-assistant' },
+
+        // Scholar - Modules éducatifs avancés
+        { id: 'resistance-phenotypes', name: 'Phénotypes de Résistance', desc: 'Mécanismes de résistance aux antibiotiques avec schémas explicatifs', icon: <Shield size={24} />, category: 'Scholar', path: '/hugin/resistance-phenotypes' },
+        { id: 'lab-equipment', name: 'Fiches Machines', desc: 'Base de données des équipements de laboratoire avec guides d\'utilisation', icon: <Microscope size={24} />, category: 'Scholar', path: '/hugin/lab-equipment' },
+        { id: 'qcm-multi', name: 'QCM Multi-Disciplines', desc: '2000+ questions pour tester vos connaissances scientifiques', icon: <Brain size={24} />, category: 'Scholar', path: '/hugin/qcm-multi-disciplines' },
+        { id: 'lms', name: 'Plateforme d\'Apprentissage', desc: 'Système de gestion de l\'apprentissage (LMS type Moodle)', icon: <BookOpen size={24} />, category: 'Scholar', path: '/hugin/learning-management' },
+        { id: 'cloud-storage', name: 'Stockage Cloud', desc: 'Stockage et partage de fichiers sécurisé (type Nextcloud amélioré)', icon: <Cloud size={24} />, category: 'Scholar', path: '/hugin/cloud-storage' }
     ];
+
+    // Modules autorisés pour les étudiants (Scholar uniquement)
+    const studentAllowedModules = [
+        'messaging',              // Messagerie
+        'planning',               // Planning
+        'meetings',               // Réunions
+        'word',                   // Traitement de texte
+        'tableur',                // Tableur
+        'poster',                 // Créateur de posters
+        'research',               // Recherche de revue scientifique
+        'bibliography',           // Bibliographie
+        'notebook',               // Cahier de labo
+        'ai-assistant',           // Mímir
+        // Modules Scholar - UNIQUEMENT pour étudiants
+        'resistance-phenotypes',  // Phénotypes de Résistance
+        'lab-equipment',          // Fiches Machines
+        'qcm-multi',              // QCM Multi-Disciplines
+        'lms',                    // Plateforme d'Apprentissage
+        'cloud-storage'           // Stockage Cloud
+    ];
+    
+    // Modules Scholar à exclure pour les professionnels
+    const scholarOnlyModules = [
+        'resistance-phenotypes',
+        'lab-equipment',
+        'qcm-multi',
+        'lms',
+        'cloud-storage'
+    ];
+
+    // Filtrer les modules selon la vue
+    const baseModules = isStudentView 
+        ? modules.filter(m => studentAllowedModules.includes(m.id))
+        : modules.filter(m => !scholarOnlyModules.includes(m.id)); // Exclure Scholar pour les pros
 
     // Charger les modules beta et les fusionner avec les modules standards
     const allModules = useMemo(() => {
-        const standardModules: any[] = [...modules];
+        const standardModules: any[] = [...baseModules];
         
         if (!isUserSuperAdmin) {
             console.log('👤 Utilisateur standard, modules:', standardModules.length);
@@ -146,9 +201,9 @@ const Hugin = () => {
         
         console.log('📦 Total modules (avec beta):', standardModules.length);
         return standardModules;
-    }, [isUserSuperAdmin, customOrder]);
+    }, [isUserSuperAdmin, customOrder, baseModules]);
 
-    const categories = ['Tout', 'Core', 'Lab', 'Research', 'Analysis'];
+    const categories = ['Tout', 'Core', 'Lab', 'Research', 'Analysis', 'Scholar'];
 
     const accessibleModules = allModules.filter(m => hasAccess(m.id));
 
@@ -180,12 +235,35 @@ const Hugin = () => {
             <div className="container" style={{ paddingTop: isElectron ? '1rem' : '2rem' }}>
                 <header style={{ marginBottom: '3rem', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     {!isElectron && (
-                        <img src={LOGOS.hugin} alt="Hugin Lab Logo" style={{ width: '400px', height: '400px', objectFit: 'contain', marginBottom: '0.5rem', filter: 'drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px rgba(99, 102, 241, 0.3))' }} />
+                        <img src={LOGOS.hugin} alt={`${platformName} Logo`} style={{ width: '400px', height: '400px', objectFit: 'contain', marginBottom: '0.5rem', filter: 'drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px rgba(99, 102, 241, 0.3))' }} />
                     )}
-                    <h1 className="text-gradient" style={{ fontSize: isElectron ? '2.5rem' : '3rem', marginBottom: '1rem' }}>Hugin Lab</h1>
+                    <h1 className="text-gradient" style={{ fontSize: isElectron ? '2.5rem' : '3rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                        {isStudentView && <GraduationCap size={48} />}
+                        {platformName}
+                    </h1>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', marginBottom: '2rem' }}>
-                        Outils de laboratoire avancés
+                        {platformDescription}
                     </p>
+                    
+                    {isStudentView && (
+                        <div style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                            padding: '0.75rem 1.5rem',
+                            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.15))',
+                            border: '2px solid #10b981',
+                            borderRadius: '2rem',
+                            marginBottom: '2rem',
+                            fontSize: '0.95rem',
+                            fontWeight: 600,
+                            color: '#10b981',
+                            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.2)'
+                        }}>
+                            <GraduationCap size={20} />
+                            <span>Mode Étudiant - Modules adaptés à la scolarité</span>
+                        </div>
+                    )}
 
                     <div style={{ position: 'relative', width: '100%', maxWidth: '600px', margin: '0 auto 2rem auto' }}>
                         <Search
@@ -195,7 +273,13 @@ const Hugin = () => {
                         <input
                             type="text"
                             value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onChange={(e) => {
+                                const query = e.target.value;
+                                setSearchQuery(query);
+                                if (query.length >= 3) {
+                                    trackSearch(query);
+                                }
+                            }}
                             placeholder="Rechercher un module..."
                             className="input-field"
                             style={{
@@ -237,6 +321,7 @@ const Hugin = () => {
                                 {cat === 'Lab' && <Package size={16} />}
                                 {cat === 'Research' && <Brain size={16} />}
                                 {cat === 'Analysis' && <Activity size={16} />}
+                                {cat === 'Scholar' && <GraduationCap size={16} />}
                                 {cat}
                             </button>
                         ))}
@@ -273,6 +358,23 @@ const Hugin = () => {
                     </div>
                 </header>
 
+                {/* Affichage des modules (identique pour étudiants et professionnels, mais filtrés) */}
+                {isStudentView && (
+                    <div style={{
+                        maxWidth: '900px',
+                        margin: '0 auto 2rem',
+                        padding: '1.5rem',
+                        background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05))',
+                        border: '2px solid #10b981',
+                        borderRadius: '1rem',
+                        textAlign: 'center'
+                    }}>
+                        <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>
+                            <strong style={{ color: '#10b981' }}>🎓 Modules adaptés aux étudiants</strong> - Vous avez accès aux outils essentiels pour vos études et travaux pratiques. Les modules Scholar spécialisés (Devoirs & TP, Préparation Examens, Notes de Cours, Comptes-Rendus) arrivent bientôt !
+                        </p>
+                    </div>
+                )}
+
                 {categories.filter(cat => cat !== 'Tout' && (activeCategory === 'Tout' || activeCategory === cat)).map(cat => {
                     const catModules = filteredModules.filter(m => m.category === cat);
                     if (catModules.length === 0) return null;
@@ -291,7 +393,10 @@ const Hugin = () => {
                                         <div
                                             key={m.id}
                                             className="card glass-panel"
-                                            onClick={() => navigate(m.path)}
+                                            onClick={() => {
+                                                trackToolUse(m.id);
+                                                navigate(m.path);
+                                            }}
                                             style={{
                                                 cursor: 'pointer',
                                                 position: 'relative',

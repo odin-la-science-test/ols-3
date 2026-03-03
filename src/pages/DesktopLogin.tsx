@@ -33,7 +33,7 @@ const DesktopLogin = () => {
     <div className="desktop-login">
       <div className="desktop-login-container">
         <div className="desktop-login-header">
-          <img src="/logo1.png" alt="Odin La Science" className="desktop-login-logo" />
+          <img src={LOGOS.main} alt="Odin La Science" className="desktop-login-logo" />
           <h1>Odin La Science</h1>
           <p>Application Desktop</p>
         </div>

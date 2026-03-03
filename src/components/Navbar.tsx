@@ -6,6 +6,7 @@ import { useDeviceDetection } from '../hooks/useDeviceDetection';
 import NotificationCenter from './NotificationCenter';
 import Avatar from './Avatar';
 import QuickNotes from './QuickNotes';
+import StudentViewToggle from './StudentViewToggle';
 import { LOGOS } from '../utils/logoCache';
 
 const Navbar = () => {
@@ -26,6 +27,10 @@ const Navbar = () => {
     const currentUserEmail = profile?.email || currentUser || '';
     const username = currentUser || 'User';
     const isLoggedIn = !!currentUser;
+    
+    // Vérifier si l'utilisateur est super admin
+    const superAdmins = ['ethan@ols.com', 'bastien@ols.com', 'issam@ols.com'];
+    const isSuperAdmin = currentUserEmail && superAdmins.includes(currentUserEmail.toLowerCase().trim());
 
     const handleLogout = () => {
         localStorage.removeItem('currentUser');
@@ -121,7 +126,11 @@ const Navbar = () => {
                     {showBackButton && (
                         <button
                             onClick={() => {
-                                if (location.pathname.startsWith('/hugin')) {
+                                if (location.pathname.startsWith('/hugin/')) {
+                                    // Si on est dans un sous-module de Hugin, retourner à /hugin
+                                    navigate('/hugin');
+                                } else if (location.pathname === '/hugin') {
+                                    // Si on est sur la page Hugin principale, retourner à /home
                                     navigate('/home');
                                 } else if (location.pathname.startsWith('/munin')) {
                                     navigate('/home');
@@ -151,6 +160,9 @@ const Navbar = () => {
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} ref={dropdownRef}>
                     {isLoggedIn ? (
                         <>
+                            {isSuperAdmin && !isMobile && (
+                                <StudentViewToggle />
+                            )}
                             {!isMobile && location.pathname !== '/home' && location.pathname !== '/' && (
                                 <button
                                     onClick={() => setIsNotesOpen(!isNotesOpen)}
@@ -311,7 +323,11 @@ const Navbar = () => {
             }}>
                 {showBackButton ? (
                     <button onClick={() => {
-                        if (location.pathname.startsWith('/hugin')) {
+                        if (location.pathname.startsWith('/hugin/')) {
+                            // Si on est dans un sous-module de Hugin, retourner à /hugin
+                            navigate('/hugin');
+                        } else if (location.pathname === '/hugin') {
+                            // Si on est sur la page Hugin principale, retourner à /home
                             navigate('/home');
                         } else if (location.pathname.startsWith('/munin')) {
                             navigate('/home');

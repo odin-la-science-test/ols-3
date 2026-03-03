@@ -12,6 +12,7 @@ import {
 } from '../utils/encryption';
 import { InputValidator, AnomalyDetector } from '../utils/securityEnhancements';
 import { SecurityLogger } from '../utils/securityConfig';
+import { createLicense } from '../utils/licenseManagement';
 import type { AccountType } from '../types/accountTypes';
 import { ACCOUNT_TYPE_LABELS, ACCOUNT_PRICES } from '../types/accountTypes';
 import {
@@ -33,13 +34,13 @@ const VOLUME_DISCOUNTS = [
 ];
 
 const MODULE_OPTIONS = [
-    { id: 'munin', name: 'Munin Atlas', price: 250, icon: <BookOpen size={20} />, description: 'Encyclopédie scientifique et gestion des entités' },
-    { id: 'hugin_core', name: 'Hugin Core', price: 450, icon: <LayoutDashboard size={20} />, description: 'Messagerie, Planning, Documents, Inventaire' },
-    { id: 'hugin_lab', name: 'Hugin Lab', price: 850, icon: <Beaker size={20} />, description: 'Suivi de cultures, Recherches, Cahier de labo, Stocks' },
-    { id: 'hugin_analysis', name: 'Hugin Analysis', price: 1200, icon: <Activity size={20} />, description: 'Spectrométrie, Cytométrie, Cinétique, Gels' },
+    { id: 'munin', name: 'Munin Atlas', price: 0, icon: <BookOpen size={20} />, description: 'Encyclopédie scientifique (Gratuit)' },
+    { id: 'hugin_core', name: 'Hugin Core', price: 49, icon: <LayoutDashboard size={20} />, description: 'Messagerie, Planning, Documents, Inventaire' },
+    { id: 'hugin_lab', name: 'Hugin Lab', price: 99, icon: <Beaker size={20} />, description: 'Suivi de cultures, Recherches, Cahier de labo, Stocks' },
+    { id: 'hugin_analysis', name: 'Hugin Analysis', price: 199, icon: <Activity size={20} />, description: 'Spectrométrie, Cytométrie, Cinétique, Gels' },
 ];
 
-const FULL_PACK_PRICE_25K = 2600;
+const FULL_PACK_PRICE = 499; // Plan Pro complet
 const ANNUAL_DISCOUNT = 0.20;
 
 const Register = () => {
@@ -98,41 +99,44 @@ const Register = () => {
     const ds = theme.designSystem;
 
     const calculatePrice = () => {
-        let basePrice = 0;
+        let pricePerSeat = 0;
         
-        // Prix de base selon abonnement
+        // Prix de base par siège selon abonnement
         if (formData.subscriptionType === 'full') {
-            basePrice = 2600;
+            pricePerSeat = 499; // Plan Pro complet
         } else {
             const prices: { [key: string]: number } = { 
-                munin: 250, 
-                hugin_core: 450, 
-                hugin_lab: 850, 
-                hugin_analysis: 1200 
+                munin: 0,        // Gratuit
+                hugin_core: 49,  // Standard
+                hugin_lab: 99,   // Standard+
+                hugin_analysis: 199  // Pro
             };
-            basePrice = formData.selectedModules.reduce((sum, mod) => sum + (prices[mod] || 0), 0);
+            pricePerSeat = formData.selectedModules.reduce((sum, mod) => sum + (prices[mod] || 0), 0);
         }
         
         // Réduction étudiant (50%)
         if (formData.accountCategory === 'personal' && formData.isStudent) {
-            basePrice = basePrice * 0.5;
+            pricePerSeat = pricePerSeat * 0.5;
         }
         
-        // Multiplication par nombre d'employés
+        // Pour les entreprises
+        let totalPrice = pricePerSeat;
         if (formData.accountCategory === 'enterprise') {
-            basePrice = basePrice * formData.numberOfEmployees;
+            // Multiplier par le nombre d'employés pour obtenir le prix total
+            totalPrice = pricePerSeat * formData.numberOfEmployees;
+            // TODO: Ajouter tarif Enterprise (999€) pour >500 employés plus tard
         }
         
-        const monthlyPrice = Math.round(basePrice);
+        const monthlyPrice = Math.round(totalPrice);
         const annualPrice = formData.billingCycle === 'annual' 
-            ? Math.round(monthlyPrice * 12 * 0.8)
+            ? Math.round(monthlyPrice * 12 * 0.9)  // 10% de réduction
             : monthlyPrice * 12;
         
         return {
-            basePrice: Math.round(basePrice),
+            basePrice: Math.round(pricePerSeat),
             monthly: monthlyPrice,
             annual: annualPrice,
-            savings: formData.billingCycle === 'annual' ? Math.round(monthlyPrice * 12 * 0.2) : 0,
+            savings: formData.billingCycle === 'annual' ? Math.round(monthlyPrice * 12 * 0.1) : 0,  // 10% d'économie
             studentDiscount: formData.accountCategory === 'personal' && formData.isStudent ? 50 : 0
         };
     };
@@ -309,7 +313,8 @@ const Register = () => {
                     type: formData.subscriptionType,
                     cycle: formData.billingCycle,
                     modules: formData.subscriptionType === 'full' ? 'all' : formData.selectedModules,
-                    price: formData.billingCycle === 'annual' ? cost.annual : cost.monthly
+                    price: formData.billingCycle === 'annual' ? cost.annual : cost.monthly,
+                    seats: formData.accountCategory === 'enterprise' ? formData.numberOfEmployees : 1
                 },
                 createdAt: new Date().toISOString()
             };
@@ -317,6 +322,19 @@ const Register = () => {
             localStorage.setItem(`user_profile_${formData.email}`, JSON.stringify(userProfile));
             localStorage.setItem('currentUser', formData.email);
             localStorage.setItem('currentUserRole', userProfile.role);
+
+            // Créer une licence si compte entreprise
+            if (formData.accountCategory === 'enterprise' && formData.numberOfEmployees > 0) {
+                // cost.basePrice contient déjà le prix par siège
+                const pricePerSeat = cost.basePrice;
+                createLicense(
+                    formData.email,
+                    formData.numberOfEmployees,
+                    formData.subscriptionType,
+                    formData.billingCycle,
+                    pricePerSeat
+                );
+            }
 
             // Créer une session sécurisée
             SessionManager.createSession(formData.email);
@@ -722,11 +740,11 @@ const Register = () => {
                                                 fontSize: '0.7rem',
                                                 fontWeight: 700
                                             }}>
-                                                -20%
+                                                -10%
                                             </div>
                                             <TrendingUp size={32} color={formData.billingCycle === 'annual' ? c.accentPrimary : c.textSecondary} style={{ marginBottom: '0.75rem' }} />
                                             <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem' }}>Annuel</h3>
-                                            <p style={{ fontSize: '0.85rem', color: c.textSecondary, margin: 0 }}>Économisez 20%</p>
+                                            <p style={{ fontSize: '0.85rem', color: c.textSecondary, margin: 0 }}>Économisez 10%</p>
                                         </div>
                                     </div>
                                 </div>
@@ -751,7 +769,7 @@ const Register = () => {
                                             <Layers size={32} color={formData.subscriptionType === 'full' ? c.accentPrimary : c.textSecondary} style={{ marginBottom: '0.75rem' }} />
                                             <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem' }}>Site complet</h3>
                                             <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.75rem' }}>Tous les modules inclus</p>
-                                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c.accentPrimary }}>2600€</div>
+                                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c.accentPrimary }}>499€</div>
                                             <div style={{ fontSize: '0.75rem', color: c.textSecondary }}>par mois</div>
                                         </div>
 
@@ -769,7 +787,7 @@ const Register = () => {
                                             <Package size={32} color={formData.subscriptionType === 'modules' ? c.accentPrimary : c.textSecondary} style={{ marginBottom: '0.75rem' }} />
                                             <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.5rem' }}>Par modules</h3>
                                             <p style={{ fontSize: '0.85rem', color: c.textSecondary, marginBottom: '0.75rem' }}>Choisissez vos modules</p>
-                                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c.accentPrimary }}>À partir de 250€</div>
+                                            <div style={{ fontSize: '1.5rem', fontWeight: 800, color: c.accentPrimary }}>À partir de 49€</div>
                                             <div style={{ fontSize: '0.75rem', color: c.textSecondary }}>par mois</div>
                                         </div>
                                     </div>
@@ -1236,7 +1254,7 @@ const Register = () => {
 
                                             <span style={{ color: c.textSecondary }}>Facturation:</span>
                                             <strong style={{ textAlign: 'right', color: formData.billingCycle === 'annual' ? '#10b981' : 'inherit' }}>
-                                                {formData.billingCycle === 'annual' ? '📅 Annuelle (-20%)' : '📆 Mensuelle'}
+                                                {formData.billingCycle === 'annual' ? '📅 Annuelle (-10%)' : '📆 Mensuelle'}
                                             </strong>
                                         </div>
                                     </div>
@@ -1290,7 +1308,7 @@ const Register = () => {
                                             }}>
                                                 <div style={{ color: c.textSecondary, marginBottom: '0.25rem' }}>Si vous passiez en annuel</div>
                                                 <div style={{ fontSize: '1.1rem', fontWeight: 700, color: '#3b82f6' }}>
-                                                    Économisez {Math.round(cost.monthly * 12 * 0.2)}€/an
+                                                    Économisez {Math.round(cost.monthly * 12 * 0.1)}€/an
                                                 </div>
                                             </div>
                                         )}
